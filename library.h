@@ -14,36 +14,42 @@ typedef struct Funcionario {
 
 typedef struct Editora {
     char nome[50];
-} TEditora;
+} TEdit;
 
 typedef struct Livro {
     int cod;
     char nome[50];
     char data_lançamento[11];
-    TEditora editora;
+    TEdit editora;
 } TLivro;
 
+// Retorna tamanho das estruturas
+int tamanho_TFunc(); // Funcionario
+int tamanho_TEdit(); //Editora
+int tamaho_TLivro();  //Livro
+
+// Cria uma estrutura do tipo especificado da funçao
+TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario);
+TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora);
+TEdit *newEditora(char *nome);
 
 
-
-// Retorna tamanho do funcionario em bytes
-int tamanho_registro();
-
-// Cria funcionario.
-TFunc *funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario);
-
-
-// Salva funcionario no arquivo out, na posicao atual do cursor
-void salva(TFunc *func, FILE *out);
-
+// Salva a estrutura no arquivo out, na posicao atual do cursor
+void salvaFunc(TFunc *func, FILE *out);
+void salvaEdit(TEdit *editora, FILE *out);
+void salvaLivro(TLivro *livro, FILE *out);
 
 // Le um funcionario do arquivo in na posicao atual do cursor
 // Retorna um ponteiro para funcionario lido do arquivo
-TFunc *le(FILE *in);
+TFunc *leFunc(FILE *in);
+TEdit *leEdit(FILE *in);
+TLivro *leLivro(FILE *in);
 
 
-// Imprime funcionario
-void imprime(TFunc *func);
+// Imprime o tipo da funçao
+void imprimeFunc(TFunc *func);
+void imprimeEdit(TEdit *edit);
+void imprimeLivro(TLivro *livro);
 
 
 //Nao implementadas ainda:
