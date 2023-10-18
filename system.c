@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 void sistemaBiblioteca(){
 int opcao;
     while (1) {
@@ -72,7 +71,7 @@ int opcao;
                 break;
             case 0:
                 printf("Saindo...\n");
-                return 0;
+                return;
             default:
                 printf("Opção inválida! Tente novamente.\n");
                 break;

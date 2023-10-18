@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+//gcc -o nomeDoPrograma arquivoPrincipal.c -I caminhoDosHeaders
+//gcc -o main main.c -I .
 typedef struct Funcionario {
     int cod;
     char nome[50];
