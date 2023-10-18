@@ -8,7 +8,6 @@
 
 void sistemaBiblioteca(){
 int opcao;
-int teste;
     while (1) {
         printf("Selecione uma opção:\n");
         printf("1 - Novo Funcionário\n");
