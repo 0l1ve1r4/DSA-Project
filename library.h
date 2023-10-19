@@ -7,6 +7,7 @@
 
 //gcc -o nomeDoPrograma arquivoPrincipal.c -I caminhoDosHeaders
 //gcc -o main main.c -I .
+
 typedef struct Funcionario {
     int cod;
     char nome[50];
@@ -22,7 +23,7 @@ typedef struct Editora {
 typedef struct Livro {
     int cod;
     char nome[50];
-    char data_lançamento[11];
+    char data_lancamento[11];
     TEdit editora;
 } TLivro;
 
@@ -60,10 +61,10 @@ void imprimeLivro(TLivro *livro);
 void buscarLivro();
 void realizarEmprestimos();
 void devolverLivros();
-void registrarUsuários();
-void relatórios();
-void renovarEmpréstimos();
-void gerenciarFuncionários();
+void registrarUsuarios();
+void relatorios();
+void renovarEmprestimos();
+void gerenciarFuncionarios();
 
 
 #endif

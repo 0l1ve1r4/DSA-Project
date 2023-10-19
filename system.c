@@ -7,6 +7,10 @@
 
 void sistemaBiblioteca(){
 int opcao;
+int funcionaryCode;
+double funcionarySalary;
+char funcionaryName[50], funcionaryBirthday[11], cpf[15];
+
     while (1) {
         printf("Selecione uma opção:\n");
         printf("1 - Novo Funcionário\n");
@@ -25,14 +29,16 @@ int opcao;
         
         switch (opcao) {
             case 1:
-                int funcionaryCode;
-                double funcionarySalary;
-                char funcionaryName[50], funcionaryBirthday[11], cpf[15];
-                printf("\nInsira o codigo do funcionario: "); scanf("%d", &funcionaryCode);
-                printf("\nInsira o salario do funcionario: "); scanf("%d", &funcionarySalary);
-                printf("\nInsira o nome do funcionario: "); scanf("%i", &funcionaryName);
-                printf("\nInsira a data de nascimento do funcionario: "); scanf("%i", &funcionaryBirthday);
-                printf("\nInsira o CPF do funcionario: "); scanf("%i", &cpf);
+                printf("\nInsira o codigo do funcionario: "); 
+                    scanf("%d", &funcionaryCode);
+                printf("\nInsira o salario do funcionario: "); 
+                    scanf("%lf", &funcionarySalary);
+                printf("\nInsira o nome do funcionario: "); 
+                    scanf("%s", &funcionaryName);
+                printf("\nInsira a data de nascimento do funcionario: "); 
+                    scanf("%s", &funcionaryBirthday);
+                printf("\nInsira o CPF do funcionario: ");
+                    scanf("%s", &cpf);
                 
                 newFuncionario(funcionaryCode, funcionaryName, cpf, funcionaryBirthday, funcionarySalary);
                 break;
@@ -81,4 +87,8 @@ int opcao;
 
 
 
+}
+
+int main(){
+    sistemaBiblioteca();
 }
