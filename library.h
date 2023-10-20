@@ -8,6 +8,8 @@
 //gcc -o nomeDoPrograma arquivoPrincipal.c -I caminhoDosHeaders
 //gcc -o main main.c -I .
 
+
+
 typedef struct Funcionario {
     int cod;
     char nome[50];
@@ -57,7 +59,7 @@ void imprimeLivro(TLivro *livro);
 
 
 //Nao implementadas ainda:
-
+void sistemaBiblioteca(FILE *arquivoFuncionarios); //Fnçao principal do codigo
 void buscarLivro();
 void realizarEmprestimos();
 void devolverLivros();
