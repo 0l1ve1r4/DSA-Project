@@ -59,7 +59,7 @@ void imprimeLivro(TLivro *livro);
 
 
 //Nao implementadas ainda:
-void sistemaBiblioteca(FILE *arquivoFuncionarios); //Fnçao principal do codigo
+void sistemaBiblioteca(FILE *arquivoFuncionarios, FILE *arquivoLivros, FILE *arquivoEditoras); //Fnçao principal do codigo
 void buscarLivro();
 void realizarEmprestimos();
 void devolverLivros();

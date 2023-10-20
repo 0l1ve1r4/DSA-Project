@@ -90,17 +90,42 @@ void imprimeFunc(TFunc *func) {
     printf("\n**********************************************");
 }
 
-void sistemaBiblioteca(FILE *arquivoFuncionarios){
+
+void findFuncionary(FILE *in, int code) {
+    TFunc *func;
+    int found = 0;
+
+    rewind(in); 
+
+    while ((func = leFunc(in)) != NULL) {
+        if (func->cod == code) {
+            found = 1;
+            imprimeFunc(func); 
+            free(func); 
+            break; 
+        }
+        free(func); 
+    }
+
+    if (!found) {
+        printf("Employee with code %d not found.\n", code);
+    }
+}
+
+
+
+void sistemaBiblioteca(FILE *arquivoFuncionarios, FILE *arquivoLivros, FILE *arquivoEditoras){
 int opcao;
 int funcionaryCode;
 double funcionarySalary;
 char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
     while (1) {
-        printf("Selecione uma opção:\n");
+        printf("\nSelecione uma opção:\n");
         printf("1 - Novo Funcionário\n");
         printf("2 - Novo Livro\n");
         printf("3 - Nova Editora\n");
+        printf("4 - Buscar funcionario");
         printf("8 - Imprimir Funcionário\n");
         printf("9 - Imprimir Livro\n");
         printf("10 - Imprimir Editora\n");
@@ -108,7 +133,7 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
         
-        switch (opcao) {
+        switch (opcao) { // Funcionando
             case 1:
                 printf("\nInsira o codigo do funcionario: "); scanf("%d", &funcionaryCode);
                 printf("\nInsira o salario do funcionario: "); scanf("%lf", &funcionarySalary);
@@ -125,8 +150,9 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
             case 3:
                 // Código para criar uma nova editora
                 break;
-            case 4:
-                // Código para salvar um funcionário em um arquivo
+            case 4: // Funcionando
+                printf("\nInsira o codigo do funcionario: "); scanf("%d", &funcionaryCode);
+                findFuncionary(arquivoFuncionarios,funcionaryCode);
                 break;
             case 5:
                 // Código para salvar um livro em um arquivo
