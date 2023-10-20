@@ -1,5 +1,5 @@
 #include "library.c"
-
+#include<stdlib.h>
 
 // O void sistemaBiblioteca() esta em library.c
 
@@ -9,8 +9,10 @@ int main(){
     FILE *funcionaryFile, booksFile;
 
 
-    //abre arquivo na pasta bin (binarios)
-    funcionaryFile = fopen("./bin/funcionarios.dat", "w+b") == NULL ? printf("\nAberto com sucesso."): printf("\nErro ao abrir arquivo");
+    if ((funcionaryFile = fopen("./bin/funcionarios.dat", "w+b")) == NULL) {
+        printf("Erro ao abrir arquivo\n");
+        exit(1);
+    }
 
     sistemaBiblioteca(funcionaryFile);
 }
