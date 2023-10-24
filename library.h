@@ -35,8 +35,8 @@ int tamanho_TEdit(); //Editora
 int tamaho_TLivro();  //Livro
 
 // Cria uma estrutura do tipo especificado da funçao
-TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario);
-TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora);
+TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario); //OK
+TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora); //
 TEdit *newEditora(char *nome);
 
 

@@ -112,11 +112,73 @@ void findFuncionary(FILE *in, int code) {
     }
 }
 
+//Criar editora
+TEdit *newEditora(char *nome) {
+    TEdit *editora = (TEdit *)malloc(sizeof(TEdit));
+    if (editora) {
+        strcpy(editora->nome, nome);
+    }
+    return editora;
+}
+
+void salvaEdit(TEdit *editora, FILE *out) {
+    fwrite(editora->nome, sizeof(char), sizeof(editora->nome), out);
+}
+
+TEdit *leEdit(FILE *in) {
+    TEdit *editora = (TEdit *)malloc(sizeof(TEdit));
+    if (editora) {
+        fread(editora->nome, sizeof(char), sizeof(editora->nome), in);
+    }
+    return editora;
+}
+
+void imprimeEdit(TEdit *editora) {
+    printf("Editora: %s\n", editora->nome);
+}
+
+//Criar livro
+TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora) {
+    TLivro *livro = (TLivro *)malloc(sizeof(TLivro));
+    if (livro) {
+        livro->cod = cod;
+        strcpy(livro->nome, nome);
+        strcpy(livro->data_lancamento, data_lancamento);
+        livro->editora = editora;
+    }
+    return livro;
+}
+
+void salvaLivro(TLivro *livro, FILE *out) {
+    fwrite(&livro->cod, sizeof(int), 1, out);
+    fwrite(livro->nome, sizeof(char), sizeof(livro->nome), out);
+    fwrite(livro->data_lancamento, sizeof(char), sizeof(livro->data_lancamento), out);
+    salvaEdit(&livro->editora, out);
+}
+
+TLivro *leLivro(FILE *in) {
+    TLivro *livro = (TLivro *)malloc(sizeof(TLivro));
+    if (livro) {
+        fread(&livro->cod, sizeof(int), 1, in);
+        fread(livro->nome, sizeof(char), sizeof(livro->nome), in);
+        fread(livro->data_lancamento, sizeof(char), sizeof(livro->data_lancamento), in);
+        livro->editora = *leEdit(in);
+    }
+    return livro;
+}
+
+void imprimeLivro(TLivro *livro) {
+    printf("Código do Livro: %d\n", livro->cod);
+    printf("Nome do Livro: %s\n", livro->nome);
+    printf("Data de Lançamento: %s\n", livro->data_lancamento);
+    printf("Editora: %s\n", livro->editora.nome);
+}
 
 
 void sistemaBiblioteca(FILE *arquivoFuncionarios, FILE *arquivoLivros, FILE *arquivoEditoras){
 int opcao;
-int funcionaryCode;
+int funcionaryCode, bookCode;
+char bookName[50], launchBook[11], publisherName[50];
 double funcionarySalary;
 char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
@@ -143,12 +205,34 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
                 
                 TFunc *temp = newFuncionario(funcionaryCode, funcionaryName, cpf, funcionaryBirthday, funcionarySalary);
                 salvaFunc(temp, arquivoFuncionarios);
+                
+                free(temp);
                 break;
+
             case 2:
-                // Código para criar um novo livro
+                printf("\nInsira o codigo do livro: "); scanf("%d",&bookCode);
+                printf("\nInsira o nome do livro: "); scanf("%s",&bookName);
+                printf("\nInsira a data de lançamento: "); scanf("%s",&launchBook);
+                printf("\nInsira o nome da editora: "); scanf("%s",&publisherName);
+                
+                TEdit *publisher = newEditora(publisherName);
+    
+                TLivro *book = newLivro(bookCode, bookName, launchBook, *publisher);
+
+                salvaLivro(book, arquivoLivros);
+
+                free(book);
+                
                 break;
             case 3:
-                // Código para criar uma nova editora
+                printf("\nInsira o nome da editora: ");
+                scanf("%s", publisherName);
+
+                TEdit *publisher = newEditora(publisherName);
+
+                salvaEdit(publisher, arquivoEditoras);
+
+                free(publisher);
                 break;
             case 4: // Funcionando
                 printf("\nInsira o codigo do funcionario: "); scanf("%d", &funcionaryCode);
