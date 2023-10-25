@@ -190,9 +190,9 @@ TLivro *leLivro(FILE *in) {
 }
 
 void imprimeLivro(TLivro *livro) {
-    printf("Código do Livro: %d\n", livro->cod);
+    printf("Codigo do Livro: %d\n", livro->cod);
     printf("Nome do Livro: %s\n", livro->nome);
-    printf("Data de Lançamento: %s\n", livro->data_lancamento);
+    printf("Data de Lancamento: %s\n", livro->data_lancamento);
     printf("Editora: %s\n", livro->editora.nome);
 }
 
@@ -234,9 +234,17 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
             case 2:
                 printf("\nInsira o codigo do livro: "); scanf("%d",&bookCode);
-                printf("\nInsira o nome do livro: "); scanf("%s",&bookName);
-                printf("\nInsira a data de lançamento: "); scanf("%s",&launchBook);
-                printf("\nInsira o nome da editora: "); scanf("%s",&publisherName);
+                printf("\nInsira o nome do livro: "); 
+                fflush(stdin);
+                fgets(bookName,50,stdin);
+
+                printf("\nInsira a data de lancamento: "); 
+                fgets(launchBook,11,stdin);
+                fflush(stdin);
+
+                printf("\nInsira o nome da editora: ");
+                fflush(stdin);
+                fgets(publisherName,50,stdin);
                 
                 TEdit *publisherBook = newEditora(publisherName);
     
