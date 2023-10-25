@@ -183,16 +183,16 @@ double funcionarySalary;
 char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
     while (1) {
-        printf("\nSelecione uma opção:\n");
-        printf("1 - Novo Funcionário\n");
+        printf("\nSelecione uma opcao:\n");
+        printf("1 - Novo Funcionario\n");
         printf("2 - Novo Livro\n");
         printf("3 - Nova Editora\n");
-        printf("4 - Buscar funcionario");
-        printf("8 - Imprimir Funcionário\n");
+        printf("4 - Buscar Funcionario");
+        printf("8 - Imprimir Funcionario\n");
         printf("9 - Imprimir Livro\n");
         printf("10 - Imprimir Editora\n");
         printf("0 - Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         
         switch (opcao) { // Funcionando
@@ -211,13 +211,13 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
             case 2:
                 printf("\nInsira o codigo do livro: "); scanf("%d",&bookCode);
-                printf("\nInsira o nome do livro: "); scanf("%s",&bookName);
-                printf("\nInsira a data de lançamento: "); scanf("%s",&launchBook);
-                printf("\nInsira o nome da editora: "); scanf("%s",&publisherName);
+                printf("\nInsira o nome do livro: "); scanf("%s",bookName);
+                printf("\nInsira a data de lançamento: "); scanf("%s",launchBook);
+                printf("\nInsira o nome da editora: "); scanf("%s",publisherName);
                 
-                TEdit *publisher = newEditora(publisherName);
+                TEdit *publisherBook = newEditora(publisherName);
     
-                TLivro *book = newLivro(bookCode, bookName, launchBook, *publisher);
+                TLivro *book = newLivro(bookCode, bookName, launchBook, *publisherBook);
 
                 salvaLivro(book, arquivoLivros);
 
