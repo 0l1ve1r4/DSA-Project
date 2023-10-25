@@ -112,6 +112,28 @@ void findFuncionary(FILE *in, int code) {
     }
 }
 
+void findBook(FILE *in, int code) {
+    TLivro *livro;
+    int found = 0;
+
+    rewind(in);
+
+    while ((livro = leLivro(in)) != NULL) {
+        if (livro->cod == code) {
+            found = 1;
+            imprimeLivro(livro);
+            free(livro);
+            break;
+        }
+        free(livro);
+    }
+
+    if (!found) {
+        printf("Book with code %d not found.\n", code);
+    }
+}
+
+
 //Criar editora
 TEdit *newEditora(char *nome) {
     TEdit *editora = (TEdit *)malloc(sizeof(TEdit));
@@ -187,7 +209,8 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
         printf("1 - Novo Funcionario\n");
         printf("2 - Novo Livro\n");
         printf("3 - Nova Editora\n");
-        printf("4 - Buscar Funcionario");
+        printf("4 - Buscar Funcionario\n");
+        printf("5 - Buscar Livro\n");
         printf("8 - Imprimir Funcionario\n");
         printf("9 - Imprimir Livro\n");
         printf("10 - Imprimir Editora\n");
@@ -211,9 +234,9 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
 
             case 2:
                 printf("\nInsira o codigo do livro: "); scanf("%d",&bookCode);
-                printf("\nInsira o nome do livro: "); scanf("%s",bookName);
-                printf("\nInsira a data de lançamento: "); scanf("%s",launchBook);
-                printf("\nInsira o nome da editora: "); scanf("%s",publisherName);
+                printf("\nInsira o nome do livro: "); scanf("%s",&bookName);
+                printf("\nInsira a data de lançamento: "); scanf("%s",&launchBook);
+                printf("\nInsira o nome da editora: "); scanf("%s",&publisherName);
                 
                 TEdit *publisherBook = newEditora(publisherName);
     
@@ -239,7 +262,8 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
                 findFuncionary(arquivoFuncionarios,funcionaryCode);
                 break;
             case 5:
-                // Código para salvar um livro em um arquivo
+                printf("\nInsira o codigo do livro: "); scanf("%d", &bookCode);
+                findBook(arquivoLivros,bookCode);
                 break;
             case 6:
                 // Código para salvar uma editora em um arquivo
