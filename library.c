@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <time.h>
 
 int tamanho_TFunc() {
     return sizeof(int)  //cod
@@ -37,6 +38,18 @@ TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, dou
     strcpy(func->data_nascimento, data_nascimento);
     func->salario = salario;
     return func;
+}
+
+//Criar livro
+TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora) {
+    TLivro *livro = (TLivro *)malloc(sizeof(TLivro));
+        if (livro) memset(livro, 0, sizeof(TLivro));
+        livro->cod = cod;
+        strcpy(livro->nome, nome);
+        strcpy(livro->data_lancamento, data_lancamento);
+        livro->editora = editora;
+    
+    return livro;
 }
 
 
@@ -93,45 +106,59 @@ void imprimeFunc(TFunc *func) {
 
 void findFuncionary(FILE *in, int code) {
     TFunc *func;
+    int comparison = 0;
     int found = 0;
+    clock_t start, end;
+    double cpu_time_used;
 
     rewind(in); 
+    start = clock();
 
     while ((func = leFunc(in)) != NULL) {
+        comparison++;
         if (func->cod == code) {
             found = 1;
             imprimeFunc(func); 
             free(func); 
             break; 
         }
-        free(func); 
     }
 
-    if (!found) {
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    if (found == 1) {
+        printf("\nBusca Sequencial...");
+        printf("\nNumero de comparacoes realizadas: %d\n", comparison);
+        printf("Tempo gasto: %f segundos\n", cpu_time_used);
+    }else{
         printf("Employee with code %d not found.\n", code);
     }
 }
 
 void findBook(FILE *in, int code) {
     TLivro *livro;
-    int found = 0;
+    int comparison = 0;
+    clock_t start, end;
+    double cpu_time_used;
 
     rewind(in);
+    start = clock();
 
     while ((livro = leLivro(in)) != NULL) {
+        comparison++;
         if (livro->cod == code) {
-            found = 1;
+            end = clock();
+            cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+            printf("Busca sequecial finalizada...");
+            printf("\nNumero de comparacoes: %d | Tempo: %f \n", comparison, cpu_time_used);
             imprimeLivro(livro);
             free(livro);
-            break;
+            return;
         }
-        free(livro);
+    } printf("Book with code %d not found.\n", code);
     }
 
-    if (!found) {
-        printf("Book with code %d not found.\n", code);
-    }
-}
 
 
 //Criar editora
@@ -159,18 +186,6 @@ void imprimeEdit(TEdit *editora) {
     printf("Editora: %s\n", editora->nome);
 }
 
-//Criar livro
-TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora) {
-    TLivro *livro = (TLivro *)malloc(sizeof(TLivro));
-    if (livro) {
-        livro->cod = cod;
-        strcpy(livro->nome, nome);
-        strcpy(livro->data_lancamento, data_lancamento);
-        livro->editora = editora;
-    }
-    return livro;
-}
-
 void salvaLivro(TLivro *livro, FILE *out) {
     fwrite(&livro->cod, sizeof(int), 1, out);
     fwrite(livro->nome, sizeof(char), sizeof(livro->nome), out);
@@ -190,10 +205,9 @@ TLivro *leLivro(FILE *in) {
 }
 
 void imprimeLivro(TLivro *livro) {
-    printf("Codigo do Livro: %d\n", livro->cod);
-    printf("Nome do Livro: %s\n", livro->nome);
-    printf("Data de Lancamento: %s\n", livro->data_lancamento);
-    printf("Editora: %s\n", livro->editora.nome);
+    printf("Nome: %s | Codigo: %d\n",livro->nome, livro->cod);
+    printf("Lancamento: %s | Editora: %s\n", livro->data_lancamento, livro->editora.nome);
+
 }
 
 
@@ -222,9 +236,18 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
             case 1:
                 printf("\nInsira o codigo do funcionario: "); scanf("%d", &funcionaryCode);
                 printf("\nInsira o salario do funcionario: "); scanf("%lf", &funcionarySalary);
-                printf("\nInsira o nome do funcionario: "); scanf("%s", &funcionaryName);
-                printf("\nInsira a data de nascimento do funcionario: "); scanf("%s", &funcionaryBirthday);
-                printf("\nInsira o CPF do funcionario: "); scanf("%s", &cpf);
+
+                printf("\nInsira o nome do funcionario: ");
+                fflush(stdin);
+                fgets(funcionaryName,50,stdin);
+
+                printf("\nInsira a data de nascimento do funcionario: ");
+                fflush(stdin);
+                fgets(funcionaryBirthday,11,stdin);
+
+                printf("\nInsira o CPF do funcionario: ");
+                fflush(stdin);
+                fgets(cpf,15,stdin);
                 
                 TFunc *temp = newFuncionario(funcionaryCode, funcionaryName, cpf, funcionaryBirthday, funcionarySalary);
                 salvaFunc(temp, arquivoFuncionarios);
@@ -272,6 +295,7 @@ char funcionaryName[50], funcionaryBirthday[11], cpf[15];
             case 5:
                 printf("\nInsira o codigo do livro: "); scanf("%d", &bookCode);
                 findBook(arquivoLivros,bookCode);
+                system("pause");
                 break;
             case 6:
                 // Código para salvar uma editora em um arquivo

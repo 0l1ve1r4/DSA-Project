@@ -9,7 +9,6 @@
 //gcc -o main main.c -I .
 
 
-
 typedef struct Funcionario {
     int cod;
     char nome[50];
@@ -56,12 +55,10 @@ TLivro *leLivro(FILE *in);//OK
 void imprimeFunc(TFunc *func);//OK
 void imprimeEdit(TEdit *edit);//OK
 void imprimeLivro(TLivro *livro);//OK
-
-void findBook(); // OK
+void findBook(FILE *in, int code); // OK
 
 //Nao implementadas ainda:
 void sistemaBiblioteca(FILE *arquivoFuncionarios, FILE *arquivoLivros, FILE *arquivoEditoras); //Fnçao principal do codigo
-
 void realizarEmprestimos();
 void devolverLivros();
 void registrarUsuarios();
