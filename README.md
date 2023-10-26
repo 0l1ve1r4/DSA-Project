@@ -17,11 +17,13 @@ Para executar este projeto, é necessário ter as seguintes tecnologias e ferram
 Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
 
 1. Compile o código-fonte, se necessário.
-
+```
+ gcc -o program_name -I .  
+```
 2. Execute o programa principal usando o comando:
-
-./main
-
+````
+./program_name
+````
 3. Comece a explorar as funcionalidades do sistema.
 
 ## Contribuição
