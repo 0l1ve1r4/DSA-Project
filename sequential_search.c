@@ -1,4 +1,5 @@
 #include "sequential_search.h"
+#include "library.h"
 
 void findBook(FILE *in, int code) {
     TLivro livro;
@@ -34,7 +35,7 @@ void findEmployee(FILE *in, int code){
             double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
             printf("Busca sequencial finalizada...\n");
             printf("Numero de comparacoes: %d | Tempo: %f\n", comparison, cpu_time_used);
-            imprimeFuncionario(&funcionario);
+            imprimeFunc(&funcionario);
             return;
         }
     }

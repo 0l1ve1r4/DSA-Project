@@ -1,5 +1,5 @@
 #include "main_loop.h"
-
+#include "library.h"
 
 void init_main_loop(){
 
@@ -96,7 +96,7 @@ void main_loop(FILE *funcionaryFile, FILE *booksFile, FILE *editorsFile){
 
             case 4:
                 printf("\nEnter employee code: "); scanf("%d", &funcionaryCode);
-                findFuncionary(funcionaryFile, funcionaryCode);
+                findEmployee(funcionaryFile, funcionaryCode);
                 break;
 
             case 5:

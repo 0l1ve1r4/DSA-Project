@@ -11,4 +11,4 @@ int main()
     return 0;
 }
 
-//To compile use: gcc library.c sequential_search.c main_loop.c main.c -o main
+//To compile use: gcc -o app ./*.c
