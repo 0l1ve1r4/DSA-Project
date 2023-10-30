@@ -1,7 +1,6 @@
 #ifndef SEQUENTIAL_SEARCH_H
 #define SEQUENTIAL_SEARCH_H
 
-#include "library.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
