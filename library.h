@@ -31,6 +31,8 @@ int tamaho_TLivro();  //Livro
 
 // Cria uma estrutura do tipo especificado da funçao
 TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario); //OK
+void criarFuncAleatorias(int x, FILE *out);
+
 TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora); // OK
 TEdit *newEditora(char *nome);
 

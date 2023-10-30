@@ -41,6 +41,40 @@ TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, dou
     return func;
 }
 
+void criarFuncAleatorias(int x, FILE *out) {
+    TFunc **employees = (TFunc **)malloc(x * sizeof(TFunc *));
+    TFunc **randomEmployees = (TFunc **)malloc(x * sizeof(TFunc *));
+
+    for (int i = 0; i < x; i++) {
+        // Generate employee parameters
+        int cod = i;
+        char nome[] = "FuncionarioName ";
+        char cpf[] = "0000000000";
+        char data_nascimento[] = "00/00/0000";
+        double salario = rand() % 10000;
+
+        // Create the employee and add it to the array
+        employees[i] = newFuncionario(cod, nome, cpf, data_nascimento, salario);
+    }
+
+    // Randomly shuffle the employees into the randomEmployees array
+    for (int i = 0; i < x; i++) {
+        int randomIndex = rand() % x;
+        while (employees[randomIndex] == NULL) {
+            randomIndex = rand() % x;
+        }
+
+        randomEmployees[i] = employees[randomIndex];
+        employees[randomIndex] = NULL;
+        // Ensure that the 'salvaFunc' function is properly defined and saves the employee to the 'out' file.
+        salvaFunc(randomEmployees[i], out);
+    }
+
+    free(employees);
+    free(randomEmployees);
+}
+
+
 //Criar livro
 TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora) {
     TLivro *livro = (TLivro *)malloc(sizeof(TLivro));
@@ -70,10 +104,9 @@ TEdit *newEditora(char *nome) {
 // Salva funcionario no arquivo out, na posicao atual do cursor
 void salvaFunc(TFunc *func, FILE *out) {
     fwrite(&func->cod, sizeof(int), 1, out);
-    //func->nome ao inves de &func->nome, pois string ja eh um ponteiro
-    fwrite(func->nome, sizeof(char), sizeof(func->nome), out);
-    fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
-    fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
+    fwrite(func->nome, sizeof(char), 50, out); // Specify the size of the name field
+    fwrite(func->cpf, sizeof(char), 15, out);   // Specify the size of the CPF field
+    fwrite(func->data_nascimento, sizeof(char), 11, out); // Specify the size of the data_nascimento field
     fwrite(&func->salario, sizeof(double), 1, out);
 }
 
