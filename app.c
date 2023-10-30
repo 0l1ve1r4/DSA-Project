@@ -5,6 +5,7 @@
 
 #include "library.h"
 #include "sequential_search.h"
+#include "binary_search.h"
 
 int main(int argc, char *argv[])
 {
