@@ -3,11 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
-
-//gcc -o nomeDoPrograma arquivoPrincipal.c -I caminhoDosHeaders
-//gcc -o main main.c -I .
-
+#include <string.h>
 
 typedef struct Funcionario {
     int cod;
@@ -36,13 +32,13 @@ int tamaho_TLivro();  //Livro
 // Cria uma estrutura do tipo especificado da funçao
 TFunc *newFuncionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario); //OK
 TLivro *newLivro(int cod, char *nome, char *data_lancamento, TEdit editora); // OK
-TEdit *newEditora(char *nome); // OK
-
+TEdit *newEditora(char *nome);
 
 // Salva a estrutura no arquivo out, na posicao atual do cursor
 void salvaFunc(TFunc *func, FILE *out); // OK
-void salvaEdit(TEdit *editora, FILE *out); // OK
 void salvaLivro(TLivro *livro, FILE *out); // OK
+void salvaEdit(TEdit *editora, FILE *out); // OK
+
 
 // Le um funcionario do arquivo in na posicao atual do cursor
 // Retorna um ponteiro para funcionario lido do arquivo
@@ -55,16 +51,6 @@ TLivro *leLivro(FILE *in);//OK
 void imprimeFunc(TFunc *func);//OK
 void imprimeEdit(TEdit *edit);//OK
 void imprimeLivro(TLivro *livro);//OK
-void findBook(FILE *in, int code); // OK
-
-//Nao implementadas ainda:
-void sistemaBiblioteca(FILE *arquivoFuncionarios, FILE *arquivoLivros, FILE *arquivoEditoras); //Fnçao principal do codigo
-void realizarEmprestimos();
-void devolverLivros();
-void registrarUsuarios();
-void relatorios();
-void renovarEmprestimos();
-void gerenciarFuncionarios();
 
 
 #endif
