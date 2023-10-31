@@ -1,0 +1,127 @@
+#include "funcionario.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdarg.h>
+
+//_______________________________________________________________________________________________________________________
+
+int tamanho_registro_funcionario() {
+    TFunc *temp;
+    return sizeof(temp->cod) 
+           + sizeof(temp->nome) 
+           + sizeof(temp->cpf) 
+           + sizeof(temp->data_nascimento) 
+           + sizeof(temp->salario); 
+}
+
+//_______________________________________________________________________________________________________________________
+
+TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario) {
+    TFunc *func = (TFunc *) malloc(sizeof(TFunc));
+    if (func) memset(func, 0, sizeof(TFunc));
+    func->cod = cod;
+    strcpy(func->nome, nome);
+    strcpy(func->cpf, cpf);
+    strcpy(func->data_nascimento, data_nascimento);
+    func->salario = salario;
+    return func;
+}
+
+//_______________________________________________________________________________________________________________________
+
+void salvar_funcionario(TFunc *func, FILE *out) {
+    fwrite(&func->cod, sizeof(int), 1, out);
+    fwrite(func->nome, sizeof(char), sizeof(func->nome), out);
+    fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
+    fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
+    fwrite(&func->salario, sizeof(double), 1, out);
+}
+
+//_______________________________________________________________________________________________________________________
+
+int tamanho_arquivo_de_funcionarios(FILE *arq) {
+    fseek(arq, 0, SEEK_END);
+    int tam = trunc(ftell(arq) / tamanho_registro_funcionario());
+    return tam;
+}
+
+//_______________________________________________________________________________________________________________________
+
+TFunc *ler_arquivo_funcionario(FILE *in) {
+    TFunc *func = (TFunc *) malloc(sizeof(TFunc));
+    if (0 >= fread(&func->cod, sizeof(int), 1, in)) {
+        free(func);
+        return NULL;
+    }
+    fread(func->nome, sizeof(char), sizeof(func->nome), in);
+    fread(func->cpf, sizeof(char), sizeof(func->cpf), in);
+    fread(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), in);
+    fread(&func->salario, sizeof(double), 1, in);
+    return func;
+}
+
+//_______________________________________________________________________________________________________________________
+
+void imprimir_funcionario(TFunc *func) {
+    printf("**********************************************");
+    printf("\nFuncionario de codigo ");
+    printf("%d", func->cod);
+    printf("\nNome: ");
+    printf("%s", func->nome);
+    printf("\nCPF: ");
+    printf("%s", func->cpf);
+    printf("\nData de Nascimento: ");
+    printf("%s", func->data_nascimento);
+    printf("\nSalario: ");
+    printf("%4.2f", func->salario);
+    printf("\n**********************************************");
+}
+
+//_______________________________________________________________________________________________________________________
+
+void criarBase_funcionarios(FILE *out, int tam){
+
+    int vet[tam];
+    TFunc *f;
+
+    for(int i=0;i<tam;i++)
+        vet[i] = i+1;
+
+    shuffle_funcionarios(vet,tam,(tam*10)/100);
+
+    printf("\nGerando a base de dados...\n");
+
+    for (int i=0;i<tam;i++){
+        f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
+        salvar_funcionario(f, out);
+    }
+
+    free(f);
+
+}
+
+//_______________________________________________________________________________________________________________________
+
+void shuffle_funcionarios(int *vet,int MAX,int MIN) {
+    srand(time(NULL));
+    for (int i = MAX - MIN - 1; i > 0; i--) {
+        int j = rand() % (i);
+        int tmp = vet[j];
+        vet[j] = vet[i];
+        vet[i] = tmp;
+    }
+}
+
+//_______________________________________________________________________________________________________________________
+
+void imprimirBase_funcionarios(FILE *out){
+    
+    rewind(out);
+    TFunc *f;
+    while ((f = ler_arquivo_funcionario(out)) != NULL)
+        imprimir_funcionario(f);
+    free(f);
+
+}
+
+//_______________________________________________________________________________________________________________________
