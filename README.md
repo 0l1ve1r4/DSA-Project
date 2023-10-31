@@ -31,15 +31,14 @@ gcc -o app ./*.c
 
 ## TODO
 
-A seguir, uma lista de tarefas (TODO) para melhorar e expandir o Sistema de Gerenciamento de Biblioteca:
-
 1. **Entidades e Campos de Dados**
-   - Definir a estrutura das entidades principais, como Livros, Usuários e Editoras.
-   - Especificar os campos de dados para cada entidade, como título, autor, categoria, nome do usuário, etc.
+   ~~- Definir a estrutura das entidades principais, como Livros, Usuários e Editoras.~~
+  ~~- Especificar os campos de dados para cada entidade, como título, autor, categoria, nome do usuário, etc.~~
 
 2. **Operações de Gerenciamento**
    - Implementar as seguintes operações de gerenciamento:
-     - Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc.
+     ~~- Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma sequencial)~~
+     - Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma binária)
      - Realizar Empréstimos: Capacidade de registrar empréstimos de livros com data de início e prazo de devolução.
      - Devolver Livros: Funcionalidade para que os usuários possam devolver livros emprestados, atualizando o status.
      - Registrar Usuários: Possibilitar que funcionários registrem novos membros na biblioteca.
