@@ -1,31 +1,34 @@
-# Sistema de Gerenciamento de Biblioteca
+# Library Management System
 
-Bem-vindo ao nosso Sistema de Gerenciamento de Biblioteca, uma aplicação que oferece um conjunto abrangente de recursos para a administração de bibliotecas. Com este sistema, você pode gerenciar livros, usuários, editoras e realizar diversas operações relacionadas a uma biblioteca de forma eficiente.
+Welcome to our Library Management System, an application that provides a comprehensive set of features for library administration. With this system, you can manage books, users, publishers, and perform various library-related operations efficiently.
 
-## Requisitos
+## Requirements
 
-Para executar este projeto, é necessário ter as seguintes tecnologias e ferramentas instaladas:
+To run this project, you need to have the following technologies and tools installed:
 
-- **Linguagem de Programação:** [C] - A aplicação é desenvolvida em puro C.
+- **Programming Language:** [C] - The application is developed in pure C.
 
-- **Banco de Dados:** [Banco de dados personalizado] - Utilizamos um banco de dados personalizado, que armazena informações em arquivos binários na pasta 'bin'.
+- **Database:** [Custom database] - We use a custom database that stores information in binary files in the 'bin' folder.
 
-- **Outras Dependências:** [---] - No momento, nenhum.
+- **Other Dependencies:** [---] - Currently, there are no other dependencies.
 
-## Uso
+- **Languages:** [PT-BR/EN]  - Currently, most of the functions are in English, however the terminal prints are largely in Brazilian Portuguese.
 
-Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
+## Usage
 
-1. Compile o código-fonte, se necessário.
+To get started with the Library Management System, follow these steps:
+
+1. Compile the source code if necessary.
+
 ```
 gcc -o app ./*.c  
 ```
-2. Execute o programa principal usando o comando:
+2. Run the main program using the following command:
 ````
 user@terminal ./program_name
 ````
-3. Comece a explorar as funcionalidades do sistema.
+3. Begin exploring the system's functionalities.
 
-## Contribuição
+## Contribution
 
-Estamos abertos a contribuições e melhorias neste projeto. Se você deseja contribuir ou sugerir aprimoramentos, fique à vontade para abrir problemas, enviar solicitações de pull e colaborar no desenvolvimento.
+We are open to contributions and improvements in this project. If you wish to contribute or suggest enhancements, feel free to open issues, send pull requests, and collaborate in the development.
