@@ -14,27 +14,6 @@ Para executar este projeto, você precisa ter as seguintes tecnologias e ferrame
 
 - **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções está em inglês, no entanto, as mensagens exibidas no terminal são predominantemente em português do Brasil.
 
-## Funcionalidades
-
-O Sistema de Gerenciamento de Biblioteca oferece as seguintes funcionalidades:
-
-1. **Criação de Bases de Dados**
-   - A função `bases_buscas_sequenciais` lida com a criação de bases de dados e a realização de buscas sequenciais em registros de funcionários.
-   - Ela permite a abertura de arquivos binários de funcionários, livros e logs para operações subsequentes.
-
-2. **Busca Sequencial de Funcionários**
-   - A função `buscarFuncionario_sequencialmente` é responsável por buscar funcionários de forma sequencial em um arquivo de registro.
-   - Ela mede o número de iterações necessárias para encontrar um funcionário com um código específico.
-   - Registra o tempo gasto na busca e exibe detalhes do funcionário encontrado.
-   - Salva informações sobre a busca sequencial em um arquivo de log.
-
-3. **Salvamento de Log**
-   - A função `salvar_log_file` é usada para salvar informações detalhadas sobre a busca sequencial em um arquivo de log.
-   - Ela registra o número de iterações e o tempo gasto na busca para análise posterior.
-
-4. **Outras funcionalidades**
-   - Além das funcionalidades mencionadas, o sistema provavelmente inclui operações de adição, edição, exclusão e consulta de registros de funcionários, bem como operações relacionadas à gestão de livros, editoras e usuários.
-
 ## Uso
 
 Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
@@ -49,6 +28,33 @@ gcc -o app ./*.c
 ````windows shell
 ./nome_do_programa
 ````
+
+## TODO
+
+A seguir, uma lista de tarefas (TODO) para melhorar e expandir o Sistema de Gerenciamento de Biblioteca:
+
+1. **Entidades e Campos de Dados**
+   - Definir a estrutura das entidades principais, como Livros, Usuários e Editoras.
+   - Especificar os campos de dados para cada entidade, como título, autor, categoria, nome do usuário, etc.
+
+2. **Operações de Gerenciamento**
+   - Implementar as seguintes operações de gerenciamento:
+     - Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc.
+     - Realizar Empréstimos: Capacidade de registrar empréstimos de livros com data de início e prazo de devolução.
+     - Devolver Livros: Funcionalidade para que os usuários possam devolver livros emprestados, atualizando o status.
+     - Registrar Usuários: Possibilitar que funcionários registrem novos membros na biblioteca.
+     - Relatórios: Implementar a geração de relatórios, incluindo empréstimos atrasados, livros populares, membros mais ativos, etc.
+     - Renovar Empréstimos: Permitir que os usuários estendam o prazo de empréstimo, se disponível.
+     - Gerenciar Funcionários: Adicionar e atualizar informações sobre os funcionários da biblioteca.
+
+3. **Melhorias Gerais**
+   - Aprimorar a interface do usuário e as mensagens do sistema.
+   - Refinar o mecanismo de busca e classificação de livros.
+   - Implementar medidas de segurança para proteger os dados sensíveis.
+
+4. **Documentação**
+   - Documentar o código-fonte com comentários detalhados para facilitar a compreensão e manutenção futura.
+
 
 ## Contribuição
 
