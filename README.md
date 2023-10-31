@@ -32,12 +32,12 @@ gcc -o app ./*.c
 ## TODO
 
 1. **Entidades e Campos de Dados**
-   ~~- Definir a estrutura das entidades principais, como Livros, Usuários e Editoras.~~
-  ~~- Especificar os campos de dados para cada entidade, como título, autor, categoria, nome do usuário, etc.~~
+    - ~~Definir a estrutura das entidades principais, como Livros, Usuários e Editoras.~~
+    - ~~Especificar os campos de dados para cada entidade, como título, autor, categoria, nome do usuário, etc.~~
 
 2. **Operações de Gerenciamento**
    - Implementar as seguintes operações de gerenciamento:
-     ~~- Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma sequencial)~~
+     - ~~Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma sequencial)~~
      - Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma binária)
      - Realizar Empréstimos: Capacidade de registrar empréstimos de livros com data de início e prazo de devolução.
      - Devolver Livros: Funcionalidade para que os usuários possam devolver livros emprestados, atualizando o status.
