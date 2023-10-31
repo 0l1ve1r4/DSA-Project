@@ -2,6 +2,9 @@
 #include "buscas_sequenciais.h"
 #include "time.h"
 
+/*Comentarios na buscas_sequenciais.h 
+    Guilherme Santos*/
+
 void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
     if ((employeeFile = fopen("./bin/funcionarios.dat", "ab+")) == NULL 
         || (bookFile = fopen("./bin/books.dat", "ab+")) == NULL

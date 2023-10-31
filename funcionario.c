@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-//_______________________________________________________________________________________________________________________
+/*Comentarios na funcionario.h 
+    Guilherme Santos*/
 
 int tamanho_registro_funcionario() {
     TFunc *temp;
@@ -13,8 +14,6 @@ int tamanho_registro_funcionario() {
            + sizeof(temp->data_nascimento) 
            + sizeof(temp->salario); 
 }
-
-//_______________________________________________________________________________________________________________________
 
 TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario) {
     TFunc *func = (TFunc *) malloc(sizeof(TFunc));
@@ -27,7 +26,6 @@ TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, 
     return func;
 }
 
-//_______________________________________________________________________________________________________________________
 
 void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(&func->cod, sizeof(int), 1, out);
@@ -37,15 +35,12 @@ void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(&func->salario, sizeof(double), 1, out);
 }
 
-//_______________________________________________________________________________________________________________________
-
 int tamanho_arquivo_de_funcionarios(FILE *arq) {
     fseek(arq, 0, SEEK_END);
     int tam = trunc(ftell(arq) / tamanho_registro_funcionario());
     return tam;
 }
 
-//_______________________________________________________________________________________________________________________
 
 TFunc *ler_arquivo_funcionario(FILE *in) {
     TFunc *func = (TFunc *) malloc(sizeof(TFunc));
@@ -60,7 +55,6 @@ TFunc *ler_arquivo_funcionario(FILE *in) {
     return func;
 }
 
-//_______________________________________________________________________________________________________________________
 
 void imprimir_funcionario(TFunc *func) {
     printf("**********************************************");
@@ -76,8 +70,6 @@ void imprimir_funcionario(TFunc *func) {
     printf("%4.2f", func->salario);
     printf("\n**********************************************");
 }
-
-//_______________________________________________________________________________________________________________________
 
 void criarBase_funcionarios(FILE *out, int tam){
 
@@ -100,8 +92,6 @@ void criarBase_funcionarios(FILE *out, int tam){
 
 }
 
-//_______________________________________________________________________________________________________________________
-
 void shuffle_funcionarios(int *vet,int MAX,int MIN) {
     srand(time(NULL));
     for (int i = MAX - MIN - 1; i > 0; i--) {
@@ -111,8 +101,6 @@ void shuffle_funcionarios(int *vet,int MAX,int MIN) {
         vet[i] = tmp;
     }
 }
-
-//_______________________________________________________________________________________________________________________
 
 void imprimirBase_funcionarios(FILE *out){
     
@@ -124,4 +112,3 @@ void imprimirBase_funcionarios(FILE *out){
 
 }
 
-//_______________________________________________________________________________________________________________________

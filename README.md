@@ -1,34 +1,56 @@
-# Library Management System
+# Sistema de Gerenciamento de Biblioteca - AEDS 2 - UFOP
 
-Welcome to our Library Management System, an application that provides a comprehensive set of features for library administration. With this system, you can manage books, users, publishers, and perform various library-related operations efficiently.
+Bem-vindo ao nosso Sistema de Gerenciamento de Biblioteca, uma aplicação que oferece um conjunto abrangente de recursos para a administração de bibliotecas. Com este sistema, você pode gerenciar livros, usuários, editoras e realizar várias operações relacionadas à biblioteca de forma eficiente.
 
-## Requirements
+## Requisitos
 
-To run this project, you need to have the following technologies and tools installed:
+Para executar este projeto, você precisa ter as seguintes tecnologias e ferramentas instaladas:
 
-- **Programming Language:** [C] - The application is developed in pure C.
+- **Linguagem de Programação:** [C] - A aplicação é desenvolvida em C puro.
 
-- **Database:** [Custom database] - We use a custom database that stores information in binary files in the 'bin' folder.
+- **Banco de Dados:** [Banco de dados personalizado] - Utilizamos um banco de dados personalizado que armazena informações em arquivos binários na pasta 'bin'.
 
-- **Other Dependencies:** [---] - Currently, there are no other dependencies.
+- **Outras Dependências:** [---] - Atualmente, não há outras dependências.
 
-- **Languages:** [PT-BR/EN]  - Currently, most of the functions are in English, however the terminal prints are largely in Brazilian Portuguese.
+- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções está em inglês, no entanto, as mensagens exibidas no terminal são predominantemente em português do Brasil.
 
-## Usage
+## Funcionalidades
 
-To get started with the Library Management System, follow these steps:
+O Sistema de Gerenciamento de Biblioteca oferece as seguintes funcionalidades:
 
-1. Compile the source code if necessary.
+1. **Criação de Bases de Dados**
+   - A função `bases_buscas_sequenciais` lida com a criação de bases de dados e a realização de buscas sequenciais em registros de funcionários.
+   - Ela permite a abertura de arquivos binários de funcionários, livros e logs para operações subsequentes.
+
+2. **Busca Sequencial de Funcionários**
+   - A função `buscarFuncionario_sequencialmente` é responsável por buscar funcionários de forma sequencial em um arquivo de registro.
+   - Ela mede o número de iterações necessárias para encontrar um funcionário com um código específico.
+   - Registra o tempo gasto na busca e exibe detalhes do funcionário encontrado.
+   - Salva informações sobre a busca sequencial em um arquivo de log.
+
+3. **Salvamento de Log**
+   - A função `salvar_log_file` é usada para salvar informações detalhadas sobre a busca sequencial em um arquivo de log.
+   - Ela registra o número de iterações e o tempo gasto na busca para análise posterior.
+
+4. **Outras funcionalidades**
+   - Além das funcionalidades mencionadas, o sistema provavelmente inclui operações de adição, edição, exclusão e consulta de registros de funcionários, bem como operações relacionadas à gestão de livros, editoras e usuários.
+
+## Uso
+
+Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
+
+1. Compile o código-fonte, se necessário.
+
+```shell windows or linux
+gcc -o app ./*.c
 
 ```
-gcc -o app ./*.c  
-```
-2. Run the main program using the following command:
-````
-user@terminal ./program_name
+2. Execute o programa principal usando o seguinte comando:
+````windows shell
+./nome_do_programa
 ````
 3. Begin exploring the system's functionalities.
 
-## Contribution
+## Contribuição
 
-We are open to contributions and improvements in this project. If you wish to contribute or suggest enhancements, feel free to open issues, send pull requests, and collaborate in the development.
+Estamos abertos a contribuições e melhorias neste projeto. Se você deseja contribuir ou sugerir aprimoramentos, sinta-se à vontade para abrir problemas, enviar solicitações de pull e colaborar no desenvolvimento.
