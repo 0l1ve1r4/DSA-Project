@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento de Biblioteca - AEDS 2 - UFOP
+# Sistema de Biblioteca - AEDS 2 - UFOP
 
 Bem-vindo ao nosso Sistema de Gerenciamento de Biblioteca, uma aplicação que oferece um conjunto abrangente de recursos para a administração de bibliotecas. Com este sistema, você pode gerenciar livros, usuários, editoras e realizar várias operações relacionadas à biblioteca de forma eficiente.
 
@@ -49,7 +49,6 @@ gcc -o app ./*.c
 ````windows shell
 ./nome_do_programa
 ````
-3. Begin exploring the system's functionalities.
 
 ## Contribuição
 
