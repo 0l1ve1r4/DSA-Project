@@ -39,6 +39,38 @@ book *newBook(int code, char *name, publisher editora){
 
 //---------------------------------------*--------------------------------------
 
+void create_random_book_database(int n, FILE *out){
+    book **books = (book **)malloc(n * sizeof(book *)); //n é o tamanho desejado do banco de dados
+    book **randomBooks = (book **)malloc(n * sizeof(book *));
+
+    for (int i = 0; i < n; i++) {
+
+        int cod = i;
+        char name[] = "Nome do livro ";
+        publisher editora = *newPublisher("Editora do livro");
+
+        books[i] = newBook(cod, name, editora);
+    }
+
+    for (int i = 0; i < n; i++) {       // Coloca randomicamente os livros dentro do array de livros
+        int randomIndex = rand() % n;
+        while (books[randomIndex] == NULL) {
+            randomIndex = rand() % n;
+        }
+
+        randomBooks[i] = books[randomIndex];
+        books[randomIndex] = NULL;
+
+        saveBook(randomBooks[i], out);
+    }
+
+    free(books);
+    free(randomBooks);
+
+}
+
+//---------------------------------------*--------------------------------------
+
 void savePublisher(publisher *e, FILE *out){
     fwrite(e->name, sizeof(char), sizeof(e->name), out);
 }

@@ -29,6 +29,8 @@ publisher *newPublisher(char *name);
 // Função para criar um novo livro com o código, nome e editora fornecidos e retornar um ponteiro para ele
 book *newBook(int code, char *name, publisher editora);
 
+void create_random_book_database(int n, FILE *out);
+
 // Função para salvar uma estrutura de editora em um arquivo 
 void savePublisher(publisher *e, FILE *out);
 

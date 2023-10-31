@@ -26,14 +26,16 @@ int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
         printf("\033[H\033[J"); //Limpar tela
 
         create_random_employee_database(1000, employeeFile);
-        int random_number = rand() % 100;
+        create_random_book_database(1000, bookFile);
 
-        printf("Numero aleatorio de vezes que iremos procurar funcionario aleatorios: %d\n", random_number); system("pause");
+        int random_number = rand() % 100;
+        printf("Numero aleatorio de vezes que iremos procurar funcionario aleatorios: %d\n", random_number); //system("pause");
         
         clock_t start = clock();
-        for (int i = 0; i < random_number; i++)
+        for (int i = 0; i < random_number; i++){
             findEmployee(employeeFile, i);
-        
+            findBook(bookFile, i);
+            }
         
         double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
         printf("Tempo total: %f ms\n", cpu_time_used*1000);
