@@ -43,6 +43,9 @@ sequenciais e informações padrão ("XXXXXXXXXX", "000.000.000-00", "00/00/0000
  Ela também utiliza a função shuffle_funcionarios para embaralhar os códigos dos funcionários.*/
 void criarBase_funcionarios(FILE *out, int tam);
 
+/*Sem shuffle para Binários*/
+void criarBase_funcionarios_Binario(FILE *out, int tam);
+
 /*Essa função embaralha um vetor de códigos de funcionários, randomizando a ordem dos códigos.*/
 void shuffle_funcionarios(int *vet,int MAX,int MIN);
 

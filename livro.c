@@ -2,16 +2,17 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 int tamanho_registro_livro() {
     TLivro *temp;
-    return sizeof(temp->cod) 
-           + sizeof(temp->nome) 
-           + sizeof(temp->numero_paginas) 
-           + sizeof(temp->autor) 
-           + sizeof(temp->editora) 
-           + sizeof(temp->data_emprestimo) 
-           + sizeof(temp->preco); 
+    return sizeof(temp->cod)
+           + sizeof(temp->nome)
+           + sizeof(temp->numero_paginas)
+           + sizeof(temp->autor)
+           + sizeof(temp->editora)
+           + sizeof(temp->data_emprestimo)
+           + sizeof(temp->preco);
 }
 
 TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco) {
@@ -59,7 +60,7 @@ TLivro *ler_arquivo_livro(FILE *in) {
 }
 
 void imprimir_livro(TLivro *livro) {
-    printf("**********************************************\n");
+    printf("\n**********************************************\n");
     printf("Codigo do Livro: %d\n", livro->cod);
     printf("Nome: %s\n", livro->nome);
     printf("Numero de Paginas: %s\n", livro->numero_paginas);
@@ -85,6 +86,26 @@ void criarBase_livros(FILE *out, int tam) {
         livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
         salvar_livro(livro, out);
     }
+
+    free(livro);
+}
+
+
+void criarBase_livros_Binario(FILE *out, int tam) {
+    int vet[tam];
+    TLivro *livro;
+
+    for (int i = 0; i < tam; i++)
+        vet[i] = i + 1;
+
+    printf("\nGerando a base de dados de livros...\n");
+
+    for (int i = 0; i < tam; i++) {
+        livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
+        salvar_livro(livro, out);
+    }
+
+    printf("Base de dados de livros gerada com sucesso!\n");
 
     free(livro);
 }

@@ -19,6 +19,7 @@ int tamanho_arquivo_de_livros(FILE *arq);
 TLivro *ler_arquivo_livro(FILE *in);
 void imprimir_livro(TLivro *livro);
 void criarBase_livros(FILE *out, int tam);
+void criarBase_livros_Binario(FILE *out, int tam);
 void shuffle_livros(int *vet, int MAX, int MIN);
 void imprimirBase_livros(FILE *out);
 

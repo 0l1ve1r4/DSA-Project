@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
 
 /*Comentarios na funcionario.h 
     Guilherme Santos*/
@@ -87,6 +90,27 @@ void criarBase_funcionarios(FILE *out, int tam){
         f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
         salvar_funcionario(f, out);
     }
+
+    free(f);
+
+}
+
+void criarBase_funcionarios_Binario(FILE *out, int tam){
+
+    int vet[tam];
+    TFunc *f;
+
+    for(int i=0;i<tam;i++)
+        vet[i] = i+1;
+
+    printf("\nGerando a base de dados de funcionario...\n");
+
+    for (int i=0;i<tam;i++){
+        f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
+        salvar_funcionario(f, out);
+    }
+
+    printf("Base de dados de funcionarios gerada com sucesso!\n");
 
     free(f);
 
