@@ -10,7 +10,9 @@ Para executar este projeto, você precisa ter as seguintes tecnologias e ferrame
 
 - **Banco de Dados:** [Banco de dados personalizado] - Utilizamos um banco de dados personalizado que armazena informações em arquivos binários na pasta 'bin'.
 
-- **Outras Dependências:** [win] O programa roda somente em windows devido a uma biblioteca utilizada no projeto para a interface grafica, "<windows.h>".
+- **Compilador:** [Minimalist GNU for Windows] O programa foi feito utilizando MinGW como compilador, não foi testado outros compiladores para testar a funcionalidade do programa, caso não tenha o MinGW ou o GCC instalado, recomendo [INSTALAR](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) para evitar bugs que foram corrijidos usando comandos específicos do compilador. 
+
+- **Outras Dependências:** [win] O programa roda somente em windows devido a uma biblioteca utilizada no projeto para a interface grafica, *<windows.h>*.
 
 - **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções está em inglês, no entanto, as mensagens exibidas no terminal são predominantemente em português do Brasil.
 
@@ -18,15 +20,15 @@ Para executar este projeto, você precisa ter as seguintes tecnologias e ferrame
 
 Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
 
-1. Compile o código-fonte, se necessário.
+1. Compile o código-fonte;
 
-```shell windows or linux
-gcc -o app ./*.c
+```shell windows 
+gcc -o window ./*.c
 
 ```
-2. Execute o programa principal usando o seguinte comando:
-````windows shell
-./nome_do_programa
+2. Isso irá compilar todos os arquivos .c no diretório, após execute o programa principal usando o seguinte comando:
+````shell windows
+./window.exe
 ````
 
 ## TODO

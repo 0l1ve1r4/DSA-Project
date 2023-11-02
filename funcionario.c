@@ -36,6 +36,8 @@ void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
     fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
     fwrite(&func->salario, sizeof(double), 1, out);
+
+    printf("Window Debug: Funcionario salvo com sucesso!\n");
 }
 
 int tamanho_arquivo_de_funcionarios(FILE *arq) {

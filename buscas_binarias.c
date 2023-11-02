@@ -1,10 +1,11 @@
-#include "funcionario.h"
-#include "livro.h"
-#include "buscas_binarias.h"
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include "funcionario.h"
+#include "livro.h"
+#include "buscas_binarias.h"
 
 int total_iterations;
 
@@ -127,7 +128,6 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
             salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
             printf("\nCodigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms\n", chave, iteracoes, elapsed_time);
             imprimir_livro(registro);
-            printf("Binary search worked");
             return registro;
         } else if (registro->cod < chave) {
             esq = meio + 1;
@@ -136,7 +136,6 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
         }
         total_iterations += iteracoes;
     }
-    printf("Binary search failed, code %i", chave);
     free(registro);
     return NULL;
 }

@@ -20,7 +20,9 @@ TLivro *registro;
 LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
-            // Create labels and edit controls to display book information
+
+            if (registro != NULL){
+
             char cod_print[11];
             char nome_print[50];
             char paginas_print[11];
@@ -38,25 +40,21 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
 
             CreateWindow("STATIC", codText, WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-
             CreateWindow("STATIC", nome_print, WS_VISIBLE | WS_CHILD, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-
-
             CreateWindow("STATIC", paginas_print, WS_VISIBLE | WS_CHILD, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-
-
             CreateWindow("STATIC", autor_print, WS_VISIBLE | WS_CHILD, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-
-
             CreateWindow("STATIC", editora_print, WS_VISIBLE | WS_CHILD, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-
-
             CreateWindow("STATIC", precoText, WS_VISIBLE | WS_CHILD, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
 
+            break;}
 
-            // Add other controls here...
+        else{
 
-            break;
+            CreateWindow("STATIC", "Livro nao encontrado", WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
+            break;}
+
+
+        
         }
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
@@ -239,10 +237,16 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     
                     bookFile = fopen("bin//books.dat", "r");
                     LogFileBinary = fopen("bin//logBinary.dat", "w");
+
+                    #pragma GCC diagnostic push
+                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" // Nao faço a minima ideia pq ta dando essas warning com o header incluido,
+                    #pragma GCC diagnostic ignored "-Wint-conversion"   // Apenas fingindo que nao ta acontecendo...
+
                     registro = buscarLivro_binariamente(cod, bookFile, 10000, LogFileBinary);
-                
-                    printf("Ok...\n");
+                    registro != NULL ? printf("\nWindow Debug: Livro encontrado com sucesso!"): printf("\nWindow Debug: Livro nao encontrado!");
                     print_Book();
+
+                    #pragma GCC diagnostic pop // Volta a mostrar os warnings
 
                     break;
 
