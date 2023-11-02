@@ -17,7 +17,6 @@ TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *L
 
 TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);
 
-
 void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms);
 
 #endif // BUSCAS_BINARIAS_H

@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "../livro.h"
+#include "../buscas_binarias.h"
 
 #define TAMANHO_LABEL_INSERT_Y 200
 
@@ -38,7 +39,7 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             sprintf(editora_print, "Editora: %s", registro->editora);
             sprintf(precoText, "Preco: %.2lf", preco);
 
-
+            
             CreateWindow("STATIC", codText, WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
             CreateWindow("STATIC", nome_print, WS_VISIBLE | WS_CHILD, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
             CreateWindow("STATIC", paginas_print, WS_VISIBLE | WS_CHILD, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
