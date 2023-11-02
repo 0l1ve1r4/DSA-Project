@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "time.h": "c",
         "library.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "*.rh": "c"
     }
 }

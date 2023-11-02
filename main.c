@@ -8,7 +8,7 @@
 #include "buscas_binarias.h"
 #include "livro.h"
 
-int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
+/*int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
 {
     printf("\033[H\033[J"); //Limpar tela do seu terminal
     FILE *employeeFile, *bookFile, *logFile, *logFileBinary, *employeeFileBinary, *bookFileBinary;
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
     fclose(logFileBinary);
     return 0;
 }
-
+*/
 
 
 

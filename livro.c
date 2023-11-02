@@ -25,6 +25,8 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
     strcpy(livro->editora, editora);
     strcpy(livro->data_emprestimo, data_emprestimo);
     livro->preco = preco;
+
+    printf("Livro criado com sucesso.\n");
     return livro;
 }
 
@@ -36,6 +38,9 @@ void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro->editora, sizeof(char), sizeof(livro->editora), out);
     fwrite(livro->data_emprestimo, sizeof(char), sizeof(livro->data_emprestimo), out);
     fwrite(&livro->preco, sizeof(double), 1, out);
+
+    printf("Livro salvo com sucesso.\n");
+
 }
 
 int tamanho_arquivo_de_livros(FILE *arq) {
