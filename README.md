@@ -10,7 +10,7 @@ Para executar este projeto, você precisa ter as seguintes tecnologias e ferrame
 
 - **Banco de Dados:** [Banco de dados personalizado] - Utilizamos um banco de dados personalizado que armazena informações em arquivos binários na pasta 'bin'.
 
-- **Outras Dependências:** [---] - Atualmente, não há outras dependências.
+- **Outras Dependências:** [win] O programa roda somente em windows devido a uma biblioteca utilizada no projeto para a interface grafica, "<windows.h>".
 
 - **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções está em inglês, no entanto, as mensagens exibidas no terminal são predominantemente em português do Brasil.
 
