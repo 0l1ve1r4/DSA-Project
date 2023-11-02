@@ -1,20 +1,18 @@
-# Sistema de Biblioteca - AEDS 2 - UFOP
+_Esse repósitorio foi construido para o estudo dos alunos de Algorimos e Estruturas de dados II, mostrando de forma prática como funciona a anipulação de arquivos em memoria segundaria em linguagem C, e como exemplo, foi montado uma aplicação que disponibiliza um conjunto de recursos para a administração de uma bibliotecas. Com o auxílio deste sistema, é possível supervisionar o controle de exemplares literários, gestão de usuários, registros de editoras e funcionários._
 
-Bem-vindo ao nosso Sistema de Gerenciamento de Biblioteca, uma aplicação que oferece um conjunto abrangente de recursos para a administração de bibliotecas. Com este sistema, você pode gerenciar livros, usuários, editoras e realizar várias operações relacionadas à biblioteca de forma eficiente.
+## Requisitos Essenciais
 
-## Requisitos
+Para a implementação bem-sucedida deste projeto, é indispensável que disponha das seguintes tecnologias e ferramentas devidamente configuradas:
 
-Para executar este projeto, você precisa ter as seguintes tecnologias e ferramentas instaladas:
+- **Linguagem de Programação:** [C] - A aplicação foi concebida mediante o uso exclusivo da linguagem de programação C.
 
-- **Linguagem de Programação:** [C] - A aplicação é desenvolvida em C puro.
+- **Banco de Dados:** [Banco de dados personalizado] - O sistema emprega um banco de dados personalizado que armazena informações em arquivos binários localizados na pasta 'bin'.
 
-- **Banco de Dados:** [Banco de dados personalizado] - Utilizamos um banco de dados personalizado que armazena informações em arquivos binários na pasta 'bin'.
+- **Compilador:** [Minimalist GNU for Windows] - A aplicação foi desenvolvida utilizando o MinGW como compilador. Para garantir o desempenho adequado do programa e evitar potenciais bugs, é altamente recomendado [INSTALAR](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) o MinGW ou o GCC, pois as correções realizadas no código se baseiam em comandos específicos do compilador.
 
-- **Compilador:** [Minimalist GNU for Windows] O programa foi feito utilizando MinGW como compilador, não foi testado outros compiladores para testar a funcionalidade do programa, caso não tenha o MinGW ou o GCC instalado, recomendo [INSTALAR](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) para evitar bugs que foram corrijidos usando comandos específicos do compilador. 
+- **Outras Dependências:** [win] - Importante ressaltar que o programa é exclusivamente compatível com o sistema operacional Windows devido à utilização de uma biblioteca gráfica específica, *<windows.h>*.
 
-- **Outras Dependências:** [win] O programa roda somente em windows devido a uma biblioteca utilizada no projeto para a interface grafica, *<windows.h>*.
-
-- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções está em inglês, no entanto, as mensagens exibidas no terminal são predominantemente em português do Brasil.
+- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções do programa estão em inglês, porém, as mensagens exibidas no terminal são predominantemente apresentadas em português do Brasil.
 
 ## Uso
 
@@ -40,7 +38,7 @@ gcc -o window ./*.c
 2. **Operações de Gerenciamento**
    - Implementar as seguintes operações de gerenciamento:
      - ~~Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma sequencial)~~
-     - Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma binária)
+     - ~~Buscar Livro: Permitir que os usuários pesquisem livros por título, autor, categoria, etc. (de forma binária)~~
      - Realizar Empréstimos: Capacidade de registrar empréstimos de livros com data de início e prazo de devolução.
      - Devolver Livros: Funcionalidade para que os usuários possam devolver livros emprestados, atualizando o status.
      - Registrar Usuários: Possibilitar que funcionários registrem novos membros na biblioteca.
@@ -49,9 +47,8 @@ gcc -o window ./*.c
      - Gerenciar Funcionários: Adicionar e atualizar informações sobre os funcionários da biblioteca.
 
 3. **Melhorias Gerais**
-   - Aprimorar a interface do usuário e as mensagens do sistema.
+   - ~~Aprimorar a interface do usuário e as mensagens do sistema.~~
    - Refinar o mecanismo de busca e classificação de livros.
-   - Implementar medidas de segurança para proteger os dados sensíveis.
 
 4. **Documentação**
    - Documentar o código-fonte com comentários detalhados para facilitar a compreensão e manutenção futura.
