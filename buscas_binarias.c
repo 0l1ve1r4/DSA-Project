@@ -114,7 +114,6 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
     int esq = 0;
     int dir = tam - 1;
     int iteracoes = 0;
-
     clock_t start_time = clock(); // Marca o início do tempo de execução
 
     while (esq <= dir) {
@@ -128,6 +127,7 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
             salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
             printf("\nCodigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms\n", chave, iteracoes, elapsed_time);
             imprimir_livro(registro);
+            printf("Binary search worked");
             return registro;
         } else if (registro->cod < chave) {
             esq = meio + 1;
@@ -136,7 +136,7 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
         }
         total_iterations += iteracoes;
     }
-
+    printf("Binary search failed, code %i", chave);
     free(registro);
     return NULL;
 }

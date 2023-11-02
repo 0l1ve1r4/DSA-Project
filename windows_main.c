@@ -1,10 +1,20 @@
 #include <windows.h>
 #include <stdio.h>
 
-#include "windows_insertBook.h"
+#include "./window_functions/window_book_functions.c"
 
 #define DISTANCIA_BOTOES_X 50
 #define TAMANHO_BOTOES_Y 160
+
+
+/*
+    Aqui jaz, um pedaço de minha alma, que nunca mais voltará.
+
+    Guilherme Oliveira Santos, 2023. Sistemas de Informação, UFOP.
+
+    ´Para compilar, use o comando abaixo no terminal: gcc -o window ./*.c
+
+*/
 
 
 LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -15,7 +25,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             CreateWindow("BUTTON", "Buscar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, DISTANCIA_BOTOES_X*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)2, NULL, NULL);
             CreateWindow("BUTTON", "Registrar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, DISTANCIA_BOTOES_X*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)3, NULL, NULL);
             CreateWindow("BUTTON", "Buscar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, DISTANCIA_BOTOES_X*3, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)4, NULL, NULL);
-            CreateWindow("BUTTON", "Sair", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, DISTANCIA_BOTOES_X*4, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)0, NULL, NULL);
+
             break;
         }
         case WM_COMMAND: {
@@ -25,10 +35,11 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     insert_Book();
 
                     break;
-                case 0: // Botão "Cancelar" pressionado
-                    // Fechar a janela
-                    DestroyWindow(hwnd);
-                    break;
+
+                case 2:
+                    search_Book();
+
+
             }
             break;
         }
