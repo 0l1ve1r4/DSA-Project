@@ -24,8 +24,8 @@ int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
     fclose(bookFileBinary);
     fclose(logFileBinary);
     return 0;
-}
-*/
+}*/
+
 
 
 

@@ -26,7 +26,7 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
     strcpy(livro->data_emprestimo, data_emprestimo);
     livro->preco = preco;
 
-    printf("Livro criado com sucesso.\n");
+    printf("Shell Debug: Livro criado com sucesso.\n");
     return livro;
 }
 
@@ -39,7 +39,7 @@ void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro->data_emprestimo, sizeof(char), sizeof(livro->data_emprestimo), out);
     fwrite(&livro->preco, sizeof(double), 1, out);
 
-    printf("Livro salvo com sucesso.\n");
+    printf("Shell Debug: Livro salvo com sucesso.\n");
 
 }
 
@@ -65,15 +65,8 @@ TLivro *ler_arquivo_livro(FILE *in) {
 }
 
 void imprimir_livro(TLivro *livro) {
-    printf("\n**********************************************\n");
-    printf("Codigo do Livro: %d\n", livro->cod);
-    printf("Nome: %s\n", livro->nome);
-    printf("Numero de Paginas: %s\n", livro->numero_paginas);
-    printf("Autor: %s\n", livro->autor);
-    printf("Editora: %s\n", livro->editora);
-    printf("Data de Emprestimo: %s\n", livro->data_emprestimo);
-    printf("Preco: %.2f\n", livro->preco);
-    printf("**********************************************\n");
+    printf("Shell Debug: Livro de codigo %d | Nome: %s | Numero de Paginas: %s | Autor: %s | Editora: %s | Data de Emprestimo: %s | Preco: %.2f\n",
+           livro->cod, livro->nome, livro->numero_paginas, livro->autor, livro->editora, livro->data_emprestimo, livro->preco);
 }
 
 void criarBase_livros(FILE *out, int tam) {
@@ -85,7 +78,7 @@ void criarBase_livros(FILE *out, int tam) {
 
     shuffle_livros(vet, tam, (tam * 10) / 100);
 
-    printf("\nGerando a base de dados de livros...\n");
+    printf("\nShell Debug: Gerando a base de dados de livros\n");
 
     for (int i = 0; i < tam; i++) {
         livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
@@ -103,14 +96,14 @@ void criarBase_livros_Binario(FILE *out, int tam) {
     for (int i = 0; i < tam; i++)
         vet[i] = i + 1;
 
-    printf("\nGerando a base de dados de livros...\n");
+    printf("\nShell Debug: Gerando a base de dados de livros...\n");
 
     for (int i = 0; i < tam; i++) {
         livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
         salvar_livro(livro, out);
     }
 
-    printf("Base de dados de livros gerada com sucesso!\n");
+    printf("\nShell Debug: Base de dados de livros gerada com sucesso!\n");
 
     free(livro);
 }

@@ -63,6 +63,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 int main() {
+    printf("\033[H\033[J");
     // Registrar a classe da janela
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WindowProc_Main;

@@ -6,9 +6,6 @@
 #include <time.h>
 #include <math.h>
 
-/*Comentarios na funcionario.h 
-    Guilherme Santos*/
-
 int tamanho_registro_funcionario() {
     TFunc *temp;
     return sizeof(temp->cod) 
@@ -37,7 +34,7 @@ void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
     fwrite(&func->salario, sizeof(double), 1, out);
 
-    printf("Window Debug: Funcionario salvo com sucesso!\n");
+    printf("\nShell Debug: Funcionario salvo com sucesso!\n");
 }
 
 int tamanho_arquivo_de_funcionarios(FILE *arq) {
@@ -62,18 +59,9 @@ TFunc *ler_arquivo_funcionario(FILE *in) {
 
 
 void imprimir_funcionario(TFunc *func) {
-    printf("**********************************************");
-    printf("\nFuncionario de codigo ");
-    printf("%d", func->cod);
-    printf("\nNome: ");
-    printf("%s", func->nome);
-    printf("\nCPF: ");
-    printf("%s", func->cpf);
-    printf("\nData de Nascimento: ");
-    printf("%s", func->data_nascimento);
-    printf("\nSalario: ");
-    printf("%4.2f", func->salario);
-    printf("\n**********************************************");
+    printf("Shell Debug: Funcionario de codigo %d | Nome: %s | CPF: %s | Data de Nascimento: %s | Salario: %.2f\n", 
+    func->cod, func->nome, func->cpf, func->data_nascimento, func->salario);
+
 }
 
 void criarBase_funcionarios(FILE *out, int tam){
