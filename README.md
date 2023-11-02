@@ -1,4 +1,4 @@
-_Esse repósitorio foi construido para o estudo dos alunos de Algorimos e Estruturas de dados II, mostrando de forma prática como funciona a anipulação de arquivos em memoria segundaria em linguagem C, e como exemplo, foi montado uma aplicação que disponibiliza um conjunto de recursos para a administração de uma bibliotecas. Com o auxílio deste sistema, é possível supervisionar o controle de exemplares literários, gestão de usuários, registros de editoras e funcionários._
+_Esse repósitorio foi construido para o estudo dos alunos de Algorimos e Estruturas de dados II, mostrando de forma prática como funciona a manipulação de arquivos em memoria segundaria em linguagem C, e como exemplo, foi montado uma aplicação que disponibiliza um conjunto de recursos para a administração de uma bibliotecas. Com o auxílio deste sistema, é possível supervisionar o controle de exemplares literários, gestão de usuários, registros de editoras e funcionários, etc..._
 
 ## Requisitos Essenciais
 
