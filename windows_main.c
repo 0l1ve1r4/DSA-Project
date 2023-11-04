@@ -45,6 +45,10 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             CreateWindow("BUTTON", "Criar Base Desordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, (DISTANCIA_BOTOES_Y%DISTANCIA_BOTOES_Y)+1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)5, NULL, NULL);
             CreateWindow("BUTTON", "Criar Base Ordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)6, NULL, NULL);
         
+            CreateWindow("STATIC", "Guilherme Santos", WS_VISIBLE | WS_CHILD, DISTANCIA_BOTOES_X*20, 200, TAMANHO_BOTOES_Y, 20, hwnd, NULL, NULL, NULL);
+            CreateWindow("STATIC", "Mateus Diniz", WS_VISIBLE | WS_CHILD, DISTANCIA_BOTOES_X*20, 225, TAMANHO_BOTOES_Y, 20, hwnd, NULL, NULL, NULL);
+
+
             break;
         }
         case WM_COMMAND: {
