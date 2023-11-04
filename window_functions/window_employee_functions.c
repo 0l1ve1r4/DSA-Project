@@ -48,10 +48,11 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
             }
 
         else {
-
-            CreateWindow("STATIC", "Funcionario nao encontrado", WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
+            MessageBox(NULL, "Funcionario nao encontrado.", "Error", MB_ICONERROR | MB_OK);
+            DestroyWindow(hwnd);
             break;
-        }
+            
+            }
 
 
         

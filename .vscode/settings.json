@@ -6,6 +6,7 @@
         "stdio.h": "c",
         "*.rh": "c",
         "window_book_functions.h": "c",
-        "buscas_binarias.h": "c"
+        "buscas_binarias.h": "c",
+        "windows.h": "c"
     }
 }

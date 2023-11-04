@@ -20,6 +20,7 @@
 #include "./window_functions/window_book_functions.c"
 #include "./window_functions/window_employee_functions.c"
 #include "./window_functions/window_database_functions.c"
+#include "./window_functions/window_utils.c"
 
 #define DISTANCIA_BOTOES_Y 50
 #define DISTANCIA_BOTOES_X 10
@@ -27,10 +28,15 @@
 
 
 
+
 LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
-        case WM_CREATE: {
         
+        case WM_CREATE: {
+
+            set_icon(hwnd, "images\\appIcon.ico");
+            removeExpandButton(hwnd);
+
             CreateWindow("BUTTON", "Adicionar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, (DISTANCIA_BOTOES_Y%DISTANCIA_BOTOES_Y)+1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)1, NULL, NULL);
             CreateWindow("BUTTON", "Buscar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)2, NULL, NULL);
             CreateWindow("BUTTON", "Registrar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)3, NULL, NULL);
