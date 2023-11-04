@@ -151,7 +151,7 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 
                     FILE *bookFile;
-                    bookFile = fopen("bin//books.dat", "ab+");
+                    bookFile = fopen("bin//window_books.dat", "ab+");
                     TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "XXXXXX", preco);
                     salvar_livro(temp, bookFile);
 
@@ -226,8 +226,8 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     
 
                     FILE *bookFile, *LogFileBinary;
-                    bookFile = fopen("bin//books.dat", "r");
-                    LogFileBinary = fopen("bin//logBinary.dat", "w");
+                    bookFile = fopen("bin//window_books.dat", "r");
+                    LogFileBinary = fopen("bin//window_log.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" // Nao faço a minima ideia pq ta dando essas warning com o header incluido,

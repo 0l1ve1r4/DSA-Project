@@ -138,7 +138,7 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     }
 
                     FILE *employeeFile;
-                    employeeFile = fopen("bin//employeeFileBinary.dat", "ab+");
+                    employeeFile = fopen("bin//window_employee.dat", "ab+");
                     TFunc *temp = criar_funcionario(cod, nome, cpf, data_nascimento, salario); 
                     salvar_funcionario(temp, employeeFile);
 
@@ -217,8 +217,8 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     
 
                     FILE *employeeFileBinary, *LogFileBinary;
-                    employeeFileBinary = fopen("bin//employeeFileBinary.dat", "r");
-                    LogFileBinary = fopen("bin//logBinary.dat", "w");
+                    employeeFileBinary = fopen("bin//window_employee.dat", "r");
+                    LogFileBinary = fopen("bin//window_log.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
