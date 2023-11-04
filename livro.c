@@ -76,7 +76,7 @@ void criarBase_livros(FILE *out, int tam) {
     for (int i = 0; i < tam; i++)
         vet[i] = i + 1;
 
-    shuffle_livros(vet, tam, (tam * 10) / 100);
+    shuffle_livros(vet, tam);
 
     printf("\nShell Debug: Gerando a base de dados de livros\n");
 
@@ -108,10 +108,10 @@ void criarBase_livros_Binario(FILE *out, int tam) {
     free(livro);
 }
 
-void shuffle_livros(int *vet, int MAX, int MIN) {
+void shuffle_livros(int *vet, int size) {
     srand(time(NULL));
-    for (int i = MAX - MIN - 1; i > 0; i--) {
-        int j = rand() % (i);
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
         int tmp = vet[j];
         vet[j] = vet[i];
         vet[i] = tmp;

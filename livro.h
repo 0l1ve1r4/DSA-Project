@@ -20,7 +20,7 @@ TLivro *ler_arquivo_livro(FILE *in);
 void imprimir_livro(TLivro *livro);
 void criarBase_livros(FILE *out, int tam);
 void criarBase_livros_Binario(FILE *out, int tam);
-void shuffle_livros(int *vet, int MAX, int MIN);
+void shuffle_livros(int *vet, int MAX);
 void imprimirBase_livros(FILE *out);
 
 #endif // LIVRO_H

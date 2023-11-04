@@ -72,9 +72,7 @@ void criarBase_funcionarios(FILE *out, int tam){
     for(int i=0;i<tam;i++)
         vet[i] = i+1;
 
-    shuffle_funcionarios(vet,tam,(tam*10)/100);
-
-    printf("\nGerando a base de dados...\n");
+    shuffle_funcionarios(vet, tam);
 
     for (int i=0;i<tam;i++){
         f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
@@ -93,23 +91,19 @@ void criarBase_funcionarios_Binario(FILE *out, int tam){
     for(int i=0;i<tam;i++)
         vet[i] = i+1;
 
-    printf("\nGerando a base de dados de funcionario...\n");
-
     for (int i=0;i<tam;i++){
         f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
         salvar_funcionario(f, out);
     }
 
-    printf("Base de dados de funcionarios gerada com sucesso!\n");
-
     free(f);
 
 }
 
-void shuffle_funcionarios(int *vet,int MAX,int MIN) {
+void shuffle_funcionarios(int *vet, int size) {
     srand(time(NULL));
-    for (int i = MAX - MIN - 1; i > 0; i--) {
-        int j = rand() % (i);
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
         int tmp = vet[j];
         vet[j] = vet[i];
         vet[i] = tmp;

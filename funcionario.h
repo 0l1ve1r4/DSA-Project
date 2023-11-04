@@ -47,7 +47,7 @@ void criarBase_funcionarios(FILE *out, int tam);
 void criarBase_funcionarios_Binario(FILE *out, int tam);
 
 /*Essa função embaralha um vetor de códigos de funcionários, randomizando a ordem dos códigos.*/
-void shuffle_funcionarios(int *vet,int MAX,int MIN);
+void shuffle_funcionarios(int *vet,int MAX);
 
 
 /*Esta função lê e imprime todos os registros de funcionários em um arquivo, 

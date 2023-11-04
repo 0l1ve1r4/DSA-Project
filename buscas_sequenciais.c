@@ -14,16 +14,14 @@ void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile,
     }
 
     else{
-          printf("\033[H\033[J");
+        printf("\033[H\033[J");
+        int total_iterations = 0;
         criarBase_funcionarios(employeeFile, tamanho_base);
         criarBase_livros(bookFile, tamanho_base);
-        printf("Base de dados criada com sucesso!\n");
-
-        int random_number = rand() % 100;
-        printf("Numero aleatorio de vezes que iremos procurar funcionario aleatorios: %d\n", random_number); system("pause");
+        printf("Shell Debug: Base de dados criada com sucesso!\n");
         
         clock_t start = clock();
-        for (int i = 0; i < random_number; i++){
+        for (int i = 0; i < tamanho_base; i++){
             buscarFuncionario_sequencialmente(employeeFile, i, logFile);
             buscarLivro_sequencialmente(bookFile, i, logFile);
             }

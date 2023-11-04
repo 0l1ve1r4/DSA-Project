@@ -17,66 +17,24 @@ void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE 
         exit(1);
     } else {
         printf("\033[H\033[J");
-
         criarBase_funcionarios_Binario(employeeFileBinary, tamanho_base);
         criarBase_livros_Binario(bookFileBinary, tamanho_base);
 
-        int codigo;
-
-        printf("Digite o codigo que deseja buscar binariamente: ");
-        scanf("%d", &codigo);
-
         clock_t start = clock();
-        buscarFuncionario_binariamente(codigo, employeeFileBinary, tamanho_base, LogFileBinary);
-        buscarLivro_binariamente(codigo, bookFileBinary, tamanho_base, LogFileBinary);
+        for(int i = 0; i < tamanho_base; i++){
+        buscarFuncionario_binariamente(i, employeeFileBinary, tamanho_base, LogFileBinary);
+        buscarLivro_binariamente(i, bookFileBinary, tamanho_base, LogFileBinary);
+
+        }
 
         double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
-        printf("\nTempo total: %.2f ms\n", cpu_time_used * 1000);
-
-        clock_t startTotal = clock();
-        // Gere aleatoriamente números de funcionários a serem buscados.
-        int num_funcionarios_a_buscar = 1000;
-        int funcionarios_a_buscar[num_funcionarios_a_buscar];
-
-        srand(time(NULL));
-        for (int i = 0; i < num_funcionarios_a_buscar; i++) {
-            funcionarios_a_buscar[i] = rand() % tamanho_base + 1; // Altere o intervalo conforme necessário.
-        }
-
-        for (int i = 0; i < num_funcionarios_a_buscar; i++) {
-            int codigo_aleatorio = funcionarios_a_buscar[i];
-            TFunc *funcionario_encontrado = buscarFuncionario_binariamente(codigo_aleatorio, employeeFileBinary, tamanho_base, LogFileBinary);
-
-            if (funcionario_encontrado) {
-                printf("\nFuncionario com codigo %d encontrado.\n", codigo_aleatorio);
-            } else {
-                printf("\nFuncionario com codigo %d nao encontrado.\n", codigo_aleatorio);
-            }
-        }
-
-        int num_livros_a_buscar = 1000;
-        int livros_a_buscar[num_livros_a_buscar];
-
-        for (int i = 0; i < num_livros_a_buscar; i++) {
-            livros_a_buscar[i] = rand() % tamanho_base + 1;
-        }
-
-        for (int i = 0; i < num_livros_a_buscar; i++) {
-            int codigo_aleatorio = livros_a_buscar[i];
-            TLivro *livro_encontrado = buscarLivro_binariamente(codigo_aleatorio, bookFileBinary, tamanho_base, LogFileBinary);
-
-            if (livro_encontrado) {
-                printf("Livro com codigo %d encontrado.\n", codigo_aleatorio);
-            } else {
-                printf("Livro com codigo %d nao encontrado.\n", codigo_aleatorio);
-            }
-        }
-
-        double cpu_time_used_total = ((double) (clock() - startTotal)) / CLOCKS_PER_SEC;
-        printf("\nTempo total: %.2f ms\n", cpu_time_used_total * 1000);
-        printf("\nIteracao total: %d",total_iterations);
-
+        salvar_log_file_binary(LogFileBinary, total_iterations, cpu_time_used * 1000);
+        printf("\nShell Debug: Tempo total: %.2f ms | Numero de iteracoes:\n", cpu_time_used * 1000, total_iterations);
+        total_iterations = 0;
+        return;
     }
+
+    
 }
 
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary) {
