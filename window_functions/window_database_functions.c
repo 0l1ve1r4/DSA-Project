@@ -42,9 +42,9 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
                     
 
                     FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("bin//books.dat", "w");
-                    LogFileBinary = fopen("bin//logBinary.dat", "w");
-                    employeeFile = fopen("bin//funcionarios.dat", "w");
+                    bookFile = fopen("bin//shell_books.dat", "w");
+                    LogFileBinary = fopen("bin//shell_log.dat", "w");
+                    employeeFile = fopen("bin//shell_funcionarios.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
@@ -130,9 +130,9 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
                     
 
                     FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("bin//books.dat", "w");
-                    LogFileBinary = fopen("bin//logBinary.dat", "w");
-                    employeeFile = fopen("bin//funcionarios.dat", "w");
+                    bookFile = fopen("bin//shell_books.dat", "w");
+                    LogFileBinary = fopen("bin//shell_log.dat", "w");
+                    employeeFile = fopen("bin//shell_funcionarios.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 

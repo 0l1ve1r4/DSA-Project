@@ -5,17 +5,18 @@
 /*Comentarios na buscas_sequenciais.h 
     Guilherme Santos*/
 
+int total_iterations_sequencial = 0;
+
 void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
-    if ((employeeFile = fopen("./bin/funcionarios.dat", "ab+")) == NULL 
-        || (bookFile = fopen("./bin/books.dat", "ab+")) == NULL
-        || (logFile = fopen("./bin/log.dat", "ab+")) == NULL   ) {
+    if ((employeeFile = fopen("./bin/shell_funcionarios.dat", "ab+")) == NULL 
+        || (bookFile = fopen("./bin/shell_books.dat", "ab+")) == NULL
+        || (logFile = fopen("./bin/shell_log.dat", "ab+")) == NULL   ) {
         printf("Erro ao abrir os arquivo binarios\n");
         exit(1);
     }
 
     else{
         printf("\033[H\033[J");
-        int total_iterations = 0;
         criarBase_funcionarios(employeeFile, tamanho_base);
         criarBase_livros(bookFile, tamanho_base);
         printf("Shell Debug: Base de dados criada com sucesso!\n");
@@ -27,7 +28,7 @@ void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile,
             }
         
         double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
-        printf("\nTempo total: %.2f ms\n", cpu_time_used*1000);
+        printf("\nTempo total: %.2f ms | Total de iteracoes: %i\n", cpu_time_used*1000, total_iterations_sequencial);
             
 
 }
@@ -44,6 +45,7 @@ TFunc *buscarFuncionario_sequencialmente(FILE *arquivo, int codigo, FILE *logFil
 
     while (fread(&funcionario->cod, sizeof(int), 1, arquivo) == 1) {
         numero_iteracoes++;
+        total_iterations_sequencial++;
         if (funcionario->cod == codigo) {
             clock_t end_time = clock();
             double time_elapsed_ms = ((double)(end_time - start_time) / CLOCKS_PER_SEC) * 1000.0;
@@ -77,6 +79,7 @@ TLivro *buscarLivro_sequencialmente(FILE *arquivo, int codigo, FILE *logFile) {
 
     while (fread(&livro->cod, sizeof(int), 1, arquivo) == 1) {
         numero_iteracoes++;
+        total_iterations_sequencial++;
         if (livro->cod == codigo) {
             clock_t end_time = clock();
             double time_elapsed_ms = ((double)(end_time - start_time) / CLOCKS_PER_SEC) * 1000.0;

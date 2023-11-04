@@ -10,9 +10,9 @@
 int total_iterations;
 
 void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
-    if ((employeeFileBinary = fopen("./bin/funcionarios_binary_search.dat", "ab+")) == NULL
-        || (bookFileBinary = fopen("./bin/books_binary_search.dat", "ab+")) == NULL
-        || (LogFileBinary = fopen("./bin/log_binary_search", "w")) == NULL) {
+    if ((employeeFileBinary = fopen("./bin/shell_funcionarios.dat", "wb+")) == NULL
+        || (bookFileBinary = fopen("./bin/shell_books.dat", "wb+")) == NULL
+        || (LogFileBinary = fopen("./bin/shell_log.dat", "w")) == NULL) {
         printf("Erro ao abrir os arquivo binários\n");
         exit(1);
     } else {
@@ -29,7 +29,7 @@ void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE 
 
         double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
         salvar_log_file_binary(LogFileBinary, total_iterations, cpu_time_used * 1000);
-        printf("\nShell Debug: Tempo total: %.2f ms | Numero de iteracoes:\n", cpu_time_used * 1000, total_iterations);
+        printf("\nShell Debug: Tempo total: %.2f ms | Numero de iteracoes: %i\n", cpu_time_used * 1000, total_iterations);
         total_iterations = 0;
         return;
     }
