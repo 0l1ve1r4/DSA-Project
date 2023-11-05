@@ -23,7 +23,7 @@ Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas
 1. Compile o código-fonte;
 
 ```shell windows 
-gcc -o window ./*.c
+gcc -o window ./src/*.c ./src/buscas/*.c ./windows_main.c
 
 ```
 2. Isso irá compilar todos os arquivos .c no diretório, após execute o programa principal usando o seguinte comando:
@@ -53,7 +53,7 @@ gcc -o window ./*.c
    - ~~Refinar o mecanismo de busca e classificação de livros.~~
 
 4. **Documentação**
-   - Documentar o código-fonte com comentários detalhados para facilitar a compreensão e manutenção futura.
+   - ~~Documentar o código-fonte com comentários detalhados para facilitar a compreensão e manutenção futura.~~
 
 
 ## Contribuição
