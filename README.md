@@ -1,8 +1,10 @@
-_Esse repósitorio foi construido para o estudo dos alunos de Algorimos e Estruturas de dados II, mostrando de forma prática como funciona a manipulação de arquivos em memoria segundaria em linguagem C, e como exemplo, foi montado uma aplicação que disponibiliza um conjunto de recursos para a administração de uma bibliotecas. Com o auxílio deste sistema, é possível supervisionar o controle de exemplares literários, gestão de usuários, registros de editoras e funcionários, etc..._
+# Data Structures & Algorithms II
+
+Este repositório foi construído para o estudo dos alunos de Algoritmos e Estruturas de Dados II, mostrando de forma prática como funciona a manipulação de arquivos em memória secundária em linguagem C. Como exemplo, foi montada uma aplicação que disponibiliza um conjunto de recursos para a administração de uma biblioteca. Com o auxílio deste sistema, é possível supervisionar o controle de exemplares literários, gestão de usuários, registros de editoras e funcionários, etc...
 
 ## Requisitos Essenciais
 
-Para a implementação bem-sucedida deste projeto, é indispensável que disponha das seguintes tecnologias e ferramentas devidamente configuradas:
+Para a implementação bem-sucedida deste projeto, é indispensável que você disponha das seguintes tecnologias e ferramentas devidamente configuradas:
 
 - **Linguagem de Programação:** [C] - A aplicação foi concebida mediante o uso exclusivo da linguagem de programação C.
 
@@ -10,9 +12,9 @@ Para a implementação bem-sucedida deste projeto, é indispensável que disponh
 
 - **Compilador:** [Minimalist GNU for Windows] - A aplicação foi desenvolvida utilizando o MinGW como compilador. Para garantir o desempenho adequado do programa e evitar potenciais bugs, é altamente recomendado [INSTALAR](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) o MinGW ou o GCC, pois as correções realizadas no código se baseiam em comandos específicos do compilador.
 
-- **Outras Dependências:** [win] - Importante ressaltar que o programa é exclusivamente compatível com o sistema operacional Windows devido à utilização de uma biblioteca gráfica específica, *<windows.h>*.
+- **Outras Dependências:** [Windows] - Importante ressaltar que o programa é exclusivamente compatível com o sistema operacional Windows devido à utilização de uma biblioteca gráfica específica, *<windows.h>*.
 
-- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções do programa estão em inglês, porém, as mensagens exibidas no terminal são predominantemente apresentadas em português do Brasil.
+- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções do programa está em inglês, porém, as mensagens exibidas no terminal são predominantemente apresentadas em português do Brasil.
 
 ## Uso
 
@@ -48,7 +50,7 @@ gcc -o window ./*.c
 
 3. **Melhorias Gerais**
    - ~~Aprimorar a interface do usuário e as mensagens do sistema.~~
-   - Refinar o mecanismo de busca e classificação de livros.
+   - ~~Refinar o mecanismo de busca e classificação de livros.~~
 
 4. **Documentação**
    - Documentar o código-fonte com comentários detalhados para facilitar a compreensão e manutenção futura.
