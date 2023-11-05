@@ -30,3 +30,5 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+//gcc -o window ./src/*.c ./src/buscas/*.c ./unit_tests/shellTests.c
+
