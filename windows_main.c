@@ -10,9 +10,11 @@
 
     Guilherme Oliveira Santos, 2023. Sistemas de Informação, UFOP.
 
-    Para compilar, use o comando abaixo no terminal: gcc -o window ./*.c
-
 */
+
+
+//Para compilar, use gcc -o window ./buscas/*.c ./*.c
+//Isso vai compilar todos os arquivos .c dentro das pastas depois todos os arquivos .c dentro do diretório atual
 
 #include <windows.h>
 #include <stdio.h>

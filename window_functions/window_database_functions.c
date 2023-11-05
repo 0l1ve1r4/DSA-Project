@@ -1,8 +1,8 @@
 #include <windows.h>
 #include <stdio.h>
 
-#include "../buscas_sequenciais.h"
-#include "../buscas_binarias.h"
+#include "../buscas/buscas_sequenciais.h"
+#include "../buscas/buscas_binarias.h"
 
 #define TAMANHO_LABEL_INSERT_Y 400
 #define DISTANCIA_BOTOES_Y 50

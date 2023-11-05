@@ -1,7 +1,8 @@
 #ifndef BUSCAS_SEQUENCIAIS_H
 #define BUSCAS_SEQUENCIAIS_H
-#include "funcionario.h"
-#include "livro.h"
+
+#include "../funcionario.h"
+#include "../livro.h"
 
 typedef struct LogFile{
     int iteracoes;

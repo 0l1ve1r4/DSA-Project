@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "../livro.h"
-#include "../buscas_binarias.h"
+#include "../buscas/buscas_binarias.h"
 
 #define TAMANHO_LABEL_INSERT_Y 400
 

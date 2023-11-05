@@ -1,6 +1,6 @@
-#include "funcionario.h"
+#include "../funcionario.h"
 #include "buscas_sequenciais.h"
-#include "time.h"
+#include <time.h>
 
 /*Comentarios na buscas_sequenciais.h 
     Guilherme Santos*/
@@ -8,9 +8,10 @@
 int total_iterations_sequencial = 0;
 
 void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
-    if ((employeeFile = fopen("./bin/shell_funcionarios.dat", "ab+")) == NULL 
-        || (bookFile = fopen("./bin/shell_books.dat", "ab+")) == NULL
-        || (logFile = fopen("./bin/shell_log.dat", "ab+")) == NULL   ) {
+    if ((employeeFile = fopen("./bin/shell_funcionarios.dat", "wb+")) == NULL 
+        || (bookFile = fopen("./bin/shell_books.dat", "wb+")) == NULL
+        || (logFile = fopen("./bin/shell_log.dat", "wb+")) == NULL   ) {
+
         printf("Erro ao abrir os arquivo binarios\n");
         exit(1);
     }

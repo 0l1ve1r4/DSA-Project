@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "funcionario.h"
-#include "livro.h"
+#include "../funcionario.h"
+#include "../livro.h"
 #include "buscas_binarias.h"
 
 int total_iterations;
@@ -12,7 +12,7 @@ int total_iterations;
 void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
     if ((employeeFileBinary = fopen("./bin/shell_funcionarios.dat", "wb+")) == NULL
         || (bookFileBinary = fopen("./bin/shell_books.dat", "wb+")) == NULL
-        || (LogFileBinary = fopen("./bin/shell_log.dat", "w")) == NULL) {
+        || (LogFileBinary = fopen("./bin/shell_log.dat", "wb+")) == NULL) {
         printf("Erro ao abrir os arquivo binários\n");
         exit(1);
     } else {

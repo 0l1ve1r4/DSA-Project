@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "../funcionario.h"
-#include "../buscas_binarias.h"
+#include "../buscas/buscas_binarias.h"
 
 int cod;
 char codText_Employee[50];
