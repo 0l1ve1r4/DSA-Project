@@ -9,13 +9,13 @@
 #include "./src/buscas/buscas_binarias.h"
 
 
-int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
+int main(int argc, char *argv[])   
 {
     printf("\033[H\033[J"); //Limpar tela do seu terminal
     FILE *employeeFile, *bookFile, *logFile;
-    employeeFile = fopen("./bin/shell_funcionarios.dat", "wb+");
-    bookFile = fopen("./bin/shell_books.dat", "wb+");
-    logFile = fopen("./bin/shell_log.dat", "w");
+    employeeFile = fopen("./src/bin/shell_funcionarios.dat", "wb+");
+    bookFile = fopen("./src/bin/shell_books.dat", "wb+");
+    logFile = fopen("./src/bin/shell_log.dat", "w");
     printf("Buscas Sequenciais\n");
     bases_buscas_sequenciais(employeeFile, bookFile, logFile, 1000);
 

@@ -139,7 +139,7 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     }
 
                     FILE *employeeFile;
-                    employeeFile = fopen("bin//window_employee.dat", "ab+");
+                    employeeFile = fopen("src/bin//window_employee.dat", "ab+");
                     TFunc *temp = criar_funcionario(cod, nome, cpf, data_nascimento, salario); 
                     salvar_funcionario(temp, employeeFile);
 
@@ -218,8 +218,8 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     
 
                     FILE *employeeFileBinary, *LogFileBinary;
-                    employeeFileBinary = fopen("bin//window_employee.dat", "r");
-                    LogFileBinary = fopen("bin//window_log.dat", "w");
+                    employeeFileBinary = fopen("src/bin//window_employee.dat", "r");
+                    LogFileBinary = fopen("src/bin//window_log.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
@@ -256,7 +256,7 @@ int search_employee() {
     RegisterClass(&wc);
 
 
-    HWND hwnd = CreateWindow("Window_Search_Employee_Class", "Buscar Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
+    HWND hwnd = CreateWindow("Window_Search_Employee_Class", "Buscar Funcionario no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     MSG msg;
 

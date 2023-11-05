@@ -10,9 +10,9 @@
 int total_iterations;
 
 void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
-    if ((employeeFileBinary = fopen("./bin/shell_funcionarios.dat", "wb+")) == NULL
-        || (bookFileBinary = fopen("./bin/shell_books.dat", "wb+")) == NULL
-        || (LogFileBinary = fopen("./bin/shell_log.dat", "wb+")) == NULL) {
+    if ((employeeFileBinary = fopen("./src/bin/shell_funcionarios.dat", "wb+")) == NULL
+        || (bookFileBinary = fopen("./src/bin/shell_books.dat", "wb+")) == NULL
+        || (LogFileBinary = fopen("./src/bin/shell_log.dat", "wb+")) == NULL) {
         printf("Erro ao abrir os arquivo binários\n");
         exit(1);
     } else {

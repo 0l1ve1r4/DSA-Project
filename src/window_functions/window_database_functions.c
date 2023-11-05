@@ -42,9 +42,9 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
                     
 
                     FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("bin//shell_books.dat", "w");
-                    LogFileBinary = fopen("bin//shell_log.dat", "w");
-                    employeeFile = fopen("bin//shell_funcionarios.dat", "w");
+                    bookFile = fopen("src/bin//shell_books.dat", "w");
+                    LogFileBinary = fopen("src/bin//shell_log.dat", "w");
+                    employeeFile = fopen("src/bin//shell_funcionarios.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
@@ -82,7 +82,7 @@ int Window_Unsorted_DataBase() {
     RegisterClass(&wc);
 
 
-    HWND hwnd = CreateWindow("Window_Unsorted_DataBase_Search", "Buscar Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
+    HWND hwnd = CreateWindow("Window_Unsorted_DataBase_Search", "Buscas sequenciais", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     MSG msg;
 
@@ -130,9 +130,9 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
                     
 
                     FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("bin//shell_books.dat", "w");
-                    LogFileBinary = fopen("bin//shell_log.dat", "w");
-                    employeeFile = fopen("bin//shell_funcionarios.dat", "w");
+                    bookFile = fopen("src/bin//shell_books.dat", "w");
+                    LogFileBinary = fopen("src/bin//shell_log.dat", "w");
+                    employeeFile = fopen("src/bin//shell_funcionarios.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
@@ -170,7 +170,7 @@ int Window_Sorted_DataBase() {
     RegisterClass(&wc);
 
 
-    HWND hwnd = CreateWindow("Window_Sorted_DataBase_Search", "Buscar Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
+    HWND hwnd = CreateWindow("Window_Sorted_DataBase_Search", "Buscas Binarias", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     MSG msg;
 
