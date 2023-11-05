@@ -1,12 +1,13 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-#include "funcionario.h"
-#include "buscas_sequenciais.h"
-#include "buscas_binarias.h"
-#include "livro.h"
+#include "./src/livro.h"
+#include "./src/funcionario.h"
+#include "./src/buscas/buscas_sequenciais.h"
+#include "./src/buscas/buscas_binarias.h"
+
 
 int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
 {
@@ -28,7 +29,4 @@ int main(int argc, char *argv[])    //Para compilar use ->  gcc -o app ./*.c
     fclose(logFile);
     return 0;
 }
-
-*/
-
 

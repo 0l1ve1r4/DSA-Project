@@ -13,16 +13,17 @@
 */
 
 
-//Para compilar, use gcc -o window ./buscas/*.c ./*.c
-//Isso vai compilar todos os arquivos .c dentro das pastas depois todos os arquivos .c dentro do diretório atual
+//Para compilar, use: gcc -o window ./src/*.c ./src/buscas/*.c ./windows_main.c
+//Isso vai compilar todos os arquivos .c dentro das pastas depois o windows_main.c no diretório atual. 
+//(Voce deve alterar o ./windows_main.c para o nome do seu arquivo main.c, caso queira fazer o projeto somente em terminal) 
 
 #include <windows.h>
 #include <stdio.h>
 
-#include "./window_functions/window_book_functions.c"
-#include "./window_functions/window_employee_functions.c"
-#include "./window_functions/window_database_functions.c"
-#include "./window_functions/window_utils.c"
+#include "./src/window_functions/window_book_functions.c"
+#include "./src/window_functions/window_employee_functions.c"
+#include "./src/window_functions/window_database_functions.c"
+#include "./src/window_functions/window_utils.c"
 
 #define DISTANCIA_BOTOES_Y 50
 #define DISTANCIA_BOTOES_X 10
@@ -36,7 +37,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
         
         case WM_CREATE: {
 
-            set_icon(hwnd, "images\\appIcon.ico");
+            set_icon(hwnd, "./assets/images/appIcon.ico");
             removeExpandButton(hwnd);
 
             CreateWindow("BUTTON", "Adicionar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, (DISTANCIA_BOTOES_Y%DISTANCIA_BOTOES_Y)+1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)1, NULL, NULL);
