@@ -56,7 +56,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
             CreateWindow("BUTTON", "Criar Base Desordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)001, NULL, NULL);
             CreateWindow("BUTTON", "Criar Base Ordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)002, NULL, NULL);
-        
+            CreateWindow("BUTTON", "Resetar Banco de Dados ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)003, NULL, NULL);
+
             CreateWindow("STATIC", "Guilherme Santos - Mateus Diniz | Algoritmos e Estruturas de Dados II",
             WS_VISIBLE | WS_CHILD, TAMANHO_MAIN_WINDOW_X/2, TAMANHO_MAIN_WINDOW_Y-60, TAMANHO_BOTOES_Y*10, 20, hwnd, NULL, NULL, NULL);
 
@@ -89,6 +90,10 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                 
                 case 002:
                     Window_Sorted_DataBase();
+                    break;
+
+                case 003:
+                    rmvBin();
                     break;
 
                 default:

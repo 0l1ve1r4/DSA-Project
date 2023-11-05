@@ -24,3 +24,18 @@ void set_icon(HWND hwnd, char* path){
 
 
 }
+
+
+void rmvBin() {
+    int result = MessageBox(NULL, "Isso vai apagar TUDO, deseja continuar?", "Confirmacao", MB_ICONQUESTION | MB_YESNO);
+
+    if (result == IDYES) {
+        int deleteResult = system("del src\\bin\\*.dat");
+        if (deleteResult == 0) {
+            MessageBox(NULL, "Arquivos apagados. (Verifique Manualmente)", "Aviso", MB_ICONINFORMATION | MB_OK);
+        } 
+
+}
+}
+
+
