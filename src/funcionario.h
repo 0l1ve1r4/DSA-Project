@@ -55,4 +55,6 @@ usando a função ler_arquivo_funcionario e imprimir_funcionario.*/
 void imprimirBase_funcionarios(FILE *out);
 
 
+
+
 #endif // FUNCIONARIO_H

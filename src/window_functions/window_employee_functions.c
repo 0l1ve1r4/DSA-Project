@@ -3,6 +3,7 @@
 
 #include "../funcionario.h"
 #include "../buscas/buscas_binarias.h"
+#include "../metodos_ordenacao/insertionSort.h"
 
 int cod;
 char codText_Employee[50];
@@ -142,7 +143,8 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     employeeFile = fopen("src/bin//window_employee.dat", "ab+");
                     TFunc *temp = criar_funcionario(cod, nome, cpf, data_nascimento, salario); 
                     salvar_funcionario(temp, employeeFile);
-
+                    
+                    insertionSort_funcionarios(employeeFile, tamanho_arquivo_de_funcionarios(employeeFile));
                     fclose(employeeFile);
                     free(temp);
                     DestroyWindow(hwnd); 

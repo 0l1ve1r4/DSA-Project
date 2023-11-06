@@ -3,6 +3,7 @@
 
 #include "../livro.h"
 #include "../buscas/buscas_binarias.h"
+#include "../metodos_ordenacao/insertionSort.h"
 
 #define TAMANHO_LABEL_INSERT_Y 400
 
@@ -154,7 +155,8 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     bookFile = fopen("src/bin/window_books.dat", "ab+");
                     TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "XXXXXX", preco);
                     salvar_livro(temp, bookFile);
-
+                    
+                    insertionSort_livros(bookFile, tamanho_arquivo_de_livros(bookFile));
                     fclose(bookFile);
                     free(temp);
                     DestroyWindow(hwnd); // Fechar a janela automaticamente após inserir o livro para evitar bugs
