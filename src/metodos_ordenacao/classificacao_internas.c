@@ -1,10 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-#include "../src/funcionario.h"
-
+#include "classificacao_internas.h"
+#include "../funcionario.h" 
 
 void insertionSort(TFunc arr[], int n) {
     int i, j;
@@ -41,7 +37,7 @@ void gerar_particoes(char *path, int n) {
         insertionSort(partition, partition_size);
 
         char outputFileName[20];  
-        sprintf(outputFileName, "./src/bin/partitions/partition_%d.dat", i+1);
+        sprintf(outputFileName, "../src/bin/partitions/partition_%d.dat", i+1);
         FILE *outputFile = fopen(outputFileName, "wb");
 
         for (int j = 0; j < partition_size; j++) {
@@ -56,15 +52,12 @@ void gerar_particoes(char *path, int n) {
 
 int main() {
     gerar_particoes("./src/bin/shell_funcionarios.dat", 5);
-    
-    FILE *test = fopen("./src/bin/partitions/partition_2.dat", "rb");
+
+    FILE *test = fopen("partition_3.dat", "rb");
     imprimirBase_funcionarios(test);
-    
-    
- 
 
     return 0;
 }
 
 
-//gcc -o partitions_example ./src/*.c ./unit_tests/*.c - 
+//gcc -o partitions_example ./src/*.c ./src/metodos_ordenacao/*.c -I./src 
