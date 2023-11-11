@@ -5,12 +5,12 @@ Este repositório foi construído para o estudo dos alunos de _Algoritmos e Estr
 ## Sumário
 1. [Requisitos](#Requisitos)
 2. [Como Usar/Instalar](#Uso)
-3. [Detalhes do projeto - (*Parte Lógica*)](#Source)
-   - [`./src/bin`](#Arquivos-Binários)
-   - [`./src/buscas`](#buscas)
-   - [`./src/metodos_ordenacao`](#ordenacoes)
+3. [Detalhes do projeto - (*Parte Lógica*)](###Source)
+   - [./src/bin](###Arquivos-Binários)
+   - [./src/buscas](###buscas)
+   - [./src/metodos_ordenacao](###ordenacoes)
 
-4. [Detalhes do projeto - (*Parte Visual*)](#Windows)
+4. [Detalhes do projeto - (*Parte Visual*)](#Windows-Source)
    - [`./src/window_functions/`](#Window-Functions)
 
 5. [Contribuição](#Contribuição)
@@ -65,7 +65,7 @@ gcc -o main ./src/*.c ./src/buscas/*.c ./src/metodos_ordenacao/*.c ./unit_tests/
 - `./windows_main.c`
 - `./src/window_functions`
 
-## [Detalhes do projeto - (*Parte Lógica*)](#Source)
+## Source
 
 Nesta seção, abordaremos cada um dos scripts do projeto e seu respectivo uso.
 
@@ -75,7 +75,7 @@ Na pasta `./src`, você encontrará as seguintes pastas e arquivos:
 
 - **"livro.c":** Este arquivo contém a estrutura e as funções definidas em seu cabeçalho (_.h_), e realiza a implementação lógica de cada função.
 
-## [`./src/bin`](#Arquivos-Binários)
+### Arquivos-Binários
 
 Nesta pasta, todos os arquivos binários do projeto são armazenados. Isso inclui aqueles criados ou modificados durante:
 
@@ -83,21 +83,21 @@ Nesta pasta, todos os arquivos binários do projeto são armazenados. Isso inclu
 - 3.1.2 Salvamento ou remoção de um funcionário.
 - 3.1.3 Realização de empréstimos.
 
-## [`./src/buscas`](#buscas)
+### Buscas
 
 Nesta pasta, estão implementados todos os métodos de busca do projeto, como buscas binárias ou sequenciais. Alguns exemplos de utilização incluem:
 
 - 3.2.1 Buscar um livro e retornar sua estrutura por meio de ponteiros.
 - 3.2.2 Buscar um funcionário e retornar sua estrutura por meio de ponteiros.
 
-## 3.3 [`./src/metodos_ordenacao`](#ordenacoes)
+### Ordenacoes
 
 Nesta pasta, você encontrará os métodos de ordenação mais comumente utilizados na manipulação de arquivos, como:
 
 - 3.3.1 Insertion Sort.
 - 3.3.2 Classificações internas por partições.
 
-## [Detalhes do projeto - (*Parte Visual*)](#Windows) 
+## Windows-Source
 **Obserbação**: Recomendo que estude essa parte e faça alterações se e somente se for por estudo, já que na maioria dos trabalhos dessa disciplina, não é obrigatório parte visual.
 
 A função `WindowProc_Main` dentro do arquivo: `./windows_main.c` é o procedimento de janela para a janela principal da aplicação. Ela lida com várias mensagens, como criação de janela, cliques em botões e destruição. Aqui estão alguns pontos-chave:
@@ -122,7 +122,7 @@ A função `main` configura a janela da aplicação, registra a classe da janela
 
 **Observação:** O código utiliza a API do Windows para funcionalidade GUI. Certas operações relacionadas à gestão de livros e funcionários, geração de relatórios e manipulação de banco de dados são acionadas por cliques em botões na janela principal.
 
-## 3.1 [`./src/window_functions/`](#Window-Functions)
+## Window-Functions
 
 ### Alguns pontos de destaque dos scripts dessas pastas:
 
