@@ -13,9 +13,8 @@
 */
 
 
-//Para compilar, use: gcc -o window ./src/*.c ./src/buscas/*.c ./windows_main.c
-//Isso vai compilar todos os arquivos .c dentro das pastas depois o windows_main.c no diretório atual. 
-//(Voce deve alterar o ./windows_main.c para o nome do seu arquivo main.c, caso queira fazer o projeto somente em terminal) 
+//Compilar: gcc -o window ./src/*.c ./src/metodos_ordenacao/*.c ./src/buscas/*.c ./windows_main.c
+//Executar: ./window.exe
 
 #include <windows.h>
 #include <stdio.h>

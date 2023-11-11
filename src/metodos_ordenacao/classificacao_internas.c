@@ -50,14 +50,12 @@ void gerar_particoes(char *path, int n) {
     fclose(file);
 }
 
-int main() {
+/*int main() {
     gerar_particoes("./src/bin/shell_funcionarios.dat", 5);
 
     FILE *test = fopen("partition_3.dat", "rb");
     imprimirBase_funcionarios(test);
 
     return 0;
-}
+}*/
 
-
-//gcc -o partitions_example ./src/*.c ./src/metodos_ordenacao/*.c -I./src 
