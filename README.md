@@ -1,41 +1,42 @@
 # Data Structures & Algorithms II
 
-Este repositório foi construído para o estudo dos alunos de _Algoritmos e Estruturas de Dados II_, mostrando de forma prática como funciona a manipulação de arquivos em memória secundária em linguagem C. Como exemplo, foi montada uma aplicação que disponibiliza um conjunto de recursos para a administração de uma biblioteca. 
+Este repositório é destinado ao estudo dos alunos de **Algoritmos e Estruturas de Dados II**, oferecendo uma abordagem prática sobre a manipulação de arquivos em memória secundária utilizando a linguagem C. Como exemplo, desenvolvemos uma aplicação para administração de uma biblioteca.
+
+#### Última Atualização da documentação: `11/11/2023`
 
 ## Sumário
-1. [Requisitos](#Requisitos)
-2. [Como Usar/Instalar](#Uso)
-3. [Detalhes do projeto - (*Parte Lógica*)](###Source)
-   - [./src/bin](###Arquivos-Binários)
-   - [./src/buscas](###buscas)
-   - [./src/metodos_ordenacao](###ordenacoes)
 
-4. [Detalhes do projeto - (*Parte Visual*)](#Windows-Source)
-   - [`./src/window_functions/`](#Window-Functions)
+1. [Requisitos](#requisitos)
+2. [Como Usar/Instalar](#uso)
+3. [Detalhes do Projeto - Parte Lógica](#source)
+   - [./src/bin](#arquivos-binários)
+   - [./src/buscas](#buscas)
+   - [./src/metodos_ordenacao](#ordenacoes)
+4. [Detalhes do Projeto - Parte Visual](#windows-source)
+   - [`./src/window_functions/`](#window-functions)
+5. [Contribuição](#contribuição)
 
-5. [Contribuição](#Contribuição)
+## Requisitos
 
+Para implementar com sucesso este projeto, você precisa das seguintes tecnologias e ferramentas configuradas:
 
-## Requisitos 
+- **Linguagem de Programação:** [C] - O projeto foi desenvolvido exclusivamente em C.
 
-Para a implementação bem-sucedida deste projeto, é indispensável que você disponha das seguintes tecnologias e ferramentas devidamente configuradas:
+- **Banco de Dados:** [Banco de dados personalizado] - Utiliza um banco de dados personalizado armazenado em arquivos binários na pasta 'bin'.
 
-- **Linguagem de Programação:** [C] - A aplicação foi concebida mediante o uso exclusivo da linguagem de programação C.
+- **Compilador:** [Minimalist GNU for Windows] - Desenvolvido usando o MinGW como compilador. Recomendamos [instalar](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) o MinGW ou GCC para garantir desempenho adequado e evitar bugs, pois as correções se baseiam em comandos específicos do compilador.
 
-- **Banco de Dados:** [Banco de dados personalizado] - O sistema emprega um banco de dados personalizado que armazena informações em arquivos binários localizados na pasta 'bin'.
+- **Sistema Operacional:** [Windows] - Exclusivamente compatível com Windows devido à utilização da biblioteca gráfica *<windows.h>*.
 
-- **Compilador:** [Minimalist GNU for Windows] - A aplicação foi desenvolvida utilizando o MinGW como compilador. Para garantir o desempenho adequado do programa e evitar potenciais bugs, é altamente recomendado [INSTALAR](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) o MinGW ou o GCC, pois as correções realizadas no código se baseiam em comandos específicos do compilador.
-
-- **Sistema Operacional:** [Windows] - Importante ressaltar que o programa é exclusivamente compatível com o sistema operacional Windows devido à utilização de uma biblioteca gráfica específica, *<windows.h>*.
-
-- **Idiomas:** [PT-BR/EN] - Atualmente, a maioria das funções do programa está em inglês, porém, as mensagens exibidas no terminal são predominantemente apresentadas em português do Brasil.
+- **Idiomas:** [PT-BR/EN] - A maioria das funções está em inglês, mas as mensagens no terminal são predominantemente em português do Brasil.
 
 ## Uso
 
-### Uso comum
+### Uso Comum
+
 Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
 
-1. Compile o código-fonte (dentro do diretório do repositório);
+1. Compile o código-fonte (dentro do diretório do repositório):
 
 ```shell windows 
 gcc -o window ./src/*.c ./src/buscas/*.c ./src/metodos_ordenacao/*.c ./windows_main.c
@@ -127,30 +128,24 @@ A função `main` configura a janela da aplicação, registra a classe da janela
 ### Alguns pontos de destaque dos scripts dessas pastas:
 
 - Script cria uma janela para realizar buscas sequenciais em bases de dados desordenadas.
+
 - Interface gráfica para definir o tamanho da base de dados.
+
 - Realiza buscas sequenciais em arquivos binários de funcionários, livros e logs.
-- Utiliza a Windows API para criar elementos de interface.
+
 - Converte e valida entradas do usuário.
+
 - Manipula arquivos binários de funcionários, livros e logs.
-- Interface gráfica para definir o tamanho da base de dados.
+
 - Realiza buscas binárias em arquivos binários de funcionários, livros e logs.
+
 - Utiliza a Windows API para criar elementos de interface.
+
 - Converte e valida entradas do usuário.
-- Manipula arquivos binários de funcionários, livros e logs.
-
-
-- Interface gráfica para inserir informações sobre um funcionário.
-- Janela para imprimir as informações de um funcionário.
-
-- Utiliza a Windows API para criar elementos de interface.
-- Utiliza a estrutura TFunc para representar funcionários.
-- Realiza a ordenação de funcionários por meio do algoritmo de ordenação insertion sort.
 
 - Remove o botão de maximizar da barra de título da janela.
 
 - Define um ícone para a janela.
-
-- Exibe uma mensagem de confirmação para apagar todos os arquivos binários em um diretório.
 
 #### Observações Gerais:
 
