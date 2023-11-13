@@ -13,9 +13,7 @@ typedef struct Funcionario {
 } TFunc;
 
 
-/*  Esta função calcula o tamanho total em bytes de um registro de funcionário. 
-Isso é feito somando os tamanhos das várias partes do registro, como código (int), 
-nome (string), CPF (string), data de nascimento (string) e salário (double).*/
+/*  Esta função calcula o tamanho total em bytes de um registro de funcionário. */
 int tamanho_registro_funcionario();
 
 /* Esta função aloca dinamicamente memória para um novo registro de funcionário (TFunc),
@@ -40,7 +38,7 @@ void imprimir_funcionario(TFunc *func);
 
 /*Essa função cria uma base de dados de funcionários, gerando registros com códigos 
 sequenciais e informações padrão ("XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0).
- Ela também utiliza a função shuffle_funcionarios para embaralhar os códigos dos funcionários.*/
+Ela também utiliza a função shuffle_funcionarios para embaralhar os códigos dos funcionários.*/
 void criarBase_funcionarios(FILE *out, int tam);
 
 /*Sem shuffle para Binários*/

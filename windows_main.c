@@ -6,15 +6,18 @@
 
     It guarantees the freedom to share, modify, and distribute both the original and modified versions of a program.
 
-    When you distribute a GPL-licensed program, you must provide the source code to recipients, ensuring they have the same freedoms you received.
+    When you distribute a GPL-licensed program, you must provide the source code to recipients, 
+    
+    ensuring they have the same freedoms as you received.
 
-    Guilherme Oliveira Santos, 2023. Sistemas de Informação, UFOP.
+    Compile: gcc -o window ./src/*.c ./src/buscas/*.c ./src/metodos_ordenacao/*.c  ./windows_main.c
+
+    Execute: ./window.exe
+
 
 */
 
 
-//Compilar: gcc -o window ./src/*.c ./src/metodos_ordenacao/*.c ./src/buscas/*.c ./windows_main.c
-//Executar: ./window.exe
 
 #include <windows.h>
 #include <stdio.h>
@@ -23,6 +26,9 @@
 #include "./src/window_functions/window_employee_functions.c"
 #include "./src/window_functions/window_database_functions.c"
 #include "./src/window_functions/window_utils.c"
+
+#include "./src/shell_functions/utils.c"
+#include "./src/shell_functions/generate_report.c"
 
 #define DISTANCIA_BOTOES_Y 50
 #define DISTANCIA_BOTOES_X 10
@@ -41,21 +47,39 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             set_icon(hwnd, "./assets/images/appIcon.ico");
             removeExpandButton(hwnd);
 
-            CreateWindow("BUTTON", "Adicionar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)101, NULL, NULL);
-            CreateWindow("BUTTON", "Buscar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)102, NULL, NULL);
-            CreateWindow("BUTTON", "Realizar Emprestimo", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)103, NULL, NULL);
-            CreateWindow("BUTTON", "Renovar Emprestimo", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*3, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)104, NULL, NULL);
-            CreateWindow("BUTTON", "Realizar Devolucao", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, DISTANCIA_BOTOES_Y*4, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)105, NULL, NULL);
+            CreateWindow("BUTTON", "Adicionar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
+            1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)101, NULL, NULL);
+
+            CreateWindow("BUTTON", "Buscar Livro", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
+            DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)102, NULL, NULL);
+
+            CreateWindow("BUTTON", "Realizar Emprestimo", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
+            DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)103, NULL, NULL);
             
-            CreateWindow("BUTTON", "Registrar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)201, NULL, NULL);
-            CreateWindow("BUTTON", "Buscar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)202, NULL, NULL);
+            CreateWindow("BUTTON", "Renovar Emprestimo", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
+            DISTANCIA_BOTOES_Y*3, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)104, NULL, NULL);
 
-            CreateWindow("BUTTON", "Gerar Relatorio", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*40, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)301, NULL, NULL);
+            CreateWindow("BUTTON", "Realizar Devolucao", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
+            DISTANCIA_BOTOES_Y*4, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)105, NULL, NULL);
+            
+            CreateWindow("BUTTON", "Registrar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, 
+            1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)201, NULL, NULL);
+
+            CreateWindow("BUTTON", "Buscar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, 
+            DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)202, NULL, NULL);
+
+            CreateWindow("BUTTON", "Gerar Relatorio", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*40, 1, 
+            TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)301, NULL, NULL);
 
 
-            CreateWindow("BUTTON", "Criar Base Desordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)001, NULL, NULL);
-            CreateWindow("BUTTON", "Criar Base Ordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)002, NULL, NULL);
-            CreateWindow("BUTTON", "Resetar Banco de Dados ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)003, NULL, NULL);
+            CreateWindow("BUTTON", "Criar Base Desordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
+            DISTANCIA_BOTOES_X*80, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)001, NULL, NULL);
+
+            CreateWindow("BUTTON", "Criar Base Ordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
+            DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)002, NULL, NULL);
+            
+            CreateWindow("BUTTON", "Resetar Banco de Dados ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
+            DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)003, NULL, NULL);
 
             CreateWindow("STATIC", "Guilherme Santos - Mateus Diniz | Algoritmos e Estruturas de Dados II",
             WS_VISIBLE | WS_CHILD, TAMANHO_MAIN_WINDOW_X/2, TAMANHO_MAIN_WINDOW_Y-60, TAMANHO_BOTOES_Y*10, 20, hwnd, NULL, NULL, NULL);
@@ -63,6 +87,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
             break;
         }
+
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             switch (wmId) {
@@ -74,13 +99,16 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     search_Book();
                     break;
 
-
                 case 201:
                     insert_employee();
                     break;
 
                 case 202:
                     search_employee();
+                    break;
+
+                case 301:
+                    //print_report();
                     break;
 
                 case 001:
@@ -100,30 +128,35 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     break;
 
             }
+
             break;
         }
+
         case WM_DESTROY: {
             PostQuitMessage(0);
             break;
         }
+
         default:
             return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
+    
     return 0;
 }
 
 int main() {
     printf("\033[H\033[J");
-    // Registrar a classe da janela
+    printf("Shell Debug: Iniciando o programa, current path: ");  get_current_path(); printf("\n");
+
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WindowProc_Main;
     wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "MyWindowClass";
+    wc.lpszClassName = "Main_Window";
     RegisterClass(&wc);
 
     // Criar a janela
-    HWND hwnd = CreateWindow("MyWindowClass", "Sistema Biblioteca", WS_OVERLAPPEDWINDOW, 100, 100, TAMANHO_MAIN_WINDOW_X, TAMANHO_MAIN_WINDOW_Y, NULL, NULL, GetModuleHandle(NULL), NULL);
-
+    HWND hwnd = CreateWindow(wc.lpszClassName, "Sistema Biblioteca", WS_OVERLAPPEDWINDOW, 100, 100, 
+    TAMANHO_MAIN_WINDOW_X, TAMANHO_MAIN_WINDOW_Y, NULL, NULL, GetModuleHandle(NULL), NULL);
     ShowWindow(hwnd, SW_SHOWDEFAULT);
 
     MSG msg;
