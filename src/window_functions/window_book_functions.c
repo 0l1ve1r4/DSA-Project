@@ -39,6 +39,7 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             sprintf(autor_print, "Autor: %s", registro->autor);
             sprintf(editora_print, "Editora: %s", registro->editora);
             sprintf(precoText, "Preco: %.2lf", registro->preco);
+            sprintf(data_emprestimo_print, "Data Emprestimo: %s", registro->data_emprestimo);
 
             CreateWindow("STATIC", cod_print, WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
             CreateWindow("STATIC", nome_print, WS_VISIBLE | WS_CHILD, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
@@ -46,6 +47,7 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             CreateWindow("STATIC", autor_print, WS_VISIBLE | WS_CHILD, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
             CreateWindow("STATIC", editora_print, WS_VISIBLE | WS_CHILD, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
             CreateWindow("STATIC", precoText, WS_VISIBLE | WS_CHILD, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
+            CreateWindow("STATIC", data_emprestimo_print, WS_VISIBLE | WS_CHILD, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
 
             break;
             
@@ -153,10 +155,11 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                     FILE *bookFile;
                     bookFile = fopen("src/bin/window_books.dat", "ab+");
-                    TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "XXXXXX", preco);
+                    TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "NULL", preco);
                     salvar_livro(temp, bookFile);
                     
                     insertionSort_livros(bookFile, tamanho_arquivo_de_livros(bookFile));
+                    
                     fclose(bookFile);
                     free(temp);
                     DestroyWindow(hwnd); // Fechar a janela automaticamente após inserir o livro para evitar bugs

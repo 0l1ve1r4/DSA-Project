@@ -39,7 +39,7 @@ void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro->data_emprestimo, sizeof(char), sizeof(livro->data_emprestimo), out);
     fwrite(&livro->preco, sizeof(double), 1, out);
 
-    printf("Shell Debug: Livro salvo com sucesso.\n");
+    printf("Shell Debug: Livro salvo com sucesso. cod: %i\n", livro->cod);
 
 }
 

@@ -1,4 +1,3 @@
-
 /*
     GNU General Public License (GPL) version 3:
 
@@ -17,15 +16,15 @@
 
 */
 
-
-
 #include <windows.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "./src/window_functions/window_book_functions.c"
 #include "./src/window_functions/window_employee_functions.c"
 #include "./src/window_functions/window_database_functions.c"
 #include "./src/window_functions/window_utils.c"
+#include "./src/window_functions/window_book_emprestimo.c"
 
 #include "./src/shell_functions/utils.c"
 #include "./src/shell_functions/generate_report.c"
@@ -33,8 +32,8 @@
 #define DISTANCIA_BOTOES_Y 50
 #define DISTANCIA_BOTOES_X 10
 #define TAMANHO_BOTOES_Y 170
-#define TAMANHO_MAIN_WINDOW_X 1000
-#define TAMANHO_MAIN_WINDOW_Y 900
+#define TAMANHO_MAIN_WINDOW_X 600
+#define TAMANHO_MAIN_WINDOW_Y 400
 
 
 
@@ -62,27 +61,28 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             CreateWindow("BUTTON", "Realizar Devolucao", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X, 
             DISTANCIA_BOTOES_Y*4, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)105, NULL, NULL);
             
+
             CreateWindow("BUTTON", "Registrar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, 
             1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)201, NULL, NULL);
 
             CreateWindow("BUTTON", "Buscar Funcionario", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*20, 
             DISTANCIA_BOTOES_Y*1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)202, NULL, NULL);
 
-            CreateWindow("BUTTON", "Gerar Relatorio", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*40, 1, 
-            TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)301, NULL, NULL);
+            /*CreateWindow("BUTTON", "Gerar Relatorio", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, DISTANCIA_BOTOES_X*40, 1, 
+            TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)301, NULL, NULL); Recomendo não mexer nisso aqui            */ 
 
 
             CreateWindow("BUTTON", "Criar Base Desordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
-            DISTANCIA_BOTOES_X*80, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)001, NULL, NULL);
+            DISTANCIA_BOTOES_X*40, 1, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)001, NULL, NULL);
 
             CreateWindow("BUTTON", "Criar Base Ordenada ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
-            DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)002, NULL, NULL);
+            DISTANCIA_BOTOES_X*40, DISTANCIA_BOTOES_Y, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)002, NULL, NULL);
             
             CreateWindow("BUTTON", "Resetar Banco de Dados ", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 
-            DISTANCIA_BOTOES_X*80, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)003, NULL, NULL);
+            DISTANCIA_BOTOES_X*40, DISTANCIA_BOTOES_Y*2, TAMANHO_BOTOES_Y, 30, hwnd, (HMENU)003, NULL, NULL);
 
             CreateWindow("STATIC", "Guilherme Santos - Mateus Diniz | Algoritmos e Estruturas de Dados II",
-            WS_VISIBLE | WS_CHILD, TAMANHO_MAIN_WINDOW_X/2, TAMANHO_MAIN_WINDOW_Y-60, TAMANHO_BOTOES_Y*10, 20, hwnd, NULL, NULL, NULL);
+            WS_VISIBLE | WS_CHILD, TAMANHO_MAIN_WINDOW_X/5, TAMANHO_MAIN_WINDOW_Y-60, TAMANHO_BOTOES_Y*10, 20, hwnd, NULL, NULL, NULL);
 
 
             break;
@@ -99,6 +99,18 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     search_Book();
                     break;
 
+                case 103:
+                    loan_book();
+                    break;
+
+                case 104:
+                    loan_book();
+                    break;
+
+                case 105:
+                    return_book();
+                    break;
+
                 case 201:
                     insert_employee();
                     break;
@@ -108,7 +120,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     break;
 
                 case 301:
-                    //print_report();
+                    generate_report();
                     break;
 
                 case 001:
@@ -145,8 +157,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 int main() {
-    printf("\033[H\033[J");
-    printf("Shell Debug: Iniciando o programa, current path: ");  get_current_path(); printf("\n");
+    printf("\033[H\033[JShell Debug: Iniciando o programa"); get_current_path(); 
+    //realizar_emprestimo(0);
 
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WindowProc_Main;
