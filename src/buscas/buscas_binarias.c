@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-#include "../funcionario.h"
-#include "../livro.h"
 #include "buscas_binarias.h"
 
 int total_iterations;

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "classificacao_internas.h"
-#include "../funcionario.h" 
+
 
 void insertionSort(TFunc arr[], int n) {
     int i, j;

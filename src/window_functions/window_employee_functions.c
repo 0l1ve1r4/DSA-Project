@@ -1,9 +1,5 @@
-#include <windows.h>
-#include <stdio.h>
+#include "window_employee_functions.h"
 
-#include "../funcionario.h"
-#include "../buscas/buscas_binarias.h"
-#include "../metodos_ordenacao/insertionSort.h"
 
 int cod;
 char codText_Employee[50];

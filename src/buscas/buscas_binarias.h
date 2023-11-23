@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../funcionario.h"
-#include "../livro.h"
+#include "../estruturas.h"
+
 
 typedef struct LogFileBinary{
     int iteracoes;

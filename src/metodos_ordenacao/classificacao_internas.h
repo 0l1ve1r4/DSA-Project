@@ -1,6 +1,6 @@
 #ifndef CLASSIFICACAO_INTERNAS_H
 #define CLASSIFICACAO_INTERNAS_H
-
+#include "../estruturas.h"
 // Function declarations
 void bubble_sort(int arr[], int n);
 void insertion_sort(int arr[], int n);

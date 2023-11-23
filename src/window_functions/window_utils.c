@@ -1,4 +1,5 @@
 #include <windows.h>
+#include "window_utils.h"
 
 void removeExpandButton(HWND hwnd){
 
@@ -38,5 +39,6 @@ void rmvBin() {
 }
 }
 
-
-
+void createButton(HWND hwnd, const char* text, int id, int x, int y) {
+    CreateWindow("BUTTON", text, WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, x, y, SIZE_BUTTONS_Y, 30, hwnd, (HMENU)id, NULL, NULL);
+}

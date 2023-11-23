@@ -1,4 +1,4 @@
-#include "../funcionario.h"
+
 #include "buscas_sequenciais.h"
 #include <time.h>
 
