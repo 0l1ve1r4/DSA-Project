@@ -10,15 +10,14 @@
 #include "../metodos_ordenacao/insertionSort.h"
 #include "../buscas/buscas_sequenciais.h"
 
-
-// Define constants
+//constantes
 #define DISTANCE_BUTTONS_Y 50
 #define DISTANCE_BUTTONS_X 10
 #define SIZE_BUTTONS_Y 170
 #define SIZE_MAIN_WINDOW_X 600
 #define SIZE_MAIN_WINDOW_Y 400
 
-// Define button IDs
+// buttons IDs
 #define ID_ADD_BOOK 101
 #define ID_SEARCH_BOOK 102
 #define ID_LOAN_BOOK 103
@@ -31,9 +30,16 @@
 #define ID_CREATE_SORTED_DB 2
 #define ID_RESET_DB 3
 
+// Cria um botão na janela
 void createButton(HWND hwnd, const char* text, int id, int x, int y);
+
+//Remove os arquivos binários
 void rmvBin();
+
+// Seta o icone da janela
 void set_icon(HWND hwnd, char* path);
+
+// Remove o botão de maximizar
 void removeExpandButton(HWND hwnd);
 
 

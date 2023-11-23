@@ -14,8 +14,6 @@ TFunc *registro_employee;
 #define TAMANHO_LABEL_INSERT_Y 400
 #define DISTANCIA_BOTOES_Y 50
 
-//___________________________________________________*___________________________________________________
-//Windows para lidar com a impressão de Funcionarios que estarao armazenadas dinamicamente em uma estutura que pesquisou em um arquivo binario;
 LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
@@ -68,7 +66,6 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 
 }
 
-
 int print_Employee() {
     WNDCLASS wc = {0};
     wc.lpfnWndProc = Window_Print_Employee;
@@ -89,8 +86,8 @@ int print_Employee() {
     return 0;
 }
 
-//___________________________________________________*___________________________________________________
-//Windows para lidar com a inserção de funcionarios no arquivo binario
+//############################################################################################################################################################################
+
 LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {

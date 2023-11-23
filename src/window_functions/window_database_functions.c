@@ -1,15 +1,8 @@
-#include <windows.h>
-#include <stdio.h>
-
-#include "../buscas/buscas_sequenciais.h"
-#include "../buscas/buscas_binarias.h"
+#include "window_database_functions.h"
 
 #define TAMANHO_LABEL_INSERT_Y 400
 #define DISTANCIA_BOTOES_Y 50
 
-
-//___________________________________________________*___________________________________________________
-//Windows para lidar com a criacao de banco de dados desordenada de Funcionarios e livros
 LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
@@ -95,9 +88,8 @@ int Window_Unsorted_DataBase() {
 }
 
 
-//___________________________________________________*___________________________________________________
+//############################################################################################################################################################################
 
-//Windows para lidar com a criacao de banco de dados desordenada de Funcionarios e livros
 LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
