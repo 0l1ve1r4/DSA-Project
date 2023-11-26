@@ -59,6 +59,8 @@ void create_Static_Label(HWND hwnd, const char* text, int x, int y, int width, i
 // Exatamente o que o nome diz :-)
 void error_message(char* message, char* title);
 
+void hideConsoleWindow();
+
 int confirm_message(char* message, char* title);
 
 HWND create_and_run_window(WNDPROC wndProc, const char* className, const char* windowTitle, DWORD windowStyle, int x, int y, int width, int height);

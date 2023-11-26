@@ -20,6 +20,14 @@ TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, 
     return func;
 }
 
+TCliente *criar_cliente(char *nome, char *cpf){
+
+    TCliente *cliente = (TCliente *) malloc(sizeof(TCliente));
+    if (cliente) memset(cliente, 0, sizeof(TCliente));
+    strcpy(cliente->nome, nome);
+    strcpy(cliente->cpf, cpf);
+    return cliente;
+}
 
 void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(&func->cod, sizeof(int), 1, out);
@@ -147,17 +155,10 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
 }
 
 void salvar_livro(TLivro *livro, FILE *out) {
-    fwrite(&livro->cod, sizeof(int), 1, out);
-    fwrite(livro->nome, sizeof(char), sizeof(livro->nome), out);
-    fwrite(livro->numero_paginas, sizeof(char), sizeof(livro->numero_paginas), out);
-    fwrite(livro->autor, sizeof(char), sizeof(livro->autor), out);
-    fwrite(livro->editora, sizeof(char), sizeof(livro->editora), out);
-    fwrite(livro->data_emprestimo, sizeof(char), sizeof(livro->data_emprestimo), out);
-    fwrite(&livro->preco, sizeof(double), 1, out);
-    fwrite(livro->funcionario, sizeof(TFunc), 1, out);
-    fwrite(livro->cliente, sizeof(TCliente), 1, out);
+    fwrite(livro, sizeof(TLivro), 1, out);
+    fclose(out);
 
-    printf("Shell Debug: Livro salvo com sucesso. cod: %i\n", livro->cod);
+    printf("Shell Debug: Livro salvo com sucesso. Livro cod: %i | Funcionario Cod: %i\n", livro->cod, livro->funcionario->cod);
 
 }
 
@@ -185,6 +186,10 @@ TLivro *ler_arquivo_livro(FILE *in) {
 void imprimir_livro(TLivro *livro) {
     printf("Shell Debug: Livro de codigo %d | Nome: %s | Numero de Paginas: %s | Autor: %s | Editora: %s | Data de Emprestimo: %s | Preco: %.2f\n",
            livro->cod, livro->nome, livro->numero_paginas, livro->autor, livro->editora, livro->data_emprestimo, livro->preco);
+    printf("Tamanho do registro: %i\n", tamanho_registro_livro());
+    printf("Shell Debug: Funcionario: %s | Cliente: %s\n", livro->funcionario->nome, livro->cliente->nome);
+    
+
 }
 
 /*void criarBase_livros(FILE *out, int tam) {

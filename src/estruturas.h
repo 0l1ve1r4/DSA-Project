@@ -37,6 +37,8 @@ typedef struct {
 
 } TLivro;
 
+TCliente *criar_cliente(char *nome, char *cpf);
+
 // Função para calcular o tamanho total de um registro de funcionário
 int tamanho_registro_funcionario();
 

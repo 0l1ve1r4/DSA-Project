@@ -47,6 +47,14 @@ void error_message(char* message, char* title) {
     MessageBox(NULL, message, title, MB_ICONERROR | MB_OK);
 }
 
+void hideConsoleWindow() {
+    HWND hWnd = GetConsoleWindow();
+
+    if (hWnd != NULL) {
+        ShowWindow(hWnd, SW_HIDE);
+    }
+}
+
 int confirm_message(char* message, char* title) {
     return MessageBox(NULL, message, title, MB_ICONQUESTION | MB_YESNO);
     
@@ -55,7 +63,7 @@ int confirm_message(char* message, char* title) {
 HWND create_and_run_window(WNDPROC wndProc, const char* className, const char* windowTitle, DWORD windowStyle, int x, int y, int width, int height) {
 
 
-    
+    //FreeConsole();
     WNDCLASS wc = {0};
     wc.lpfnWndProc = wndProc;
     wc.hInstance = GetModuleHandle(NULL);

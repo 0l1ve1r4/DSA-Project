@@ -80,7 +80,7 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
         if (registro->cod == chave) {
             double elapsed_time = (double)(clock() - start_time) / CLOCKS_PER_SEC * 1000.0;
             salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
-            printf("\nShell Debug: Codigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms\n", chave, iteracoes, elapsed_time);
+            printf("\nShell Debug: Codigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms | Funcionario: %i\n", chave, iteracoes, elapsed_time, registro->funcionario->cod);
             imprimir_livro(registro);
             return registro;
         } else if (registro->cod < chave) {
@@ -88,8 +88,8 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
         } else {
             dir = meio - 1;
         }
-        total_iterations += iteracoes;
     }
+
     free(registro);
     return NULL;
 }

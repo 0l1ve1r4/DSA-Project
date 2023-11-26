@@ -40,6 +40,9 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
             create_Static_Label(hwnd, data_nascimento_print, 10, DISTANCIA_BOTOES_Y+60, TAMANHO_LABEL_INSERT_Y, 20, 4);
             create_Static_Label(hwnd, salario_print, 10, DISTANCIA_BOTOES_Y+80, TAMANHO_LABEL_INSERT_Y, 20, 5);
 
+            free(registro_employee);
+
+
 
             break;
             
@@ -75,13 +78,14 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
     switch (uMsg) {
         case WM_CREATE: {
             
-        createButton(hwnd, "Inserir Funcionario", 1, 10, 10);
+        createButton(hwnd, "Inserir Funcionario", 1, 100, 10);
         create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
-        create_Input_Label(hwnd, "Nome:", 4, 10, 70);
-        create_Input_Label(hwnd, "CPF:", 6, 10, 90);
-        create_Input_Label(hwnd, "Nascimento:", 8, 10, 110);
-        create_Input_Label(hwnd, "Salario:", 10, 10, 130);
-        createButton(hwnd, "Adicionar", 13, 10, 200);
+        create_Input_Label(hwnd, "Nome:", 3, 10, 70);
+        create_Input_Label(hwnd, "CPF:", 4, 10, 90);
+        create_Input_Label(hwnd, "Nascimento:", 5, 10, 110);
+        create_Input_Label(hwnd, "Salario:", 6, 10, 130);
+        createButton(hwnd, "Adicionar", 13, 10, 220);
+        createButton(hwnd, "Cancelar", 14, 200, 220);
 
 
             break;
@@ -96,27 +100,25 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     GetDlgItemText(hwnd, 4, cpf, sizeof(cpf));
                     GetDlgItemText(hwnd, 5, data_nascimento, sizeof(data_nascimento));
                     GetDlgItemText(hwnd, 6, salarioText, sizeof(salario));
+                    
                     salario = strtod(salarioText, NULL);
                     cod = atoi(codText_Employee);
 
                     if (salario == 0.0 && errno == ERANGE || cod == 0 && codText_Employee[0] != '0') {
-                        printf("Window Debug: Erro ao converter o salario para double\n");
-                        return 1;
-                    } else { 
-                        
-                        printf("Window Debug: Codigo %i | Nome %s | CPF %s | Data Nascimento %s | Salario %f\n", cod, nome, cpf, data_nascimento, salario);
-                        printf("Window Debug: Conversoes realizadas com sucesso\n");
-                    }
+                        error_message("Erro ao adicionar", "Erro");
+                        break;;
+                    } 
 
-                    FILE *employeeFile;
-                    employeeFile = fopen("src/bin//window_employee.dat", "ab+");
+                    FILE *employeeFile = fopen("src/bin/window_employee.dat", "ab+");
                     TFunc *temp = criar_funcionario(cod, nome, cpf, data_nascimento, salario); 
-                    salvar_funcionario(temp, employeeFile);
                     
+                    salvar_funcionario(temp, employeeFile);
                     insertionSort_funcionarios(employeeFile, tamanho_arquivo_de_funcionarios(employeeFile));
-                    fclose(employeeFile);
-                    free(temp);
-                    DestroyWindow(hwnd); 
+                    fclose(employeeFile); free(temp); DestroyWindow(hwnd);
+                    break;
+
+                case 14:
+                    DestroyWindow(hwnd);
                     break;
             }
 
@@ -143,8 +145,9 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Procurar Funcionario", 1, 10, 10);
-            create_Input_Label(hwnd, "Codigo", 2, 0, 50);
-            createButton(hwnd, "Procurar", 13, 10, 200);
+            create_Input_Label(hwnd, "Codigo", 2, 10, 50);
+            createButton(hwnd, "Procurar", 13, 10, 220);
+            createButton(hwnd, "Cancelar", 14, 200, 220);
 
             break;
         }
@@ -158,13 +161,10 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     cod = atoi(codText_Employee);
 
                     if (cod == 0 && codText_Employee[0] != '0') {
-                        printf("Window Debug: Erro ao converter o texto do inteiro \n");
+                        error_message("Erro ao procurar", "Erro");
                         break; 
                     } 
-                    
-                    else { 
-                        printf("Window Debug: Numero Convertido para double: %d\n", cod);
-                    }
+    
                     
 
                     FILE *employeeFileBinary, *LogFileBinary;
@@ -181,8 +181,14 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
                     #pragma GCC diagnostic pop 
 
-                    create_and_run_window(Window_Print_Employee, "Window_Print_Employee", "Funcionario Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
 
+                    create_and_run_window(Window_Print_Employee, "Window_Print_Employee", "Funcionario Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
+                    fclose(employeeFileBinary); fclose(LogFileBinary);
+
+                    break;
+
+                case 14:
+                    DestroyWindow(hwnd);
                     break;
 
             }
