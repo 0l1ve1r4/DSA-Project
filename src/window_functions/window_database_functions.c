@@ -44,7 +44,7 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
                     #pragma GCC diagnostic ignored "-Wint-conversion"   
 
                     
-                    bases_buscas_sequenciais(employeeFile ,bookFile, LogFileBinary, tamanho_base);
+                    //bases_buscas_sequenciais(employeeFile ,bookFile, LogFileBinary, tamanho_base);
 
                     #pragma GCC diagnostic pop // Volta a mostrar os warnings
 
@@ -67,25 +67,7 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
 }
 
 
-int Window_Unsorted_DataBase() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Unsorted_DataBase_Search;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Unsorted_DataBase_Search";
-    RegisterClass(&wc);
 
-
-    HWND hwnd = CreateWindow("Window_Unsorted_DataBase_Search", "Buscas sequenciais", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
 
 
 //############################################################################################################################################################################
@@ -131,7 +113,7 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
                     #pragma GCC diagnostic ignored "-Wint-conversion"   
 
                     
-                    bases_buscas_binarias(employeeFile ,bookFile, LogFileBinary, tamanho_base);
+                    //bases_buscas_binarias(employeeFile ,bookFile, LogFileBinary, tamanho_base);
 
                     #pragma GCC diagnostic pop // Volta a mostrar os warnings
 
@@ -153,23 +135,3 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
     return 0;
 }
 
-
-int Window_Sorted_DataBase() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Sorted_DataBase_Search;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Sorted_DataBase_Search";
-    RegisterClass(&wc);
-
-
-    HWND hwnd = CreateWindow("Window_Sorted_DataBase_Search", "Buscas Binarias", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}

@@ -16,6 +16,13 @@ typedef struct {
     double salario;
 } TFunc;
 
+// Definição da estrutura para o registro de um cliente
+typedef struct {
+    char nome[50];
+    char cpf[15];
+
+} TCliente;
+
 // Definição da estrutura para o registro de um livro
 typedef struct {
     int cod;
@@ -24,14 +31,11 @@ typedef struct {
     editora[50], 
     data_emprestimo[11];
     double preco;
+
+    TFunc *funcionario;
+    TCliente *cliente;
+
 } TLivro;
-
-// Definição da estrutura para o registro de um cliente
-typedef struct {
-    char nome[50];
-    char cpf[15];
-
-} TCliente;
 
 // Função para calcular o tamanho total de um registro de funcionário
 int tamanho_registro_funcionario();
@@ -64,7 +68,8 @@ void imprimirBase_funcionarios(FILE *out);
 int tamanho_registro_livro();
 
 // Função para criar e preencher um registro de livro
-TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco);
+TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco, 
+                    TFunc *funcionario, TCliente *cliente);
 
 // Função para escrever os detalhes de um livro em um arquivo binário
 void salvar_livro(TLivro *livro, FILE *out);

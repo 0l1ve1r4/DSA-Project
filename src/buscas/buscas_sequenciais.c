@@ -10,7 +10,7 @@
 
 int total_iterations_sequencial = 0;
 
-void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
+/*void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
     if ((employeeFile = fopen("./src/bin/shell_funcionarios.dat", "wb+")) == NULL 
         || (bookFile = fopen("./src/bin/shell_books.dat", "wb+")) == NULL
         || (logFile = fopen("./src/bin/shell_log.dat", "wb+")) == NULL   ) {
@@ -37,7 +37,7 @@ void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile,
 
 }
 
-}
+}*/
 
 
 TFunc *buscarFuncionario_sequencialmente(FILE *arquivo, int codigo, FILE *logFile) {

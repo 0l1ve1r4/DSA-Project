@@ -2,16 +2,21 @@
 
 #define TAMANHO_LABEL_INSERT_Y 400
 
-int cod;
-char codText[50];
+char codText[50]; int cod;
 char nome[50];
 char numero_paginas[11];
 char autor[50];
 char editora[50];
 char data_emprestimo[11];
-double preco;
-char precoText[50];
+char precoText[50]; double preco;
+char funcionario_id[50]; int funcionario_id_int;
+char cliente_id[50]; int cliente_id_int;
+
+
+
 TLivro *registro;
+TFunc *registro_employee;
+
 char codLivro_loan[10];
 int cod_loan;
 
@@ -36,14 +41,20 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             sprintf(editora_print, "Editora: %s", registro->editora);
             sprintf(precoText, "Preco: %.2lf", registro->preco);
             sprintf(data_emprestimo_print, "Data Emprestimo: %s", registro->data_emprestimo);
+            //sprintf(funcionario_id, "Funcionario: %i", registro->funcionario->cod);
+            //sprintf(cliente_id, "Cliente: %i", registro->cliente->nome);
 
-            CreateWindow("STATIC", cod_print, WS_VISIBLE | WS_CHILD, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", nome_print, WS_VISIBLE | WS_CHILD, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", paginas_print, WS_VISIBLE | WS_CHILD, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", autor_print, WS_VISIBLE | WS_CHILD, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", editora_print, WS_VISIBLE | WS_CHILD, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", precoText, WS_VISIBLE | WS_CHILD, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", data_emprestimo_print, WS_VISIBLE | WS_CHILD, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, hwnd, NULL, NULL, NULL);
+            createButton(hwnd, "Livro encontrado!", 1, 10, 10);
+            create_Static_Label(hwnd, cod_print, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, 1);
+            create_Static_Label(hwnd, nome_print, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, 2);
+            create_Static_Label(hwnd, paginas_print, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, 3);
+            create_Static_Label(hwnd, autor_print, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, 4);
+            create_Static_Label(hwnd, editora_print, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, 5);
+            create_Static_Label(hwnd, precoText, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, 6);
+            create_Static_Label(hwnd, data_emprestimo_print, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, 7);
+            //create_Static_Label(hwnd, funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
+            //create_Static_Label(hwnd, cliente_id, 10, 210, TAMANHO_LABEL_INSERT_Y*2, 20, 9);
+
 
             break;
             
@@ -74,53 +85,23 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 }
 
 
-int print_Book() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Print_Book;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Print_Book_Class";
-    RegisterClass(&wc);
+//############################################################################################################################################################################
 
-    HWND hwnd = CreateWindow("Window_Print_Book_Class", "Buscar Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
-//___________________________________________________*___________________________________________________
-// Funções para lidar com a inserção de livros no arquivo binário
 LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
 
-            CreateWindow("BUTTON", "Inserir Livro", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
+            createButton(hwnd, "Inserir Livro", 1, 10, 10);
+            create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
+            create_Input_Label(hwnd, "Nome:", 3, 10, 70);
+            create_Input_Label(hwnd, "Paginas:", 4, 10, 90);
+            create_Input_Label(hwnd, "Autor:", 5, 10, 110);
+            create_Input_Label(hwnd, "Editora:", 6, 10, 130);
+            create_Input_Label(hwnd, "Preco:", 7, 10, 150);
+            create_Input_Label(hwnd, "Funcionario:", 8, 10, 170);
+            create_Input_Label(hwnd, "Cliente:", 9, 10, 190);
+            createButton(hwnd, "Adicionar", 13, 10, 210);
 
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "0", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)2, NULL, NULL);
-
-            CreateWindow("STATIC", "Nome:", WS_VISIBLE | WS_CHILD, 10, 70, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "Livro", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 70, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)3, NULL, NULL);
-
-            CreateWindow("STATIC", "Paginas:", WS_VISIBLE | WS_CHILD, 10, 90, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "0", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 90, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)4, NULL, NULL);
-
-            CreateWindow("STATIC", "Autor:", WS_VISIBLE | WS_CHILD, 10, 110, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "Unknown", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 110, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)5, NULL, NULL);
-
-            CreateWindow("STATIC", "Editora:", WS_VISIBLE | WS_CHILD, 10, 130, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "Unknown", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 130, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)6, NULL, NULL);
-
-            CreateWindow("STATIC", "Preco:", WS_VISIBLE | WS_CHILD, 10, 150, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "0.0", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 150, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)7, NULL, NULL);
-
-
-            CreateWindow("BUTTON", "Adicionar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
             break;
         }
         case WM_COMMAND: {
@@ -134,32 +115,43 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     GetDlgItemText(hwnd, 5, autor, sizeof(nome));
                     GetDlgItemText(hwnd, 6, editora, sizeof(nome));
                     GetDlgItemText(hwnd, 7, precoText, sizeof(precoText));
+                    GetDlgItemText(hwnd, 8, funcionario_id, sizeof(funcionario_id));
+                    GetDlgItemText(hwnd, 9, cliente_id, sizeof(cliente_id));
                     
                     preco = strtod(precoText, NULL);
                     cod = atoi(codText);
+                    funcionario_id_int = atoi(funcionario_id);
+                    
 
-                    if (preco == 0.0 && errno == ERANGE || cod == 0 && codText[0] != '0') {
+                    if (preco == 0.0 && errno == ERANGE || cod == 0 && codText[0] != '0' || funcionario_id_int == 0 && funcionario_id[0] != '0') {
                         printf("Window Debug: Erro ao converter alguma variável\n");
                         break;
                     } 
+
+                    FILE *bookFile, *employeeFile, *clientFile, *LogFileBinary;
+                    employeeFile = fopen("src/bin/window_employee.dat", "rb");
+                    LogFileBinary = fopen("src/bin/window_log.dat", "w");
+
+                    int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFile);
+                    registro_employee = buscarFuncionario_binariamente(cod, employeeFile, tamanho_base, LogFileBinary);
                     
+                    if (registro_employee == NULL) {
+                        MessageBox(NULL, "Funcionario Nao Encontrado.", "Error", MB_ICONERROR | MB_OK);
+                        break;
+                    
+                                 }
                     else {
-                        printf("Window Debug: Codigo %i | Nome %s | Numero Paginas %s | Autor %s | Editora %s | Preco %f\n",
-                         cod, nome, numero_paginas, autor, editora, preco);
-                    }
-
-
-                    FILE *bookFile;
                     bookFile = fopen("src/bin/window_books.dat", "ab+");
-                    TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "NULL", preco);
+                    TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "NULL", preco, registro_employee, NULL);
                     salvar_livro(temp, bookFile);
                     
                     insertionSort_livros(bookFile, tamanho_arquivo_de_livros(bookFile));
                     
                     fclose(bookFile);
                     free(temp);
-                    DestroyWindow(hwnd); // Fechar a janela automaticamente após inserir o livro para evitar bugs
+                    DestroyWindow(hwnd); 
                     break;
+                    }
             }
             break;
         }
@@ -176,36 +168,16 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
     return 0;
 }
 
-int insert_Book() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Insert_Book;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Insert_Book_Class";
-    RegisterClass(&wc);
 
-    HWND hwnd = CreateWindow("Window_Insert_Book_Class", "Inserir Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
+//############################################################################################################################################################################
 
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
-//___________________________________________________*___________________________________________________
-//Funções para lidar com a pesquisa de Livros no arquivo binário
 LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
 
-            CreateWindow("BUTTON", "Procurar Livro", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
-
-            CreateWindow("BUTTON", "Procurar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
+            createButton(hwnd, "Procurar Livro", 1, 10, 10);
+            create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
+            createButton(hwnd, "Procurar", 13, 10, 210);
             break;
         }
 
@@ -221,9 +193,7 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                         printf("Window Debug: Erro ao converter o texto do inteiro \n");
                         break; 
                     } 
-                    else {
-                         printf("Window Debug: Sucesso ao converter o inteiro do codigo: %d\n", cod);
-                    }
+
                     
 
                     FILE *bookFile, *LogFileBinary;
@@ -237,7 +207,7 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     int tamanho_base = tamanho_arquivo_de_livros(bookFile);
                     registro = buscarLivro_binariamente(cod, bookFile, tamanho_base, LogFileBinary);
                     registro != NULL ? printf("\nWindow Debug: Livro encontrado com sucesso!"): printf("\nWindow Debug: Livro nao encontrado!");
-                    print_Book();
+                    create_and_run_window(Window_Print_Book, "Window_Print_Book", "Livro Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
 
                     #pragma GCC diagnostic pop // Volta a mostrar os warnings
 
@@ -260,37 +230,15 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 }
 
 
-int search_Book() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Search_Book;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Search_Book_Class";
-    RegisterClass(&wc);
-
-
-    HWND hwnd = CreateWindow("Window_Search_Book_Class", "Buscar Livro no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
-//___________________________________________________*___________________________________________________
+//############################################################################################################################################################################
 
 
 LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
-
-            CreateWindow("BUTTON", "Emprestar Livro", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
-            CreateWindow("BUTTON", "Emprestar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
+            createButton(hwnd, "Emprestar Livro", 1, 10, 10);
+            create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
+            createButton(hwnd, "Emprestar", 13, 10, 210);
             break;
         }
 
@@ -299,8 +247,6 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             switch (wmId) {
                 case 13:
 
-                    
-
                     GetDlgItemText(hwnd, 2, codLivro_loan, sizeof(codLivro_loan));
                     cod_loan = atoi(codLivro_loan);
 
@@ -308,10 +254,7 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
                         printf("Window Debug: Erro ao converter o texto do inteiro \n");
                         break; 
                     } 
-                    
-                    else { 
-                        printf("Window Debug: Numero Convertido para double: %d\n", cod_loan);
-                    }
+
 
                     
                     #pragma GCC diagnostic push
@@ -373,43 +316,22 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
     return 0;
 }
 
-int loan_book() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Windwow_Loan_book;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Windwow_Loan_book";
-    RegisterClass(&wc);
 
-
-    HWND hwnd = CreateWindow("Windwow_Loan_book", "Emprestimo de Livros", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
-//_______________________________________________________________________________________________________________________________________________________________________________________
+//############################################################################################################################################################################
 
 LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
-
-            CreateWindow("BUTTON", "Devolver Livro", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
-            CreateWindow("BUTTON", "Devolber", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
+            createButton(hwnd, "Devolver Livro", 1, 10, 10);
+            create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
+            createButton(hwnd, "Cancelar", 3, 10, 90);
             break;
         }
 
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             switch (wmId) {
-                case 13:
+                case 1:
 
                     
 
@@ -440,8 +362,8 @@ LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     LogFileBinary = fopen("./src/bin/window_log.dat", "rb+");
 
                     if (bookFileBinary == NULL || LogFileBinary == NULL) {
-                        perror("Erro ao abrir arquivo");
-                        exit(EXIT_FAILURE);
+                        error_message("Erro ao abrir arquivo", "Erro");
+                        break;
                     }
 
                     int tam_file_book = tamanho_arquivo_de_livros(bookFileBinary);  
@@ -472,6 +394,10 @@ LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                     DestroyWindow(hwnd);
                     break;
+            
+            case 3:
+                DestroyWindow(hwnd);
+                break;
 
                     
             }
@@ -484,25 +410,5 @@ LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
         default:
             return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
-    return 0;
-}
-
-int return_book() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_return_book;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_return_book";
-    RegisterClass(&wc);
-
-
-    HWND hwnd = CreateWindow("Window_return_book", "Devolucao de Livros", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
     return 0;
 }

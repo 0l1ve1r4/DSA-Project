@@ -13,10 +13,4 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 //Windows para lidar com a busca de funcionarios no arquivo binario
 LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-/* Chamadas das funções */
-int search_employee();
-int insert_employee();
-int print_Employee();
-
-
 #endif // WINDOW_EMPLOYEE_FUNCTIONS_H

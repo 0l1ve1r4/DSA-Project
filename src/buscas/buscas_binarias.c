@@ -6,7 +6,7 @@
 
 int total_iterations;
 
-void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
+/*void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
     if ((employeeFileBinary = fopen("./src/bin/shell_funcionarios.dat", "wb+")) == NULL
         || (bookFileBinary = fopen("./src/bin/shell_books.dat", "wb+")) == NULL
         || (LogFileBinary = fopen("./src/bin/shell_log.dat", "wb+")) == NULL) {
@@ -32,8 +32,7 @@ void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE 
     }
 
     
-}
-
+}*/
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary) {
     TFunc *registro = (TFunc *)malloc(sizeof(TFunc));
     int esq = 0;

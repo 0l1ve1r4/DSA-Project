@@ -123,10 +123,12 @@ int tamanho_registro_livro() {
            + sizeof(temp->autor)
            + sizeof(temp->editora)
            + sizeof(temp->data_emprestimo)
-           + sizeof(temp->preco);
+           + sizeof(temp->preco)
+           + sizeof(temp->funcionario)
+           + sizeof(temp->cliente);
 }
 
-TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco) {
+TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco, TFunc *funcionario, TCliente *cliente) {
     TLivro *livro = (TLivro *) malloc(sizeof(TLivro));
     if (livro) memset(livro, 0, sizeof(TLivro));
     livro->cod = cod;
@@ -136,6 +138,9 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
     strcpy(livro->editora, editora);
     strcpy(livro->data_emprestimo, data_emprestimo);
     livro->preco = preco;
+
+    livro->funcionario = funcionario;
+    livro->cliente = cliente;
 
     printf("Shell Debug: Livro criado com sucesso.\n");
     return livro;
@@ -149,6 +154,8 @@ void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro->editora, sizeof(char), sizeof(livro->editora), out);
     fwrite(livro->data_emprestimo, sizeof(char), sizeof(livro->data_emprestimo), out);
     fwrite(&livro->preco, sizeof(double), 1, out);
+    fwrite(livro->funcionario, sizeof(TFunc), 1, out);
+    fwrite(livro->cliente, sizeof(TCliente), 1, out);
 
     printf("Shell Debug: Livro salvo com sucesso. cod: %i\n", livro->cod);
 
@@ -180,7 +187,7 @@ void imprimir_livro(TLivro *livro) {
            livro->cod, livro->nome, livro->numero_paginas, livro->autor, livro->editora, livro->data_emprestimo, livro->preco);
 }
 
-void criarBase_livros(FILE *out, int tam) {
+/*void criarBase_livros(FILE *out, int tam) {
     int vet[tam];
     TLivro *livro;
 
@@ -217,7 +224,7 @@ void criarBase_livros_Binario(FILE *out, int tam) {
     printf("\nShell Debug: Base de dados de livros gerada com sucesso!\n");
 
     free(livro);
-}
+}*/
 
 void shuffle_livros(int *vet, int size) {
     srand(time(NULL));

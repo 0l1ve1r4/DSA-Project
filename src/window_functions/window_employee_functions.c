@@ -32,18 +32,21 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
             sprintf(data_nascimento_print, "Data Nascimento: %s", registro_employee->data_nascimento);
             sprintf(salario_print, "Salario: %d", registro_employee->salario);
 
-            CreateWindow("STATIC", cod_print, WS_VISIBLE | WS_CHILD, 10, 0, TAMANHO_LABEL_INSERT_Y, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", nome_print, WS_VISIBLE | WS_CHILD, 10, DISTANCIA_BOTOES_Y, TAMANHO_LABEL_INSERT_Y, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", cpf_print, WS_VISIBLE | WS_CHILD, 10, DISTANCIA_BOTOES_Y*2, TAMANHO_LABEL_INSERT_Y, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", data_nascimento_print, WS_VISIBLE | WS_CHILD, 10, DISTANCIA_BOTOES_Y*3, TAMANHO_LABEL_INSERT_Y, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("STATIC", salario_print, WS_VISIBLE | WS_CHILD, 10, DISTANCIA_BOTOES_Y*4, TAMANHO_LABEL_INSERT_Y, 20, hwnd, NULL, NULL, NULL);
+            
+            createButton(hwnd, "Funcionario Encontrado", 0, 10, 0);
+            create_Static_Label(hwnd, cod_print, 10, DISTANCIA_BOTOES_Y, TAMANHO_LABEL_INSERT_Y, 20, 1);
+            create_Static_Label(hwnd, nome_print, 10, DISTANCIA_BOTOES_Y+20, TAMANHO_LABEL_INSERT_Y, 20, 2);
+            create_Static_Label(hwnd, cpf_print, 10, DISTANCIA_BOTOES_Y+40, TAMANHO_LABEL_INSERT_Y, 20, 3);
+            create_Static_Label(hwnd, data_nascimento_print, 10, DISTANCIA_BOTOES_Y+60, TAMANHO_LABEL_INSERT_Y, 20, 4);
+            create_Static_Label(hwnd, salario_print, 10, DISTANCIA_BOTOES_Y+80, TAMANHO_LABEL_INSERT_Y, 20, 5);
+
 
             break;
             
             }
 
         else {
-            MessageBox(NULL, "Funcionario nao encontrado.", "Error", MB_ICONERROR | MB_OK);
+            error_message("Funcionario nao encontrado", "Erro");
             DestroyWindow(hwnd);
             break;
             
@@ -66,48 +69,21 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 
 }
 
-int print_Employee() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Print_Employee;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Print_Employee_Class";
-    RegisterClass(&wc);
-
-
-    HWND hwnd = CreateWindow("Window_Print_Employee_Class", "Buscar Funcionario", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
 //############################################################################################################################################################################
 
 LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
-            CreateWindow("BUTTON", "Inserir Funcionario", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "0", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)2, NULL, NULL);
+            
+        createButton(hwnd, "Inserir Funcionario", 1, 10, 10);
+        create_Input_Label(hwnd, "Codigo:", 2, 10, 50);
+        create_Input_Label(hwnd, "Nome:", 4, 10, 70);
+        create_Input_Label(hwnd, "CPF:", 6, 10, 90);
+        create_Input_Label(hwnd, "Nascimento:", 8, 10, 110);
+        create_Input_Label(hwnd, "Salario:", 10, 10, 130);
+        createButton(hwnd, "Adicionar", 13, 10, 200);
 
-            CreateWindow("STATIC", "Nome:", WS_VISIBLE | WS_CHILD, 10, 70, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 70, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)3, NULL, NULL);
 
-            CreateWindow("STATIC", "CPF:", WS_VISIBLE | WS_CHILD, 10, 90, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "000.000.000-XX", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 90, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)4, NULL, NULL);
-
-            CreateWindow("STATIC", "Nascimento:", WS_VISIBLE | WS_CHILD, 10, 110, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "02/11/1980", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 110, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)5, NULL, NULL);
-
-            CreateWindow("STATIC", "Salario:", WS_VISIBLE | WS_CHILD, 10, 130, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "0.0", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 130, TAMANHO_LABEL_INSERT_Y, 20, hwnd, (HMENU)6, NULL, NULL);
-
-            CreateWindow("BUTTON", "Adicionar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
             break;
         }
         case WM_COMMAND: {
@@ -160,37 +136,16 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
 }
 
-int insert_employee() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Insert_Employee;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Insert_Employee_Class";
-    RegisterClass(&wc);
 
-
-    HWND hwnd = CreateWindow("Window_Insert_Employee_Class", "Registrar Funcionario", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
-}
-
-//___________________________________________________*___________________________________________________
-//Windows para lidar com a pesquisa de funcionarios dentro do arquivo binario
+//############################################################################################################################################################################
 
 LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
+            createButton(hwnd, "Procurar Funcionario", 1, 10, 10);
+            create_Input_Label(hwnd, "Codigo", 2, 0, 50);
+            createButton(hwnd, "Procurar", 13, 10, 200);
 
-            CreateWindow("BUTTON", "Procurar Funcionario", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Codigo:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
-            CreateWindow("BUTTON", "Procurar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
             break;
         }
 
@@ -226,7 +181,7 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
                     #pragma GCC diagnostic pop 
 
-                    print_Employee();
+                    create_and_run_window(Window_Print_Employee, "Window_Print_Employee", "Funcionario Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
 
                     break;
 
@@ -240,25 +195,5 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
         default:
             return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
-    return 0;
-}
-
-int search_employee() {
-    WNDCLASS wc = {0};
-    wc.lpfnWndProc = Window_Search_Employee;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "Window_Search_Employee_Class";
-    RegisterClass(&wc);
-
-
-    HWND hwnd = CreateWindow("Window_Search_Employee_Class", "Buscar Funcionario no Banco de Dados", WS_OVERLAPPEDWINDOW, 100, 100, 400, 300, NULL, NULL, GetModuleHandle(NULL), NULL);
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    MSG msg;
-
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
     return 0;
 }
