@@ -1,38 +1,25 @@
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include "buscas_binarias.h"
 
 int total_iterations;
 
-/*void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
-    if ((employeeFileBinary = fopen("./src/bin/shell_funcionarios.dat", "wb+")) == NULL
-        || (bookFileBinary = fopen("./src/bin/shell_books.dat", "wb+")) == NULL
-        || (LogFileBinary = fopen("./src/bin/shell_log.dat", "wb+")) == NULL) {
-        printf("Erro ao abrir os arquivo binários\n");
-        exit(1);
-    } else {
-        printf("\033[H\033[J");
-        criarBase_funcionarios_Binario(employeeFileBinary, tamanho_base);
-        criarBase_livros_Binario(bookFileBinary, tamanho_base);
+int criar_base_ordenada(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
 
-        clock_t start = clock();
-        for(int i = 0; i < tamanho_base; i++){
-        buscarFuncionario_binariamente(i, employeeFileBinary, tamanho_base, LogFileBinary);
-        buscarLivro_binariamente(i, bookFileBinary, tamanho_base, LogFileBinary);
-
-        }
-
-        double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
-        salvar_log_file_binary(LogFileBinary, total_iterations, cpu_time_used * 1000);
-        printf("\nShell Debug: Tempo total: %.2f ms | Numero de iteracoes: %i\n", cpu_time_used * 1000, total_iterations);
-        total_iterations = 0;
-        return;
+        criar_base_func_ordenada(employeeFileBinary, tamanho_base);
+        criar_base_livros_ordenada(bookFileBinary, tamanho_base);
+        
+        return 0;
     }
 
-    
-}*/
+int criar_base_desordenada(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
+
+        criar_base_func_desordenada(employeeFileBinary, tamanho_base);
+        criar_base_livros_desordenada(bookFileBinary, tamanho_base);
+        
+        return 0;
+    }
+
+
+
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary) {
     TFunc *registro = (TFunc *)malloc(sizeof(TFunc));
     int esq = 0;
@@ -80,9 +67,8 @@ TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFil
         if (registro->cod == chave) {
             double elapsed_time = (double)(clock() - start_time) / CLOCKS_PER_SEC * 1000.0;
             salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
-            printf("\nShell Debug: Codigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms | Funcionario: %i\n", chave, iteracoes, elapsed_time, registro->funcionario->cod);
-            imprimir_livro(registro);
             return registro;
+
         } else if (registro->cod < chave) {
             esq = meio + 1;
         } else {

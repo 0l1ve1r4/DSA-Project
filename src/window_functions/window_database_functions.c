@@ -7,11 +7,11 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
     switch (uMsg) {
         case WM_CREATE: {
             
-            CreateWindow("BUTTON", "Fazer Base", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Tamanho:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
+            createButton(hwnd, "Fazer Base", 1, 10, 10);
+            create_Input_Label(hwnd, "Tamanho:", 2, 10, 50);
+            createButton(hwnd, "Iniciar", 13, 10, 200);
+            createButton(hwnd, "Cancelar", 14, 200, 200);
 
-            CreateWindow("BUTTON", "Iniciar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
             break;
         }
 
@@ -26,29 +26,30 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
                     tamanho_base = atoi(cod_tamanhoBase);
 
                     if (tamanho_base == 0 && cod_tamanhoBase[0] != '0') {
-                        printf("Window Debug: Erro ao converter o texto do inteiro \n");
+                        error_message("Erro ao converter o texto do inteiro", "Erro");
                         break; 
                     } 
-                    else {
-                         printf("Window Debug: Sucesso ao converter o inteiro do codigo: %d\n", tamanho_base);
-                    }
-                    
-
-                    FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("src/bin//shell_books.dat", "w");
-                    LogFileBinary = fopen("src/bin//shell_log.dat", "w");
-                    employeeFile = fopen("src/bin//shell_funcionarios.dat", "w");
-
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
-                    #pragma GCC diagnostic ignored "-Wint-conversion"   
 
                     
-                    //bases_buscas_sequenciais(employeeFile ,bookFile, LogFileBinary, tamanho_base);
 
-                    #pragma GCC diagnostic pop // Volta a mostrar os warnings
+                    FILE *bookFile = fopen("src/bin/window_books.dat", "ab+");
+                    FILE *LogFileBinary = fopen("src/bin/window_log.dat", "ab+");
+                    FILE *employeeFile = fopen("src/bin/window_employee.dat", "ab+");
+
+
+                    int verify = criar_base_desordenada(employeeFile, bookFile, LogFileBinary, tamanho_base);
+                    if (verify != 0) {
+                        error_message("Erro ao criar a base ordenada", "Erro");
+                        
+                        } 
+
+                    DestroyWindow(hwnd);
 
                     break;
+
+
+                case 14:
+                    DestroyWindow(hwnd);
             }
 
             break;
@@ -76,11 +77,10 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
     switch (uMsg) {
         case WM_CREATE: {
             
-            CreateWindow("BUTTON", "Fazer Base", WS_VISIBLE | WS_CHILD, 10, 10, 150, 30, hwnd, (HMENU)1, NULL, NULL);
-            CreateWindow("STATIC", "Tamanho:", WS_VISIBLE | WS_CHILD, 10, 50, 100, 20, hwnd, NULL, NULL, NULL);
-            CreateWindow("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER, 110, 50, 100, 20, hwnd, (HMENU)2, NULL, NULL);
-
-            CreateWindow("BUTTON", "Iniciar", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 10, 200, 100, 30, hwnd, (HMENU)13, NULL, NULL);
+            createButton(hwnd, "Fazer Base", 1, 10, 10);
+            create_Input_Label(hwnd, "Tamanho:", 2, 10, 50);
+            createButton(hwnd, "Iniciar", 13, 10, 200);
+            createButton(hwnd, "Cancelar", 14, 200, 200);
             break;
         }
 
@@ -95,29 +95,26 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
                     tamanho_base = atoi(cod_tamanhoBase);
 
                     if (tamanho_base == 0 && cod_tamanhoBase[0] != '0') {
-                        printf("Window Debug: Erro ao converter o texto do inteiro \n");
+                        error_message("Erro ao converter o texto do inteiro", "Erro");
                         break; 
                     } 
-                    else {
-                         printf("Window Debug: Sucesso ao converter o inteiro do codigo: %d\n", tamanho_base);
-                    }
                     
+                    FILE* bookFile_database = fopen("src/bin/window_books.dat", "ab+");
+                    FILE* LogFileBinary = fopen("src/bin/window_log.dat", "ab+");
+                    FILE* employeeFile_database = fopen("src/bin/window_employee.dat", "ab+");
 
-                    FILE *bookFile, *LogFileBinary, *employeeFile;
-                    bookFile = fopen("src/bin//shell_books.dat", "w");
-                    LogFileBinary = fopen("src/bin//shell_log.dat", "w");
-                    employeeFile = fopen("src/bin//shell_funcionarios.dat", "w");
+                    int verify = criar_base_ordenada(employeeFile_database, bookFile_database, LogFileBinary, tamanho_base);
+                    if (verify != 0) {
+                        error_message("Erro ao criar a base ordenada", "Erro");
+                        
+                        } 
 
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
-                    #pragma GCC diagnostic ignored "-Wint-conversion"   
-
-                    
-                    //bases_buscas_binarias(employeeFile ,bookFile, LogFileBinary, tamanho_base);
-
-                    #pragma GCC diagnostic pop // Volta a mostrar os warnings
+                    DestroyWindow(hwnd);
 
                     break;
+
+                case 14:
+                    DestroyWindow(hwnd);
             }
 
             break;

@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
 #include "../estruturas.h"
 
 
@@ -12,8 +14,11 @@ typedef struct LogFileBinary{
 } TLogBinary;
 
 
-//'buscas_binarias.c', essa funcao cria a base de funcionarios e livros, depois faz buscas binarias neles.
-void bases_buscas_binarias(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *logFileBinary, int tamanho_base);
+//'buscas_binarias.c', essa funcao cria a base de funcionarios e livros, ordenada.
+int criar_base_ordenada(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base);
+
+//'buscas_binarias.c', essa funcao cria a base de funcionarios e livros, desordenada.
+int criar_base_desordenada(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base);
 
 //'buscas_binarias.c', essa funcao busca o funcionario binariamente.
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);

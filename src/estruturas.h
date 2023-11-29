@@ -57,8 +57,10 @@ TFunc *ler_arquivo_funcionario(FILE *in);
 // Função para imprimir os detalhes de um funcionário na saída padrão
 void imprimir_funcionario(TFunc *func);
 
+void criar_base_func_ordenada(FILE *out, int tam);
+
 // Função para criar uma base de dados de funcionários
-void criarBase_funcionarios(FILE *out, int tam);
+void criar_base_func_desordenada(FILE *out, int tam);
 
 // Função para embaralhar códigos de funcionários
 void shuffle_funcionarios(int *vet, int MAX);
@@ -86,7 +88,9 @@ TLivro *ler_arquivo_livro(FILE *in);
 void imprimir_livro(TLivro *livro);
 
 // Função para criar uma base de dados de livros
-void criarBase_livros(FILE *out, int tam);
+void criar_base_livros_desordenada(FILE *out, int tam);
+
+void criar_base_livros_ordenada(FILE *out, int tam);
 
 // Função para embaralhar códigos de livros
 void shuffle_livros(int *vet, int MAX);

@@ -202,7 +202,7 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     
 
                     FILE *bookFile, *LogFileBinary;
-                    bookFile = fopen("src/bin/window_books.dat", "r");
+                    bookFile = fopen("src/bin/window_books.dat", "rb");
                     LogFileBinary = fopen("src/bin/window_log.dat", "w");
 
                     #pragma GCC diagnostic push

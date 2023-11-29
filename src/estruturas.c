@@ -35,8 +35,7 @@ void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
     fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
     fwrite(&func->salario, sizeof(double), 1, out);
-
-    printf("\nShell Debug: Funcionario salvo com sucesso!\n");
+    
 }
 
 int tamanho_arquivo_de_funcionarios(FILE *arq) {
@@ -66,7 +65,7 @@ void imprimir_funcionario(TFunc *func) {
 
 }
 
-void criarBase_funcionarios(FILE *out, int tam){
+void criar_base_func_desordenada(FILE *out, int tam){
 
     int vet[tam];
     TFunc *f;
@@ -85,16 +84,11 @@ void criarBase_funcionarios(FILE *out, int tam){
 
 }
 
-void criarBase_funcionarios_Binario(FILE *out, int tam){
-
-    int vet[tam];
+void criar_base_func_ordenada(FILE *out, int tam){
     TFunc *f;
 
-    for(int i=0;i<tam;i++)
-        vet[i] = i+1;
-
     for (int i=0;i<tam;i++){
-        f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
+        f = criar_funcionario(i, "NULL", "NULL", "NULL", 0);
         salvar_funcionario(f, out);
     }
 
@@ -157,9 +151,6 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
 void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro, sizeof(TLivro), 1, out);
     fclose(out);
-
-    printf("Shell Debug: Livro salvo com sucesso. Livro cod: %i | Funcionario Cod: %i\n", livro->cod, livro->funcionario->cod);
-
 }
 
 int tamanho_arquivo_de_livros(FILE *arq) {
@@ -192,7 +183,7 @@ void imprimir_livro(TLivro *livro) {
 
 }
 
-/*void criarBase_livros(FILE *out, int tam) {
+void criar_base_livros_desordenada(FILE *out, int tam) {
     int vet[tam];
     TLivro *livro;
 
@@ -201,10 +192,8 @@ void imprimir_livro(TLivro *livro) {
 
     shuffle_livros(vet, tam);
 
-    printf("\nShell Debug: Gerando a base de dados de livros\n");
-
     for (int i = 0; i < tam; i++) {
-        livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
+        livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0, NULL, NULL);
         salvar_livro(livro, out);
     }
 
@@ -212,24 +201,20 @@ void imprimir_livro(TLivro *livro) {
 }
 
 
-void criarBase_livros_Binario(FILE *out, int tam) {
-    int vet[tam];
+void criar_base_livros_ordenada(FILE *out, int tam) {
     TLivro *livro;
-
-    for (int i = 0; i < tam; i++)
-        vet[i] = i + 1;
-
-    printf("\nShell Debug: Gerando a base de dados de livros...\n");
+    TFunc *temp;
+    TCliente *temp_client;
 
     for (int i = 0; i < tam; i++) {
-        livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0);
+        temp = criar_funcionario(i, "NULL", "NULL", "NULL", 0);
+        temp_client = criar_cliente("NULL", "NULL");
+        livro = criar_livro(i, "NULL", "NULL", "NULL", "NULL", "NULL", 0, temp, temp_client);
         salvar_livro(livro, out);
+
     }
 
-    printf("\nShell Debug: Base de dados de livros gerada com sucesso!\n");
-
-    free(livro);
-}*/
+}
 
 void shuffle_livros(int *vet, int size) {
     srand(time(NULL));

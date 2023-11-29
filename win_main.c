@@ -15,7 +15,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             createButton(hwnd, "Registrar Funcionario", ID_ADD_EMPLOYEE, DISTANCE_BUTTONS_X * 20, 1);
             createButton(hwnd, "Buscar Funcionario", ID_SEARCH_EMPLOYEE, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 1);
             createButton(hwnd, "Resetar Banco de Dados", ID_RESET_DB, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 2);
-
+            createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
+            createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
             create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
 
             break;
@@ -61,6 +62,16 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
                 case ID_RESET_DB:
                     rmvBin();
+                    break;
+
+                case ID_CREATE_SORTED_DB:
+                    create_and_run_window(Window_Sorted_DataBase_Search, "Window_Sorted_DataBase_Search", "Criar Base Ordenada",
+                    WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
+                    break;
+
+                case ID_CREATE_UNSORTED_DB:
+                    create_and_run_window(Window_Unsorted_DataBase_Search, "Window_Unsorted_DataBase_Search", "Criar Base Desordenada",
+                    WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     break;
 
                 default:
