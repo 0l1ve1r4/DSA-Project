@@ -1,12 +1,26 @@
 #include "estruturas.h"
 
+void shuffle(int *vet, int size) {
+    srand(time(NULL));
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int tmp = vet[j];
+        vet[j] = vet[i];
+        vet[i] = tmp;
+    }
+}
+
 int tamanho_registro_funcionario() {
-    TFunc *temp;
-    return sizeof(temp->cod) 
-           + sizeof(temp->nome) 
-           + sizeof(temp->cpf) 
-           + sizeof(temp->data_nascimento) 
-           + sizeof(temp->salario); 
+    return sizeof(TFunc);
+}
+
+TCliente *criar_cliente(char *nome, char *cpf){
+
+    TCliente *cliente = (TCliente *) malloc(sizeof(TCliente));
+    if (cliente) memset(cliente, 0, sizeof(TCliente));
+    strcpy(cliente->nome, nome);
+    strcpy(cliente->cpf, cpf);
+    return cliente;
 }
 
 TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario) {
@@ -20,21 +34,9 @@ TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, 
     return func;
 }
 
-TCliente *criar_cliente(char *nome, char *cpf){
-
-    TCliente *cliente = (TCliente *) malloc(sizeof(TCliente));
-    if (cliente) memset(cliente, 0, sizeof(TCliente));
-    strcpy(cliente->nome, nome);
-    strcpy(cliente->cpf, cpf);
-    return cliente;
-}
-
 void salvar_funcionario(TFunc *func, FILE *out) {
-    fwrite(&func->cod, sizeof(int), 1, out);
-    fwrite(func->nome, sizeof(char), sizeof(func->nome), out);
-    fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
-    fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
-    fwrite(&func->salario, sizeof(double), 1, out);
+    fwrite(func, sizeof(TFunc), 1, out);
+    fclose(out);
     
 }
 
@@ -43,7 +45,6 @@ int tamanho_arquivo_de_funcionarios(FILE *arq) {
     int tam = trunc(ftell(arq) / tamanho_registro_funcionario());
     return tam;
 }
-
 
 TFunc *ler_arquivo_funcionario(FILE *in) {
     TFunc *func = (TFunc *) malloc(sizeof(TFunc));
@@ -58,13 +59,6 @@ TFunc *ler_arquivo_funcionario(FILE *in) {
     return func;
 }
 
-
-void imprimir_funcionario(TFunc *func) {
-    printf("Shell Debug: Funcionario de codigo %d | Nome: %s | CPF: %s | Data de Nascimento: %s | Salario: %.2f\n", 
-    func->cod, func->nome, func->cpf, func->data_nascimento, func->salario);
-
-}
-
 void criar_base_func_desordenada(FILE *out, int tam){
 
     int vet[tam];
@@ -73,7 +67,7 @@ void criar_base_func_desordenada(FILE *out, int tam){
     for(int i=0;i<tam;i++)
         vet[i] = i+1;
 
-    shuffle_funcionarios(vet, tam);
+    shuffle(vet, tam);
 
     for (int i=0;i<tam;i++){
         f = criar_funcionario(vet[i], "XXXXXXXXXX", "000.000.000-00", "00/00/0000", 0);
@@ -96,16 +90,6 @@ void criar_base_func_ordenada(FILE *out, int tam){
 
 }
 
-void shuffle_funcionarios(int *vet, int size) {
-    srand(time(NULL));
-    for (int i = size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int tmp = vet[j];
-        vet[j] = vet[i];
-        vet[i] = tmp;
-    }
-}
-
 void imprimirBase_funcionarios(FILE *out){
     
     rewind(out);
@@ -118,19 +102,12 @@ void imprimirBase_funcionarios(FILE *out){
 
 
 int tamanho_registro_livro() {
-    TLivro *temp;
-    return sizeof(temp->cod)
-           + sizeof(temp->nome)
-           + sizeof(temp->numero_paginas)
-           + sizeof(temp->autor)
-           + sizeof(temp->editora)
-           + sizeof(temp->data_emprestimo)
-           + sizeof(temp->preco)
-           + sizeof(temp->funcionario)
-           + sizeof(temp->cliente);
+    return sizeof(TLivro);
 }
 
-TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char *editora, char *data_emprestimo, double preco, TFunc *funcionario, TCliente *cliente) {
+TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, 
+                    char *editora, char *data_emprestimo, double preco, 
+                    TFunc *funcionario, TCliente *cliente) {
     TLivro *livro = (TLivro *) malloc(sizeof(TLivro));
     if (livro) memset(livro, 0, sizeof(TLivro));
     livro->cod = cod;
@@ -144,7 +121,6 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor, char
     livro->funcionario = funcionario;
     livro->cliente = cliente;
 
-    printf("Shell Debug: Livro criado com sucesso.\n");
     return livro;
 }
 
@@ -190,7 +166,7 @@ void criar_base_livros_desordenada(FILE *out, int tam) {
     for (int i = 0; i < tam; i++)
         vet[i] = i + 1;
 
-    shuffle_livros(vet, tam);
+    shuffle(vet, tam);
 
     for (int i = 0; i < tam; i++) {
         livro = criar_livro(vet[i], "XXXXXXXXXX", "0", "Autor Desconhecido", "Editora Desconhecida", "00/00/0000", 0, NULL, NULL);
@@ -214,16 +190,6 @@ void criar_base_livros_ordenada(FILE *out, int tam) {
 
     }
 
-}
-
-void shuffle_livros(int *vet, int size) {
-    srand(time(NULL));
-    for (int i = size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int tmp = vet[j];
-        vet[j] = vet[i];
-        vet[i] = tmp;
-    }
 }
 
 void imprimirBase_livros(FILE *out) {

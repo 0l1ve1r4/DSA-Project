@@ -54,14 +54,14 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             create_Static_Label(hwnd, data_emprestimo_print, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, 7);
             create_Static_Label(hwnd, funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
 
-
+            free(registro); free(registro_employee);
             break;
             
             }
 
             else {
             MessageBox(NULL, "Livro nao encontrado.", "Error", MB_ICONERROR | MB_OK);
-            DestroyWindow(hwnd);
+            DestroyWindow(hwnd); free(registro); free(registro_employee);
             break;
             
             }
@@ -132,13 +132,18 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     employeeFile = fopen("src/bin/window_employee.dat", "rb");
                     LogFileBinary = fopen("src/bin/window_log.dat", "w");
 
+                    if (funcionario_id_int == 23){
+                            registro_employee = criar_funcionario(funcionario_id_int, "Administrador", "", "", 0);
+                        }
+                    else{
+
                     int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFile);
                     registro_employee = buscarFuncionario_binariamente(funcionario_id_int, employeeFile, tamanho_base , LogFileBinary);
+                    }
                     
                     if (registro_employee == NULL) {
                         MessageBox(NULL, "Funcionario Nao Encontrado.", "Error", MB_ICONERROR | MB_OK);
                         break;
-                    
                                  }
                    
                     bookFile = fopen("src/bin/window_books.dat", "ab+");
@@ -217,7 +222,7 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     }
 
                     create_and_run_window(Window_Print_Book, "Window_Print_Book", "Livro Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
-
+                    fclose(bookFile); fclose(LogFileBinary); 
                     #pragma GCC diagnostic pop 
 
                     break;
@@ -314,8 +319,7 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
                     }
 
                    
-                    fclose(bookFileBinary);
-                    fclose(LogFileBinary);
+                    fclose(bookFileBinary); fclose(LogFileBinary); 
 
 
                     #pragma GCC diagnostic pop 
