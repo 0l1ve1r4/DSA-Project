@@ -1,10 +1,6 @@
 
 #include "insertionSort.h"
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
-
 void insertionSort_funcionarios(FILE *arq, int tam) {
     int i;
     for (int j = 2; j <= tam; j++) {

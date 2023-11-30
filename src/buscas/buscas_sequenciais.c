@@ -2,42 +2,7 @@
 #include "buscas_sequenciais.h"
 #include <time.h>
 
-/*
-
-    Comentarios na buscas_sequenciais.h 
-            
-            */
-
 int total_iterations_sequencial = 0;
-
-/*void bases_buscas_sequenciais(FILE *employeeFile, FILE *bookFile, FILE *logFile, int tamanho_base) {
-    if ((employeeFile = fopen("./src/bin/shell_funcionarios.dat", "wb+")) == NULL 
-        || (bookFile = fopen("./src/bin/shell_books.dat", "wb+")) == NULL
-        || (logFile = fopen("./src/bin/shell_log.dat", "wb+")) == NULL   ) {
-
-        printf("Erro ao abrir os arquivo binarios\n");
-        exit(1);
-    }
-
-    else{
-        printf("\033[H\033[J");
-        criarBase_funcionarios(employeeFile, tamanho_base);
-        criarBase_livros(bookFile, tamanho_base);
-        printf("Shell Debug: Base de dados criada com sucesso!\n");
-        
-        clock_t start = clock();
-        for (int i = 0; i < tamanho_base; i++){
-            buscarFuncionario_sequencialmente(employeeFile, i, logFile);
-            buscarLivro_sequencialmente(bookFile, i, logFile);
-            }
-        
-        double cpu_time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
-        printf("\nTempo total: %.2f ms | Total de iteracoes: %i\n", cpu_time_used*1000, total_iterations_sequencial);
-            
-
-}
-
-}*/
 
 
 TFunc *buscarFuncionario_sequencialmente(FILE *arquivo, int codigo, FILE *logFile) {
@@ -56,7 +21,6 @@ TFunc *buscarFuncionario_sequencialmente(FILE *arquivo, int codigo, FILE *logFil
 
             printf("\nCodigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms\n", codigo, numero_iteracoes, time_elapsed_ms);
             salvar_log_file(logFile, numero_iteracoes, time_elapsed_ms);
-            imprimir_funcionario(funcionario);
             
             return funcionario;
         } else {
@@ -90,7 +54,6 @@ TLivro *buscarLivro_sequencialmente(FILE *arquivo, int codigo, FILE *logFile) {
 
             printf("\nCodigo: %i | Iteracoes: %d | Tempo: %.2f ms\n", codigo, numero_iteracoes, time_elapsed_ms);
             salvar_log_file(logFile, numero_iteracoes, time_elapsed_ms);
-            imprimir_livro(livro);
 
             return livro;
         } else {

@@ -1,13 +1,14 @@
 #ifndef ESTRUTURAS_H
 #define ESTRUTURAS_H
+#include "configs.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
-
-// Definição da estrutura para o registro de um funcionário
+/**
+ * @param cod:int
+ * @param nome:char[50]
+ * @param cpf:char[15]
+ * @param data_nascimento:char[11]
+ * @param salario:float 
+ */
 typedef struct {
     int cod;
     char nome[50], 
@@ -16,14 +17,27 @@ typedef struct {
     double salario;
 } TFunc;
 
-// Definição da estrutura para o registro de um cliente
+/**
+ * @param nome:char[50]
+ * @param cpf:char[15]
+ */
 typedef struct {
     char nome[50];
     char cpf[15];
 
 } TCliente;
 
-// Definição da estrutura para o registro de um livro
+/**
+ * @param cod:int
+ * @param nome:char[50]
+ * @param numero_paginas:char[11]
+ * @param autor:char[50]
+ * @param editora:char[50]
+ * @param data_emprestimo:char[11]
+ * @param preco:float
+ * @param funcionario:TFunc
+ * @param cliente:TCliente
+ */
 typedef struct {
     int cod;
     char nome[50], numero_paginas[11], 
@@ -37,8 +51,17 @@ typedef struct {
 
 } TLivro;
 
-//Troca aleatória de elementos de um vetor (normalmente structs)
+/**
+ * @brief Randomiza um vetor de inteiros de tamanho size.
+ * 
+ */
 void shuffle(int *vet, int size);
+
+/**
+ * @brief Cria e um cliente com os dados fornecidos.
+ * 
+ * @return Retorna um ponteiro para uma estrutura criada
+ */
 TCliente *criar_cliente(char *nome, char *cpf);
 
 //##############################################################################################################

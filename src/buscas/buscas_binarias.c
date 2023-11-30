@@ -38,7 +38,6 @@ TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *L
             double elapsed_time = (double)(clock() - start_time) / CLOCKS_PER_SEC * 1000.0;
             salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
             printf("\nShell Debug: Codigo: %i | Iteracoes: %d | Tempo de busca: %.2f ms\n", chave, iteracoes, elapsed_time);
-            imprimir_funcionario(registro);
             return registro;
         } else if (registro->cod < chave) {
             esq = meio + 1;

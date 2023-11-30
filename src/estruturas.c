@@ -95,7 +95,6 @@ void imprimirBase_funcionarios(FILE *out){
     rewind(out);
     TFunc *f;
     while ((f = ler_arquivo_funcionario(out)) != NULL)
-        imprimir_funcionario(f);
     free(f);
 
 }
