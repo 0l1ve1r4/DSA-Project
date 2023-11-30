@@ -36,7 +36,7 @@ TFunc *criar_funcionario(int cod, char *nome, char *cpf, char *data_nascimento, 
 
 void salvar_funcionario(TFunc *func, FILE *out) {
     fwrite(func, sizeof(TFunc), 1, out);
-    fclose(out);
+
     
 }
 
@@ -81,13 +81,12 @@ void criar_base_func_desordenada(FILE *out, int tam){
 void criar_base_func_ordenada(FILE *out, int tam){
     TFunc *f;
 
-    for (int i=0;i<tam;i++){
+    for (int i = 0; i < tam; i++){
         f = criar_funcionario(i, "NULL", "NULL", "NULL", 0);
         salvar_funcionario(f, out);
     }
 
     free(f);
-
 }
 
 void imprimirBase_funcionarios(FILE *out){
@@ -125,7 +124,7 @@ TLivro *criar_livro(int cod, char *nome, char *numero_paginas, char *autor,
 
 void salvar_livro(TLivro *livro, FILE *out) {
     fwrite(livro, sizeof(TLivro), 1, out);
-    fclose(out);
+
 }
 
 int tamanho_arquivo_de_livros(FILE *arq) {

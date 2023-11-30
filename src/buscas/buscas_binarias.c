@@ -3,7 +3,7 @@
 int total_iterations;
 
 int criar_base_ordenada(FILE *employeeFileBinary, FILE *bookFileBinary, FILE *LogFileBinary, int tamanho_base) {
-
+        printf("\nbuscas_binarias.c: Criando base ordenada tamanho %i\n", tamanho_base);
         criar_base_func_ordenada(employeeFileBinary, tamanho_base);
         criar_base_livros_ordenada(bookFileBinary, tamanho_base);
         

@@ -1,48 +1,35 @@
 #include "window_employee_functions.h"
 
-
-int cod;
-char codText_Employee[50];
-char nome[50];
-char cpf[15];
-char data_nascimento[11];
-double salario;
-char salarioText[50];
+int int_func_cod;
+double double_func_salario;
+char char_func_cod[10];
+char char_func_nome[50];
+char char_func_cpf[15];
+char char_func_data_nascimento[11];
+char char_func_salario[50];
 
 TFunc *registro_employee;
-
-#define TAMANHO_LABEL_INSERT_Y 400
-#define DISTANCIA_BOTOES_Y 50
+FILE *employeeFile;
+FILE *LogFileBinary;
 
 LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
 
             if (registro_employee != NULL){
-
-            char cod_print[50];
-            char nome_print[50];
-            char cpf_print[50];
-            char data_nascimento_print[50];
-            char salario_print[50];
-
-            sprintf(cod_print, "Codigo: %i", registro_employee->cod);
-            sprintf(nome_print, "Nome: %s", registro_employee->nome);
-            sprintf(cpf_print, "Cpf: %s", registro_employee->cpf);
-            sprintf(data_nascimento_print, "Data Nascimento: %s", registro_employee->data_nascimento);
-            sprintf(salario_print, "Salario: %d", registro_employee->salario);
-
-            
             createButton(hwnd, "Funcionario Encontrado", 0, 10, 0);
-            create_Static_Label(hwnd, cod_print, 10, DISTANCIA_BOTOES_Y, TAMANHO_LABEL_INSERT_Y, 20, 1);
-            create_Static_Label(hwnd, nome_print, 10, DISTANCIA_BOTOES_Y+20, TAMANHO_LABEL_INSERT_Y, 20, 2);
-            create_Static_Label(hwnd, cpf_print, 10, DISTANCIA_BOTOES_Y+40, TAMANHO_LABEL_INSERT_Y, 20, 3);
-            create_Static_Label(hwnd, data_nascimento_print, 10, DISTANCIA_BOTOES_Y+60, TAMANHO_LABEL_INSERT_Y, 20, 4);
-            create_Static_Label(hwnd, salario_print, 10, DISTANCIA_BOTOES_Y+80, TAMANHO_LABEL_INSERT_Y, 20, 5);
 
-            free(registro_employee);
+            sprintf(char_func_cod, "Codigo: %i", registro_employee->cod);
+            sprintf(char_func_nome, "Nome: %s", registro_employee->nome);
+            sprintf(char_func_cpf, "Cpf: %s", registro_employee->cpf);
+            sprintf(char_func_data_nascimento, "Nascimento: %s", registro_employee->data_nascimento);
+            sprintf(char_func_salario, "Salario: %f", registro_employee->salario);
 
-
+            create_Static_Label(hwnd, char_func_cod, 10, DISTANCE_BUTTONS_Y, TAMANHO_LABEL_INSERT_Y, 20, 1);
+            create_Static_Label(hwnd, char_func_nome, 10, DISTANCE_BUTTONS_Y+20, TAMANHO_LABEL_INSERT_Y, 20, 2);
+            create_Static_Label(hwnd, char_func_cpf, 10, DISTANCE_BUTTONS_Y+40, TAMANHO_LABEL_INSERT_Y, 20, 3);
+            create_Static_Label(hwnd, char_func_data_nascimento, 10, DISTANCE_BUTTONS_Y+60, TAMANHO_LABEL_INSERT_Y, 20, 4);
+            create_Static_Label(hwnd, char_func_salario, 10, DISTANCE_BUTTONS_Y+80, TAMANHO_LABEL_INSERT_Y, 20, 5);
 
             break;
             
@@ -55,7 +42,9 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
             
             }
 
-
+        
+            free(registro_employee);
+            break;
         
         }
 
@@ -95,26 +84,21 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
             switch (wmId) {
                 case 13:
 
-                    GetDlgItemText(hwnd, 2, codText_Employee, sizeof(codText_Employee));
-                    GetDlgItemText(hwnd, 3, nome, sizeof(nome));
-                    GetDlgItemText(hwnd, 4, cpf, sizeof(cpf));
-                    GetDlgItemText(hwnd, 5, data_nascimento, sizeof(data_nascimento));
-                    GetDlgItemText(hwnd, 6, salarioText, sizeof(salario));
+                    GetDlgItemText(hwnd, 2, char_func_cod, sizeof(char_func_cod));
+                    GetDlgItemText(hwnd, 3, char_func_nome, sizeof(char_func_nome));
+                    GetDlgItemText(hwnd, 4, char_func_cpf, sizeof(char_func_cpf));
+                    GetDlgItemText(hwnd, 5, char_func_data_nascimento, sizeof(char_func_data_nascimento));
+                    GetDlgItemText(hwnd, 6, char_func_salario, sizeof(char_func_salario));
                     
-                    salario = strtod(salarioText, NULL);
-                    cod = atoi(codText_Employee);
+                    double_func_salario = strtod(char_func_salario, NULL);
+                    int_func_cod = atoi(char_func_cod);
 
-                    if (salario == 0.0 && errno == ERANGE || cod == 0 && codText_Employee[0] != '0') {
-                        error_message("Erro ao adicionar", "Erro");
-                        break;;
-                    } 
-
-                    FILE *employeeFile = fopen("src/bin/window_employee.dat", "ab+");
-                    TFunc *temp = criar_funcionario(cod, nome, cpf, data_nascimento, salario); 
+                    employeeFile = fopen("src/bin/window_employee.dat", "ab+");
+                    registro_employee = criar_funcionario(int_func_cod, char_func_nome, char_func_cpf, char_func_data_nascimento, double_func_salario); 
                     
-                    salvar_funcionario(temp, employeeFile);
+                    salvar_funcionario(registro_employee, employeeFile);
                     insertionSort_funcionarios(employeeFile, tamanho_arquivo_de_funcionarios(employeeFile));
-                    fclose(employeeFile); free(temp); DestroyWindow(hwnd);
+                    fclose(employeeFile); free(registro_employee); DestroyWindow(hwnd);
                     break;
 
                 case 14:
@@ -157,33 +141,25 @@ LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
             switch (wmId) {
                 case 13:
 
-                    GetDlgItemText(hwnd, 2, codText_Employee, sizeof(codText_Employee));
-                    cod = atoi(codText_Employee);
-
-                    if (cod == 0 && codText_Employee[0] != '0') {
-                        error_message("Erro ao procurar", "Erro");
-                        break; 
-                    } 
+                    GetDlgItemText(hwnd, 2, char_func_cod, sizeof(char_func_cod));
+                    int_func_cod = atoi(char_func_cod);
     
                     
-
-                    FILE *employeeFileBinary, *LogFileBinary;
-                    employeeFileBinary = fopen("src/bin//window_employee.dat", "r");
+                    employeeFile = fopen("src/bin//window_employee.dat", "r");
                     LogFileBinary = fopen("src/bin//window_log.dat", "w");
 
                     #pragma GCC diagnostic push
                     #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
                     #pragma GCC diagnostic ignored "-Wint-conversion"  
 
-                    int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFileBinary);
-                    registro_employee = buscarFuncionario_binariamente(cod, employeeFileBinary, tamanho_base, LogFileBinary);
-                    registro_employee != NULL ? printf("Window Debug: Funcionario encontrado. \n"): printf("Window Debug: Funcionario nao encontrado. \n");
+                    int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFile);
+                    registro_employee = buscarFuncionario_binariamente(int_func_cod, employeeFile, tamanho_base, LogFileBinary);
 
                     #pragma GCC diagnostic pop 
 
 
                     create_and_run_window(Window_Print_Employee, "Window_Print_Employee", "Funcionario Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
-                    fclose(employeeFileBinary); fclose(LogFileBinary);
+                    fclose(employeeFile); fclose(LogFileBinary);
 
                     break;
 

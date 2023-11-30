@@ -1,58 +1,52 @@
 #include "window_book_functions.h"
 
-#define TAMANHO_LABEL_INSERT_Y 400
+double double_preco;
+int int_livro_cod;
+int int_funcionario_id;
+int int_cliente_id_int;
 
-char codText[50]; int cod;
-char nome[50];
-char numero_paginas[11];
-char autor[50];
-char editora[50];
-char data_emprestimo[11];
-char precoText[50]; double preco;
-char funcionario_id[50]; int funcionario_id_int;
-char cliente_id[50]; int cliente_id_int;
-
-
+char char_cod[50];
+char char_nome[50];
+char char_num_paginas[50];
+char char_autor[50];
+char char_editora[50];
+char char_data_emprestimo[50];
+char char_preco[50];
+char char_funcionario_id[50];
+char char_cliente_id[50];
 
 TLivro *registro;
 TFunc *registro_employee;
 
-char codLivro_loan[10];
-int cod_loan;
-
+FILE *bookFile;
+FILE *employeeFile; 
+FILE *LogFileBinary;
 
 LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE: {
 
             if (registro != NULL){
-            char cod_print[50];
-            char nome_print[50];
-            char paginas_print[50];
-            char autor_print[50];
-            char editora_print[50];
-            char data_emprestimo_print[50];
-            char preco_print[50];
-
-            sprintf(cod_print, "Codigo: %i", registro->cod);
-            sprintf(nome_print, "Nome: %s", registro->nome);
-            sprintf(paginas_print, "Numero Paginas: %s", registro->numero_paginas);
-            sprintf(autor_print, "Autor: %s", registro->autor);
-            sprintf(editora_print, "Editora: %s", registro->editora);
-            sprintf(precoText, "Preco: %.2lf", registro->preco);
-            sprintf(data_emprestimo_print, "Data Emprestimo: %s", registro->data_emprestimo);
-            sprintf(funcionario_id, "Funcionario: %s | ID: %i", registro->funcionario->nome, registro->funcionario->cod);
-            sprintf(cliente_id, "Cliente: %i", registro->cliente->nome);
-
             createButton(hwnd, "Livro encontrado!", 1, 10, 10);
-            create_Static_Label(hwnd, cod_print, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, 1);
-            create_Static_Label(hwnd, nome_print, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, 2);
-            create_Static_Label(hwnd, paginas_print, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, 3);
-            create_Static_Label(hwnd, autor_print, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, 4);
-            create_Static_Label(hwnd, editora_print, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, 5);
-            create_Static_Label(hwnd, precoText, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, 6);
-            create_Static_Label(hwnd, data_emprestimo_print, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, 7);
-            create_Static_Label(hwnd, funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
+            
+            sprintf(char_cod, "Codigo: %i", registro->cod);
+            sprintf(char_nome, "Nome: %s", registro->nome);
+            sprintf(char_num_paginas, "Numero Paginas: %s", registro->numero_paginas);
+            sprintf(char_autor, "Autor: %s", registro->autor);
+            sprintf(char_editora, "Editora: %s", registro->editora);
+            sprintf(char_preco, "Preco: %.2lf", registro->preco);
+            sprintf(char_data_emprestimo, "Data Emprestimo: %s", registro->data_emprestimo);
+            //sprintf(char_funcionario_id, "Funcionario: %s | ID: %i", registro->funcionario->nome, registro->funcionario->cod);
+            sprintf(char_cliente_id, "Cliente: %i", registro->cliente->nome);
+
+            create_Static_Label(hwnd, char_cod, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, 1);
+            create_Static_Label(hwnd, char_nome, 10, 70, TAMANHO_LABEL_INSERT_Y*2, 20, 2);
+            create_Static_Label(hwnd, char_num_paginas, 10, 90, TAMANHO_LABEL_INSERT_Y*2, 20, 3);
+            create_Static_Label(hwnd, char_autor, 10, 110, TAMANHO_LABEL_INSERT_Y*2, 20, 4);
+            create_Static_Label(hwnd, char_editora, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, 5);
+            create_Static_Label(hwnd, char_preco, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, 6);
+            create_Static_Label(hwnd, char_data_emprestimo, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, 7);
+            create_Static_Label(hwnd, char_funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
 
             free(registro); free(registro_employee);
             break;
@@ -61,12 +55,11 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
             else {
             MessageBox(NULL, "Livro nao encontrado.", "Error", MB_ICONERROR | MB_OK);
-            DestroyWindow(hwnd); free(registro); free(registro_employee);
+            free(registro); free(registro_employee);
+            DestroyWindow(hwnd); 
             break;
             
             }
-
-
         
         }
 
@@ -109,36 +102,29 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
             switch (wmId) {
                 case 13: //CreateWindow("BUTTON", "Adicionar") (HMENU)13
                     
-                    GetDlgItemText(hwnd, 2, codText, sizeof(codText));
-                    GetDlgItemText(hwnd, 3, nome, sizeof(nome));
-                    GetDlgItemText(hwnd, 4, numero_paginas, sizeof(nome));
-                    GetDlgItemText(hwnd, 5, autor, sizeof(nome));
-                    GetDlgItemText(hwnd, 6, editora, sizeof(nome));
-                    GetDlgItemText(hwnd, 7, precoText, sizeof(precoText));
-                    GetDlgItemText(hwnd, 8, funcionario_id, sizeof(funcionario_id));
-                    GetDlgItemText(hwnd, 9, cliente_id, sizeof(cliente_id));
+                    GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
+                    GetDlgItemText(hwnd, 3, char_cod, sizeof(char_cod));
+                    GetDlgItemText(hwnd, 4, char_num_paginas, sizeof(char_num_paginas));
+                    GetDlgItemText(hwnd, 5, char_autor, sizeof(char_autor));
+                    GetDlgItemText(hwnd, 6, char_editora, sizeof(char_editora));
+                    GetDlgItemText(hwnd, 7, char_preco, sizeof(char_preco));
+                    GetDlgItemText(hwnd, 8, char_funcionario_id, sizeof(char_funcionario_id));
+                    GetDlgItemText(hwnd, 9, char_cliente_id, sizeof(char_cliente_id));
                     
-                    preco = strtod(precoText, NULL);
-                    cod = atoi(codText);
-                    funcionario_id_int = atoi(funcionario_id);
+                    double_preco = strtod(char_preco, NULL);
+                    int_livro_cod = atoi(char_cod);
+                    int_funcionario_id = atoi(char_funcionario_id);
                     
-
-                    if (preco == 0.0 && errno == ERANGE || cod == 0 && codText[0] != '0' || funcionario_id_int == 0 && funcionario_id[0] != '0') {
-                        error_message("Verifique se preencheu corretamente", "Error");
-                        break;
-                    } 
-
-                    FILE *bookFile, *employeeFile, *LogFileBinary;
                     employeeFile = fopen("src/bin/window_employee.dat", "rb");
                     LogFileBinary = fopen("src/bin/window_log.dat", "w");
 
-                    if (funcionario_id_int == 23){
-                            registro_employee = criar_funcionario(funcionario_id_int, "Administrador", "", "", 0);
+                    if (int_funcionario_id == 23){
+                            registro_employee = criar_funcionario(int_funcionario_id, "Administrador", "", "", 0);
                         }
                     else{
 
                     int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFile);
-                    registro_employee = buscarFuncionario_binariamente(funcionario_id_int, employeeFile, tamanho_base , LogFileBinary);
+                    registro_employee = buscarFuncionario_binariamente(int_funcionario_id, employeeFile, tamanho_base , LogFileBinary);
                     }
                     
                     if (registro_employee == NULL) {
@@ -147,13 +133,12 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                                  }
                    
                     bookFile = fopen("src/bin/window_books.dat", "ab+");
-                    TLivro *temp = criar_livro(cod, nome, numero_paginas, autor, editora, "Disponivel", preco, registro_employee, NULL);
+                    TLivro *temp = criar_livro(int_livro_cod, char_nome, char_num_paginas, char_autor, char_editora, "Disponivel", double_preco, registro_employee, NULL);
                     salvar_livro(temp, bookFile);
                     
                     insertionSort_livros(bookFile, tamanho_arquivo_de_livros(bookFile));
                     
-                    fclose(bookFile); fclose(employeeFile); fclose(LogFileBinary);
-                    free(temp); 
+                    fclose(bookFile); fclose(employeeFile); fclose(LogFileBinary); free(temp); 
                     DestroyWindow(hwnd); 
                     break;
                     
@@ -196,26 +181,14 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
             switch (wmId) {
                 case 13: 
 
-                    GetDlgItemText(hwnd, 2, codText, sizeof(codText));
-                    cod = atoi(codText);
+                    GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
+                    int_livro_cod = atoi(char_cod);
 
-                    if (cod == 0 && codText[0] != '0') {
-                        printf("Window Debug: Erro ao converter o texto do inteiro \n");
-                        break; 
-                    } 
-
-                    
-
-                    FILE *bookFile, *LogFileBinary;
                     bookFile = fopen("src/bin/window_books.dat", "rb");
                     LogFileBinary = fopen("src/bin/window_log.dat", "w");
 
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" // Nao faço a minima ideia pq ta dando essas warning com o header incluido,
-                    #pragma GCC diagnostic ignored "-Wint-conversion"   // Apenas fingindo que nao ta acontecendo...
-
                     int tamanho_base = tamanho_arquivo_de_livros(bookFile);
-                    registro = buscarLivro_binariamente(cod, bookFile, tamanho_base, LogFileBinary);
+                    registro = buscarLivro_binariamente(int_livro_cod, bookFile, tamanho_base, LogFileBinary);
                     if (registro == NULL){ 
                         error_message("Livro nao encontrado", "Error");
                         break;
@@ -223,8 +196,6 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                     create_and_run_window(Window_Print_Book, "Window_Print_Book", "Livro Encontrado", WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     fclose(bookFile); fclose(LogFileBinary); 
-                    #pragma GCC diagnostic pop 
-
                     break;
                 
                 case 14:
@@ -269,61 +240,46 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             switch (wmId) {
                 case 13:
 
-                    GetDlgItemText(hwnd, 2, codLivro_loan, sizeof(codLivro_loan));
-                    GetDlgItemText(hwnd, 3, funcionario_id, sizeof(funcionario_id));
-                    GetDlgItemText(hwnd, 4, nome, sizeof(nome));
-                    GetDlgItemText(hwnd, 5, cliente_id, sizeof(cliente_id));
+                    GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
+                    GetDlgItemText(hwnd, 3, char_funcionario_id, sizeof(char_funcionario_id));
+                    GetDlgItemText(hwnd, 4, char_nome, sizeof(char_nome));
+                    GetDlgItemText(hwnd, 5, char_cliente_id, sizeof(char_cliente_id));
+   
+                    int_livro_cod = atoi(char_cod); int_funcionario_id = atoi(char_funcionario_id);
+                    int_funcionario_id = atoi(char_funcionario_id);
 
-                    cod_loan = atoi(codLivro_loan); funcionario_id_int = atoi(funcionario_id);
-
-                    if (cod_loan == 0 && codLivro_loan[0] != '0' || funcionario_id_int == 0 && funcionario_id[0] != '0') {
-                        error_message("Verifique se preencheu corretamente", "Error");
-                        break; 
-                    } 
-
-
-                    
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
-                    #pragma GCC diagnostic ignored "-Wint-conversion"  
-                    #pragma GCC diagnostic ignored "-Woverflow"  
-    
-
-                    TLivro *livro;
-                    FILE *bookFileBinary, *LogFileBinary;
-
-                    bookFileBinary = fopen("./src/bin/window_books.dat", "rb+");
+                    bookFile = fopen("./src/bin/window_books.dat", "rb+");
+                    employeeFile = fopen("./src/bin/window_employee.dat", "rb+");
                     LogFileBinary = fopen("./src/bin/window_log.dat", "rb+");
 
-                    if (bookFileBinary == NULL || LogFileBinary == NULL) {
-                        error_message("Erro ao abrir arquivo", "Erro");
-                        break;
-                    }
+                    int tam_file_book = tamanho_arquivo_de_livros(bookFile);  
+                    TLivro* livro = buscarLivro_binariamente(int_livro_cod, bookFile, tam_file_book, LogFileBinary);
+                    TFunc* funcionario = buscarFuncionario_binariamente(int_funcionario_id, employeeFile, tamanho_arquivo_de_funcionarios(employeeFile), LogFileBinary);
+                    TCliente *cliente = criar_cliente(char_cliente_id, "");
 
-                    int tam_file_book = tamanho_arquivo_de_livros(bookFileBinary);  
-                    livro = buscarLivro_binariamente(cod_loan, bookFileBinary, tam_file_book, LogFileBinary);
-                    
-
-                     if (livro != NULL) {
+                     if (livro != NULL && funcionario != NULL) {
                         strcpy(livro->data_emprestimo, "Emprestado");
-                        livro->funcionario->cod = funcionario_id_int;
-                        strcpy(livro->cliente->nome, nome);
-                        
-                        fseek(bookFileBinary, -sizeof(TLivro), SEEK_CUR);
-                        fwrite(livro, sizeof(TLivro), 1, bookFileBinary);
+                        livro->funcionario = NULL;
+                        livro->cliente = NULL;
+                        livro->funcionario = funcionario;
+                        livro->funcionario->cod = int_funcionario_id;
+                        livro->cliente = cliente;
 
-                        free(livro);
+                        #pragma GCC diagnostic push
+                        #pragma GCC diagnostic ignored "-Woverflow"
+                        fseek(bookFile, -sizeof(TLivro), SEEK_CUR);
+                        fwrite(livro, sizeof(TLivro), 1, bookFile);
+                        #pragma GCC diagnostic pop
+
+                        
+
                     } else {
 
-                        error_message("Livro nao encontrado", "Error");
+                        error_message("Livro ou funcionario nao encontrado", "Error");
                     }
 
-                   
-                    fclose(bookFileBinary); fclose(LogFileBinary); 
-
-
-                    #pragma GCC diagnostic pop 
-
+                    free(livro); free(funcionario); free(cliente);
+                    fclose(bookFile); fclose(LogFileBinary); fclose(employeeFile);
 
                     DestroyWindow(hwnd);
                     break;
@@ -366,63 +322,36 @@ LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                     
 
-                    GetDlgItemText(hwnd, 2, codLivro_loan, sizeof(codLivro_loan));
-                    cod_loan = atoi(codLivro_loan);
-
-                    if (cod_loan == 0 && codLivro_loan[0] != '0') {
-                        printf("Window Debug: Erro ao converter o texto do inteiro \n");
-                        break; 
-                    } 
-                    
-                    else { 
-                        printf("Window Debug: Numero Convertido para double: %d\n", cod_loan);
-                    }
+                    GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
+                    int_livro_cod = atoi(char_cod);
 
                     
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration" 
-                    #pragma GCC diagnostic ignored "-Wint-conversion"  
-                    #pragma GCC diagnostic ignored "-Woverflow"  
-                    //Nessa função, eu procuro uma estrutura de um livto dentro de um arquivo, como faço para alterar o valor do campo livro->data_emprestimo  no arquivo e salvar?
 
-                    TLivro *livro;
-                    FILE *bookFileBinary, *LogFileBinary;
-
-                    // Abre os arquivos para leitura e escrita binária
-                    bookFileBinary = fopen("./src/bin/window_books.dat", "rb+");
+                    bookFile = fopen("./src/bin/window_books.dat", "rb+");
                     LogFileBinary = fopen("./src/bin/window_log.dat", "rb+");
 
-                    if (bookFileBinary == NULL || LogFileBinary == NULL) {
-                        error_message("Erro ao abrir arquivo", "Erro");
-                        break;
-                    }
-
-                    int tam_file_book = tamanho_arquivo_de_livros(bookFileBinary);  
-                    livro = buscarLivro_binariamente(cod_loan, bookFileBinary, tam_file_book, LogFileBinary);
+                    int tam_file_book = tamanho_arquivo_de_livros(bookFile);  
+                    TLivro *livro = buscarLivro_binariamente(int_livro_cod, bookFile, tam_file_book, LogFileBinary);
                     
 
                      if (livro != NULL) {
-                        // Modifica o campo data_emprestimo
-                        strcpy(livro->data_emprestimo, "NULL");
 
-                        // Salva as alterações no arquivo
-                        fseek(bookFileBinary, -sizeof(TLivro), SEEK_CUR);
-                        fwrite(livro, sizeof(TLivro), 1, bookFileBinary);
+                        #pragma GCC diagnostic push
+                        #pragma GCC diagnostic ignored "-Woverflow"
+
+                        strcpy(livro->data_emprestimo, "NULL");
+                        fseek(bookFile, -sizeof(TLivro), SEEK_CUR);
+                        fwrite(livro, sizeof(TLivro), 1, bookFile);
+
+                        #pragma GCC diagnostic pop
 
                         free(livro);
                     } else {
-                        // Lida com o caso em que o livro não foi encontrado
-                        printf("Livro não encontrado\n");
+                        error_message("Livro nao encontrado", "Error");
                     }
 
-                    // Fecha os arquivos
-                    fclose(bookFileBinary);
+                    fclose(bookFile);
                     fclose(LogFileBinary);
-
-
-                    #pragma GCC diagnostic pop 
-
-
                     DestroyWindow(hwnd);
                     break;
             

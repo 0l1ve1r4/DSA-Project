@@ -19,6 +19,7 @@
 #define SIZE_MAIN_WINDOW_Y 400
 #define SIZE_SUB_WINDOW_X 400
 #define SIZE_SUB_WINDOW_Y 300
+#define TAMANHO_LABEL_INSERT_Y 400
 
 // Constantes dos botões da janela principal
 #define ID_ADD_BOOK 101
