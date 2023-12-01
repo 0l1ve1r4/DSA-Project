@@ -33,8 +33,11 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
 
 
                     codigo_verificacao = criar_base_desordenada(employee_file, book_file, log_file, int_tamanho_base);
+
+                    //printLivroCodes(book_file, tamanho_arquivo_de_livros(book_file)); // Debug only
+
                     if (codigo_verificacao != 0) {
-                        error_message("Erro ao criar a base ordenada", "Erro"); } 
+                        error_message("Erro ao criar a base desordenada", "Erro"); } 
                     fclose(book_file); fclose(log_file); fclose(employee_file);
 
                     DestroyWindow(hwnd);
@@ -42,7 +45,7 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
 
                     break;
 
-
+                    
                 case 14:
                     DestroyWindow(hwnd);
             }

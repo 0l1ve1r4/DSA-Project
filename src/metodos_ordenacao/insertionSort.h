@@ -5,6 +5,7 @@
 
 void insertionSort_funcionarios(FILE *arq, int tam);
 void insertionSort_livros(FILE *arq, int tam);
-
+void insertion_sort_both();
+void printLivroCodes(FILE *arq, int tam);
 
 #endif // INSERTIONSORT_H_INCLUDED

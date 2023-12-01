@@ -11,13 +11,13 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             createButton(hwnd, "Adicionar Livro", ID_ADD_BOOK, DISTANCE_BUTTONS_X, 1);
             createButton(hwnd, "Buscar Livro", ID_SEARCH_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 1);
             createButton(hwnd, "Realizar Emprestimo", ID_LOAN_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 2);
-            createButton(hwnd, "Renovar Emprestimo", ID_RENEW_LOAN, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 3);
-            createButton(hwnd, "Realizar Devolucao", ID_RETURN_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 4);
+            createButton(hwnd, "Realizar Devolucao", ID_RETURN_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 3);
             createButton(hwnd, "Registrar Funcionario", ID_ADD_EMPLOYEE, DISTANCE_BUTTONS_X * 20, 1);
             createButton(hwnd, "Buscar Funcionario", ID_SEARCH_EMPLOYEE, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 1);
             createButton(hwnd, "Resetar Banco de Dados", ID_RESET_DB, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 2);
             createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
             createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
+            createButton(hwnd, "Insertion Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
             create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
 
             break;
@@ -41,10 +41,10 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     break;
 
-                case ID_RENEW_LOAN:
+                /*case ID_RENEW_LOAN:
                     create_and_run_window(Windwow_Loan_book, "Windwow_Loan_book", "Emprestimo de Livros", 
                     WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
-                    break;
+                    break;*/
 
                 case ID_RETURN_BOOK:
                     create_and_run_window(Window_return_book, "Window_return_book", "Devolucao de Livros",
@@ -75,8 +75,12 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     break;
 
+                case ID_INSERTION_SORT:
+                    insertion_sort_both();
+                    break;
+
                 default:
-                    error_message("Funcao nao implementada", "Erro");
+                    error_message("Funcao nao implementada", "Erro 404");
                     break;
             }
 
@@ -96,6 +100,6 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 int main() {
-    printf("\033[H\033[JShell Debug: Iniciando o programa");
+    printf("\033[H\033[J\nDebug: Iniciando o programa");
     create_and_run_window(WindowProc_Main, "Window_Main", "Biblioteca do ICEA", WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
 }

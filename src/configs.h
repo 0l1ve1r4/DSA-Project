@@ -34,7 +34,13 @@
 #define ID_CREATE_UNSORTED_DB 1
 #define ID_CREATE_SORTED_DB 2
 #define ID_RESET_DB 3
-#define ID_INTERNAL_CLASSIFICATION 4
-#define ID_BASIC_INTERCALATION 5
+#define ID_INSERTION_SORT 4
+#define ID_INTERNAL_CLASSIFICATION 5
+#define ID_BASIC_INTERCALATION 6
+
+#define EMPLOYEE_FILE_PATH "src/bin/window_employee.dat"
+#define BOOK_FILE_PATH "src/bin/window_books.dat"
+#define LOG_FILE_PATH "src/bin/window_log.dat"
+#define MAX_FILES 3
 
 #endif // CONFIGS_H

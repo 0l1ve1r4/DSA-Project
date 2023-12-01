@@ -36,7 +36,6 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             sprintf(char_editora, "Editora: %s", registro->editora);
             sprintf(char_preco, "Preco: %.2lf", registro->preco);
             sprintf(char_data_emprestimo, "Data Emprestimo: %s", registro->data_emprestimo);
-            //sprintf(char_funcionario_id, "Funcionario: %s | ID: %i", registro->funcionario->nome, registro->funcionario->cod);
             sprintf(char_cliente_id, "Cliente: %i", registro->cliente->nome);
 
             create_Static_Label(hwnd, char_cod, 10, 50, TAMANHO_LABEL_INSERT_Y*2, 20, 1);
@@ -46,7 +45,7 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             create_Static_Label(hwnd, char_editora, 10, 130, TAMANHO_LABEL_INSERT_Y*2, 20, 5);
             create_Static_Label(hwnd, char_preco, 10, 150, TAMANHO_LABEL_INSERT_Y*2, 20, 6);
             create_Static_Label(hwnd, char_data_emprestimo, 10, 170, TAMANHO_LABEL_INSERT_Y*2, 20, 7);
-            create_Static_Label(hwnd, char_funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
+            //create_Static_Label(hwnd, char_funcionario_id, 10, 190, TAMANHO_LABEL_INSERT_Y*2, 20, 8);
 
             free(registro); free(registro_employee);
             break;
@@ -115,8 +114,8 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     int_livro_cod = atoi(char_cod);
                     int_funcionario_id = atoi(char_funcionario_id);
                     
-                    employeeFile = fopen("src/bin/window_employee.dat", "rb");
-                    LogFileBinary = fopen("src/bin/window_log.dat", "w");
+                    employeeFile = fopen(EMPLOYEE_FILE_PATH, "rb");
+                    LogFileBinary = fopen(LOG_FILE_PATH, "w");
 
                     if (int_funcionario_id == 23){
                             registro_employee = criar_funcionario(int_funcionario_id, "Administrador", "", "", 0);
@@ -132,7 +131,7 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                         break;
                                  }
                    
-                    bookFile = fopen("src/bin/window_books.dat", "ab+");
+                    bookFile = fopen(BOOK_FILE_PATH, "ab+");
                     TLivro *temp = criar_livro(int_livro_cod, char_nome, char_num_paginas, char_autor, char_editora, "Disponivel", double_preco, registro_employee, NULL);
                     salvar_livro(temp, bookFile);
                     
@@ -184,13 +183,13 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
                     int_livro_cod = atoi(char_cod);
 
-                    bookFile = fopen("src/bin/window_books.dat", "rb");
-                    LogFileBinary = fopen("src/bin/window_log.dat", "w");
+                    bookFile = fopen(BOOK_FILE_PATH, "rb");
+                    LogFileBinary = fopen(LOG_FILE_PATH, "w");
 
                     int tamanho_base = tamanho_arquivo_de_livros(bookFile);
                     registro = buscarLivro_binariamente(int_livro_cod, bookFile, tamanho_base, LogFileBinary);
                     if (registro == NULL){ 
-                        error_message("Livro nao encontrado", "Error");
+                        error_message("Livro nao encontrado", "Error 404");
                         break;
                     }
 
@@ -248,9 +247,9 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
                     int_livro_cod = atoi(char_cod); int_funcionario_id = atoi(char_funcionario_id);
                     int_funcionario_id = atoi(char_funcionario_id);
 
-                    bookFile = fopen("./src/bin/window_books.dat", "rb+");
-                    employeeFile = fopen("./src/bin/window_employee.dat", "rb+");
-                    LogFileBinary = fopen("./src/bin/window_log.dat", "rb+");
+                    bookFile = fopen(BOOK_FILE_PATH, "rb+");
+                    employeeFile = fopen(EMPLOYEE_FILE_PATH, "rb+");
+                    LogFileBinary = fopen(LOG_FILE_PATH, "rb+");
 
                     int tam_file_book = tamanho_arquivo_de_livros(bookFile);  
                     TLivro* livro = buscarLivro_binariamente(int_livro_cod, bookFile, tam_file_book, LogFileBinary);
@@ -327,8 +326,8 @@ LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                     
 
-                    bookFile = fopen("./src/bin/window_books.dat", "rb+");
-                    LogFileBinary = fopen("./src/bin/window_log.dat", "rb+");
+                    bookFile = fopen(BOOK_FILE_PATH, "rb+");
+                    LogFileBinary = fopen(LOG_FILE_PATH, "rb+");
 
                     int tam_file_book = tamanho_arquivo_de_livros(bookFile);  
                     TLivro *livro = buscarLivro_binariamente(int_livro_cod, bookFile, tam_file_book, LogFileBinary);

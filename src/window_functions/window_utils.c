@@ -1,4 +1,3 @@
-#include <windows.h>
 #include "window_utils.h"
 
 void removeExpandButton(HWND hwnd){
@@ -22,7 +21,7 @@ void rmvBin() {
 
     if (result == IDYES) {
         int deleteResult = system("del src\\bin\\*.dat");
-}
+    }
 }
 
 
