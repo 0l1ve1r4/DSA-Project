@@ -21,6 +21,7 @@ void rmvBin() {
 
     if (result == IDYES) {
         int deleteResult = system("del src\\bin\\*.dat");
+        int deleteResult2 = system("del src\\bin\\partitions\\*.dat");
     }
 }
 

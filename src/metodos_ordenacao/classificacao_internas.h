@@ -3,7 +3,7 @@
 #include "../estruturas.h"
 #include "../configs.h"
 
-int classificacao_interna(FILE *arq, int M);
-
+int classificacao_interna_Func(int M);
+int classificacao_interna_Livro(int M);
 
 #endif

@@ -18,6 +18,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
             createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
             createButton(hwnd, "Insertion Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
+            createButton(hwnd, "Classificacao Interna", ID_INTERNAL_CLASSIFICATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 3);
+            createButton(hwnd, "Intercalacao Basica", ID_BASIC_INTERCALATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 4);
             create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
 
             break;
@@ -77,6 +79,17 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
                 case ID_INSERTION_SORT:
                     insertion_sort_both();
+                    break;
+
+                case ID_INTERNAL_CLASSIFICATION:
+                    classificacao_interna_Func(PARTITIONS_PER_STRUCTS);
+                    classificacao_interna_Livro(PARTITIONS_PER_STRUCTS);
+                    break;
+
+                case ID_BASIC_INTERCALATION:
+                    intercalacao_basica_Func();
+                    intercalacao_basica_Livro();
+                    NUM_PARTITIONS = 0;
                     break;
 
                 default:
