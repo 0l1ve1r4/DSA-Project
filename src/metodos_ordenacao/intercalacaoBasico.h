@@ -5,9 +5,22 @@
 #include "../estruturas.h"
 #include "classificacao_internas.h"
 
-int compare_records(const void *a, const void *b);
+/**
+ * @brief Comparador genérico para as funções de ordenação para a intercalação básica
+ * 
+ * @param a Ponteiro para o primeiro registro.
+ * @param b Ponteiro para o segundo registro.
+ * @param tipo Tipo do registro a ser comparado.
+ */
+int compare_records(const void *a, const void *b, TipoRegistro tipo);
+
+/**
+ * @brief Realiza a intercalação básica entre os arquivos de partição das structs TFunc & TLivro.
+ * @brief A função de comparação é a compare_records, é feita com Intercalação Balanceada.
+ */
+void intercalacoes();
+
 void intercalacao_basica_Func();
-int compare_records_livro(const void *a, const void *b);
 void intercalacao_basica_Livro();
 
 #endif // INTERCALACAOBASICA_H_INCLUDED

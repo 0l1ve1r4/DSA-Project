@@ -15,8 +15,8 @@
 #define DISTANCE_BUTTONS_Y 50
 #define DISTANCE_BUTTONS_X 10
 #define SIZE_BUTTONS_Y 170
-#define SIZE_MAIN_WINDOW_X 600
-#define SIZE_MAIN_WINDOW_Y 400
+#define SIZE_MAIN_WINDOW_X 800
+#define SIZE_MAIN_WINDOW_Y 600
 #define SIZE_SUB_WINDOW_X 400
 #define SIZE_SUB_WINDOW_Y 300
 #define TAMANHO_LABEL_INSERT_Y 400
@@ -30,7 +30,6 @@
 #define ID_ADD_EMPLOYEE 201
 #define ID_SEARCH_EMPLOYEE 202
 #define ID_GENERATE_REPORT 301
-
 #define ID_CREATE_UNSORTED_DB 1
 #define ID_CREATE_SORTED_DB 2
 #define ID_RESET_DB 3
@@ -38,10 +37,10 @@
 #define ID_INTERNAL_CLASSIFICATION 5
 #define ID_BASIC_INTERCALATION 6
 
+// Constantes dos paths dos arquivos
 #define EMPLOYEE_FILE_PATH "src/bin/window_employee.dat"
 #define BOOK_FILE_PATH "src/bin/window_books.dat"
 #define LOG_FILE_PATH "src/bin/window_log.dat"
-
 #define PARTITIONS_PATH "src/bin/partitions"
 #define PARTITIONS_PER_STRUCTS 10
 int NUM_PARTITIONS;

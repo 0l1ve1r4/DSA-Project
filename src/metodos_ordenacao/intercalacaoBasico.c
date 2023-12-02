@@ -1,8 +1,15 @@
 #include "intercalacaoBasico.h"
 
-// Função de comparação para a intercalação
-int compare_records(const void *a, const void *b) {
-    return ((TFunc*)a)->cod - ((TFunc*)b)->cod;
+int compare_records(const void *a, const void *b, TipoRegistro tipo) {
+    switch (tipo) {
+        case FUNCIONARIO:
+            return ((TFunc*)a)->cod - ((TFunc*)b)->cod;
+        case LIVRO:
+            return ((TLivro*)a)->cod - ((TLivro*)b)->cod;
+        default:
+            printf("Debug: Tipo de registro inválido\n");
+            return 0;
+    }
 }
 
 void intercalacao_basica_Func() {
@@ -29,7 +36,6 @@ void intercalacao_basica_Func() {
     // Inicializar o buffer de leitura
     for (int i = 0; i < NUM_PARTITIONS; i++) {
         if (fread(&records[i], sizeof(TFunc), 1, partitions[i]) != 1) {
-            // Marcar partições vazias
             records[i].cod = INT_MAX;
         }
     }
@@ -40,14 +46,13 @@ void intercalacao_basica_Func() {
 
         // Encontrar o menor registro entre as partições
         for (int i = 0; i < NUM_PARTITIONS; i++) {
-            if (records[i].cod != INT_MAX && (minIndex == -1 || compare_records(&records[i], &minRecord) < 0)) {
+            if (records[i].cod != INT_MAX && (minIndex == -1 || compare_records(&records[i], &minRecord, FUNCIONARIO) < 0)) {
                 minIndex = i;
                 minRecord = records[i];
             }
         }
 
         if (minIndex == -1) {
-            // Todas as partições foram processadas
             break;
         }
 
@@ -69,10 +74,7 @@ void intercalacao_basica_Func() {
 }
 
 
-// Função de comparação para a intercalação
-int compare_records_livro(const void *a, const void *b) {
-    return ((TLivro*)a)->cod - ((TLivro*)b)->cod;
-}
+
 
 void intercalacao_basica_Livro() {
     FILE *file = fopen(BOOK_FILE_PATH, "wb");
@@ -109,7 +111,7 @@ void intercalacao_basica_Livro() {
 
         // Encontrar o menor registro entre as partições
         for (int i = 0; i < NUM_PARTITIONS; i++) {
-            if (records[i].cod != INT_MAX && (minIndex == -1 || compare_records_livro(&records[i], &minRecord) < 0)) {
+            if (records[i].cod != INT_MAX && (minIndex == -1 || compare_records(&records[i], &minRecord, LIVRO) < 0)) {
                 minIndex = i;
                 minRecord = records[i];
             }
@@ -136,3 +138,13 @@ void intercalacao_basica_Livro() {
         fclose(partitions[i]);
     }
 }
+
+void intercalacoes(){
+    intercalacao_basica_Func();
+    intercalacao_basica_Livro();
+    system("del src\\bin\\partitions\\*.dat");
+    NUM_PARTITIONS = 0;
+
+    }
+
+

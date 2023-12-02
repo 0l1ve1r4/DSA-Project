@@ -87,9 +87,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     break;
 
                 case ID_BASIC_INTERCALATION:
-                    intercalacao_basica_Func();
-                    intercalacao_basica_Livro();
-                    NUM_PARTITIONS = 0;
+                    intercalacoes();
                     break;
 
                 default:

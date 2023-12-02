@@ -3,6 +3,18 @@
 #include "configs.h"
 
 /**
+ * @brief enum para as funções genéricas de comparação
+ * 
+ * @param FUNCIONARIO TFunc
+ * @param LIVRO TLivro
+ */
+typedef enum {
+    FUNCIONARIO,
+    LIVRO
+} TipoRegistro;
+
+
+/**
  * @param cod:int
  * @param nome:char[50]
  * @param cpf:char[15]
