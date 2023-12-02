@@ -112,5 +112,5 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 int main() {
     printf("\033[H\033[J\nDebug: Iniciando o programa");
-    create_and_run_window(WindowProc_Main, "Window_Main", "Biblioteca do ICEA", WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
+    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
 }

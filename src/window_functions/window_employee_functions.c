@@ -93,7 +93,7 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     double_func_salario = strtod(char_func_salario, NULL);
                     int_func_cod = atoi(char_func_cod);
 
-                    employeeFile = fopen("src/bin/window_employee.dat", "ab+");
+                    employeeFile = fopen(EMPLOYEE_FILE_PATH, "ab+");
                     registro_employee = criar_funcionario(int_func_cod, char_func_nome, char_func_cpf, char_func_data_nascimento, double_func_salario); 
                     
                     salvar_funcionario(registro_employee, employeeFile);

@@ -1,4 +1,3 @@
-
 #ifndef CONFIGS_H
 #define CONFIGS_H
 
@@ -15,11 +14,12 @@
 #define DISTANCE_BUTTONS_Y 50
 #define DISTANCE_BUTTONS_X 10
 #define SIZE_BUTTONS_Y 170
-#define SIZE_MAIN_WINDOW_X 800
-#define SIZE_MAIN_WINDOW_Y 600
+#define SIZE_MAIN_WINDOW_X 600
+#define SIZE_MAIN_WINDOW_Y 400
 #define SIZE_SUB_WINDOW_X 400
 #define SIZE_SUB_WINDOW_Y 300
 #define TAMANHO_LABEL_INSERT_Y 400
+#define MAIN_WINDOW_TITLE "Biblioteca - Sistema de Gerenciamento"
 
 // Constantes dos botões da janela principal
 #define ID_ADD_BOOK 101
