@@ -18,8 +18,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
             createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
             createButton(hwnd, "Insertion Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
-            createButton(hwnd, "Classificacao Interna", ID_INTERNAL_CLASSIFICATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 3);
-            createButton(hwnd, "Intercalacao Basica", ID_BASIC_INTERCALATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 4);
+            createButton(hwnd, "Selecao natural", ID_INTERNAL_CLASSIFICATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 3);
+            createButton(hwnd, "Intercalacao Otimo", ID_BASIC_INTERCALATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 4);
             create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
 
             break;
@@ -42,11 +42,6 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     create_and_run_window(Windwow_Loan_book, "Windwow_Loan_book", "Emprestimo de Livros",
                     WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     break;
-
-                /*case ID_RENEW_LOAN:
-                    create_and_run_window(Windwow_Loan_book, "Windwow_Loan_book", "Emprestimo de Livros", 
-                    WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
-                    break;*/
 
                 case ID_RETURN_BOOK:
                     create_and_run_window(Window_return_book, "Window_return_book", "Devolucao de Livros",
@@ -82,12 +77,11 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     break;
 
                 case ID_INTERNAL_CLASSIFICATION:
-                    classificacao_interna_Func(PARTITIONS_PER_STRUCTS);
-                    classificacao_interna_Livro(PARTITIONS_PER_STRUCTS);
+                    classificacoes(PARTITIONS_PER_STRUCTS);
                     break;
 
                 case ID_BASIC_INTERCALATION:
-                    intercalacoes();
+                    intercalacoes_otimas();
                     break;
 
                 default:

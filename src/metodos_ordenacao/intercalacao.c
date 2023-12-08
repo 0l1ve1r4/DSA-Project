@@ -1,4 +1,4 @@
-#include "intercalacaoBasico.h"
+#include "intercalacao.h"
 
 int compare_records(const void *a, const void *b, TipoRegistro tipo) {
     switch (tipo) {
@@ -12,7 +12,7 @@ int compare_records(const void *a, const void *b, TipoRegistro tipo) {
     }
 }
 
-void intercalacao_basica_Func() {
+void intercalacao_otima_Func() {
     FILE *file = fopen(EMPLOYEE_FILE_PATH, "wb");
     if (file == NULL) {
         perror("Erro ao abrir o arquivo");
@@ -40,6 +40,7 @@ void intercalacao_basica_Func() {
         }
     }
 
+    // Intercalação ótima
     while (1) {
         int minIndex = -1;
         TFunc minRecord;
@@ -73,10 +74,7 @@ void intercalacao_basica_Func() {
     }
 }
 
-
-
-
-void intercalacao_basica_Livro() {
+void intercalacao_otima_Livro() {
     FILE *file = fopen(BOOK_FILE_PATH, "wb");
     if (file == NULL) {
         perror("Erro ao abrir o arquivo");
@@ -105,6 +103,7 @@ void intercalacao_basica_Livro() {
         }
     }
 
+    // Intercalação ótima
     while (1) {
         int minIndex = -1;
         TLivro minRecord;
@@ -139,12 +138,20 @@ void intercalacao_basica_Livro() {
     }
 }
 
-void intercalacoes(){
-    intercalacao_basica_Func();
-    intercalacao_basica_Livro();
-    system("del src\\bin\\partitions\\*.dat");
-    NUM_PARTITIONS = 0;
+void intercalacoes_otimas() {
 
-    }
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
+    intercalacao_otima_Func();
+    intercalacao_otima_Livro();
+    system("del src\\bin\\partitions\\*.dat");
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Tempo de execução: %f\n", cpu_time_used);
+    NUM_PARTITIONS = 0;
+}
 
 

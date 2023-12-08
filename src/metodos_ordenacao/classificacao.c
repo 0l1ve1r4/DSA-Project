@@ -1,4 +1,4 @@
-#include "classificacao_internas.h"
+#include "classificacao.h"
 
 int classificacao_interna_Func(int M) {
     FILE *arq = fopen(EMPLOYEE_FILE_PATH, "rb+");
@@ -27,18 +27,33 @@ int classificacao_interna_Func(int M) {
             M = i;
         }
 
-        //faz ordenacao
-        for (int j = 1; j < M; j++) {
-            TFunc *f = v[j];
-            i = j - 1;
-            while ((i >= 0) && (v[i]->cod > f->cod)) {
-                v[i + 1] = v[i];
-                i = i - 1;
+        // Seleção natural
+        for (int j = 0; j < M / 2; j++) {
+            int minIndex = j;
+            int maxIndex = j;
+            for (int k = j + 1; k < M - j; k++) {
+                if (v[k]->cod < v[minIndex]->cod) {
+                    minIndex = k;
+                } else if (v[k]->cod > v[maxIndex]->cod) {
+                    maxIndex = k;
+                }
             }
-            v[i + 1] = f;
+            if (minIndex != maxIndex) {
+                TFunc *temp = v[minIndex];
+                v[minIndex] = v[j];
+                v[j] = temp;
+
+                if (maxIndex == j) {
+                    maxIndex = minIndex;
+                }
+
+                temp = v[maxIndex];
+                v[maxIndex] = v[M - j - 1];
+                v[M - j - 1] = temp;
+            }
         }
 
-        //cria arquivo de particao e faz gravacao
+        // Cria arquivo de partição e faz a gravação
         sprintf(nomeParticao, "%s/partition%i.dat", PARTITIONS_PATH, qtdParticoes);
 
         FILE *p;
@@ -57,8 +72,6 @@ int classificacao_interna_Func(int M) {
             free(v[jj]);
     }
 
-
-    
     NUM_PARTITIONS = qtdParticoes;
     return 0;
 }
@@ -90,17 +103,33 @@ int classificacao_interna_Livro(int M) {
             M = i;
         }
 
-        // faz ordenacao
-        for (int j = 1; j < M; j++) {
-            TLivro *livro = v[j];
-            i = j - 1;
-            while ((i >= 0) && (v[i]->cod > livro->cod)) {
-                v[i + 1] = v[i];
-                i = i - 1;
+        // Seleção natural
+        for (int j = 0; j < M / 2; j++) {
+            int minIndex = j;
+            int maxIndex = j;
+            for (int k = j + 1; k < M - j; k++) {
+                if (v[k]->cod < v[minIndex]->cod) {
+                    minIndex = k;
+                } else if (v[k]->cod > v[maxIndex]->cod) {
+                    maxIndex = k;
+                }
             }
-            v[i + 1] = livro;
+            if (minIndex != maxIndex) {
+                TLivro *temp = v[minIndex];
+                v[minIndex] = v[j];
+                v[j] = temp;
+
+                if (maxIndex == j) {
+                    maxIndex = minIndex;
+                }
+
+                temp = v[maxIndex];
+                v[maxIndex] = v[M - j - 1];
+                v[M - j - 1] = temp;
+            }
         }
 
+        // Cria arquivo de partição e faz a gravação
         sprintf(nomeParticao, "%s/partition_B%i.dat", PARTITIONS_PATH, qtdParticoes);
 
         FILE *p;
@@ -118,6 +147,22 @@ int classificacao_interna_Livro(int M) {
         for (int jj = 0; jj < M; jj++)
             free(v[jj]);
     }
+
     NUM_PARTITIONS = qtdParticoes;
     return 0;
+}
+
+void classificacoes(int M) {
+
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
+    classificacao_interna_Func(M);
+    classificacao_interna_Livro(M);
+
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("\nTempo de execucao: %f\n", cpu_time_used);
+
 }
