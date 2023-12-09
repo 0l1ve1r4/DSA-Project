@@ -163,6 +163,7 @@ void classificacoes(int M) {
 
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("\nLog da classificacao:\n");
     printf("\nTempo de execucao: %f\n", cpu_time_used);
 
 }

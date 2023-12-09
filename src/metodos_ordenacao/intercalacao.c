@@ -150,8 +150,34 @@ void intercalacoes_otimas() {
 
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("Tempo de execução: %f\n", cpu_time_used);
+
+    intercalacao_otima_struct *e;
+    e = save_intercalacao_otima_struct(NUM_PARTITIONS, PARTITIONS_PER_STRUCTS, cpu_time_used);
+    printf("\nLog da intercalacao otima:\n");
+    printf("Numero de particoes: %d\n", e->num_partitions);
+    printf("Numero de registros por particao: %d\n", e->num_registro_per_partition);
+    printf("Tempo de execucao: %f\n", e->tempo);
+
     NUM_PARTITIONS = 0;
+    return;
 }
 
 
+intercalacao_otima_struct* save_intercalacao_otima_struct(int num_partitions, int num_registro_per_partition, float tempo) {
+    FILE *file = fopen(LOG_FILE_PATH, "wb+");
+    if (file == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    intercalacao_otima_struct *e = malloc(sizeof(intercalacao_otima_struct));
+    e->num_partitions = num_partitions;
+    e->num_registro_per_partition = num_registro_per_partition;
+    e->tempo = tempo;
+    fwrite(e, sizeof(intercalacao_otima_struct), 1, file);
+    
+
+    fclose(file);
+    return e;
+
+}

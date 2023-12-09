@@ -42,7 +42,7 @@
 #define BOOK_FILE_PATH "src/bin/window_books.dat"
 #define LOG_FILE_PATH "src/bin/window_log.dat"
 #define PARTITIONS_PATH "src/bin/partitions"
-#define PARTITIONS_PER_STRUCTS 10
+#define PARTITIONS_PER_STRUCTS 100
 int NUM_PARTITIONS;
 
 #endif // CONFIGS_H

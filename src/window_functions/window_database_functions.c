@@ -25,7 +25,7 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
                 case 13: 
                     
                     GetDlgItemText(hwnd, 2, char_tamanho_base, sizeof(char_tamanho_base));
-                    int_tamanho_base = atoi(char_tamanho_base); printf("Tamanho da base: %d\n", int_tamanho_base);
+                    int_tamanho_base = atoi(char_tamanho_base); printf("\nTamanho da base: %d\n", int_tamanho_base);
                     
                     book_file = fopen("src/bin/window_books.dat", "ab+");
                     log_file = fopen("src/bin/window_log.dat", "ab+");
@@ -123,3 +123,4 @@ LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wPar
     return 0;
 }
 
+//############################################################################################################################################################################
