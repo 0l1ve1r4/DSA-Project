@@ -1,5 +1,6 @@
 
 #include "insertionSort.h"
+#include <time.h>
 
 void insertionSort_funcionarios(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));
@@ -73,24 +74,37 @@ void insertionSort_livros(FILE *arq, int tam) {
 
 
 
-void insertion_sort_both(){
-        FILE *employee_file, *book_file;
-        employee_file = fopen(EMPLOYEE_FILE_PATH, "rb+");
-        book_file = fopen(BOOK_FILE_PATH, "rb+");
+void insertion_sort_both() {
+    FILE *employee_file, *book_file;
+    employee_file = fopen(EMPLOYEE_FILE_PATH, "rb+");
+    book_file = fopen(BOOK_FILE_PATH, "rb+");
 
-        if (employee_file == NULL || book_file == NULL) {
-            printf("\nDebug:Erro ao abrir os arquivos de funcionarios e livros.\n");
-            exit(1);
-        }
-        printf("\nDebug: insertion_sort_both() Iniciado\n");
-        insertionSort_funcionarios(employee_file, tamanho_arquivo_de_funcionarios(employee_file));
-        insertionSort_livros(book_file, tamanho_arquivo_de_livros(book_file));
-        
+    if (employee_file == NULL || book_file == NULL) {
+        printf("\nDebug: Erro ao abrir os arquivos de funcionarios e livros.\n");
+        exit(1);
+    }
 
-        fclose(employee_file);
-        fclose(book_file);
+    printf("\nDebug: insertion_sort_both() Iniciado\n");
 
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
+    insertionSort_funcionarios(employee_file, tamanho_arquivo_de_funcionarios(employee_file));
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Tempo de execucao (funcionarios): %f segundos\n", cpu_time_used);
+
+    start = clock();
+    insertionSort_livros(book_file, tamanho_arquivo_de_livros(book_file));
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Tempo de execucao (livros): %f segundos\n", cpu_time_used);
+
+    fclose(employee_file);
+    fclose(book_file);
 }
+
 
 void printLivroCodes(FILE *arq, int tam) {
     fseek(arq, 0, SEEK_SET);
