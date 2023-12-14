@@ -156,7 +156,7 @@
             }
         
             function gerarInsights(dados) {
-                let insights = '<h2>Conclusões e Insights:</h2><ul>';
+                let insights = '<h2>Conclusões:</h2><ul>';
             
                 let desempenhoOrdenacao = dados.filter(d => d.descricao.includes('Ordenada'));
                 let desempenhoDesordenacao = dados.filter(d => d.descricao.includes('Desordenada'));
@@ -178,7 +178,6 @@
                 { descricao: 'Base Desordenada 50000', funcionarios: 10.303000, livros: 32.980000, classificacao: 9.224000, intercalacao: 10.017000, particoes: 500, registrosPorParticao: 100 }
             ];
         
-            // Inserindo a tabela, comparações e conclusões no documento
             document.getElementById('relatorio').innerHTML = `
                 <div>${gerarTabela(dados)}</div>
                 <div>${gerarComparacoes(dados)}</div>
