@@ -2,7 +2,7 @@
 
 Este repositório é destinado ao estudo dos alunos de **Algoritmos e Estruturas de Dados II**, oferecendo uma abordagem prática sobre a manipulação de arquivos em memória secundária utilizando a linguagem C. Como exemplo, desenvolvemos uma aplicação para administração de uma biblioteca.
 
-#### Última Atualização da documentação: `30/11/2023`
+#### Última Atualização da documentação: `14/12/2023`
 
 ## Sumário
 
@@ -23,9 +23,7 @@ Para implementar com sucesso este projeto, você precisa das seguintes tecnologi
 
 - **Sistema Operacional:** [Windows] - Exclusivamente compatível com Windows devido à utilização da biblioteca gráfica *<windows.h>*.
 
-- **Idiomas:** [PT-BR/EN] - A maioria das funções está em inglês, mas as mensagens no terminal são predominantemente em português do Brasil.
-
-## Uso
+## Usos
 
 ### Uso Comum
 
@@ -42,16 +40,16 @@ Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas
 ````
 ### Uso Próprio/Modificado
 
-Caso você queira fazer modificações no projeto para que funcione apenas via terminal, recomendo que siga essas etapas para evitar bugs:
+Caso você queira fazer modificações no projeto para que funcione somante via terminal, recomendo que siga essas etapas para evitar bugs:
 
 1. Crie seu arquivo *main* dentro de `unit_tests/main.c` ;
 
 2. Depois de realizar todas as modificações desejadas para seu programa, compile:
 ```shell windows 
-gcc -o main ./src/*.c ./src/buscas/*.c ./src/metodos_ordenacao/*.c ./unit_tests/*.c 
+gcc -o main ./src/*.c ... /pasta_x/*.c
 
 ```
-3. Isso irá compilar todos os arquivos .c no diretório `unit_tests/main.c`, após execute o programa principal usando o seguinte comando:
+3. Isso irá compilar todos os arquivos .c no diretórios, após execute o programa principal usando o seguinte comando:
 ````shell windows
 ./main.exe
 ````
@@ -74,7 +72,7 @@ Fique tranquilo, na pasta `./src`, você encontrará tudo documentado nos header
 #### Observações Gerais:
 
 - Cada script é independente e contém suas próprias janelas e funcionalidades específicas.
-- O cuidado com a manipulação de arquivos e a validação de entrada do usuário são considerações importantes em todos os scripts. e suas implementações estão em `/src/estruturas.c`
+- O cuidado com a manipulação de arquivos e a validação de entrada do usuário são considerações importantes, e suas implementações estão em `/src/estruturas.c`
 - Os scripts podem ser compilados separadamente, e suas funcionalidades podem ser integradas conforme necessário.
 
 
