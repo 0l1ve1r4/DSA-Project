@@ -1,5 +1,7 @@
 # Data Structures & Algorithms II
 
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/devYaksha/DSA-Project/blob/main/README.pt-br.md)
+
 This repository is intended for students studying **Algorithms and Data Structures II**, offering a practical approach to manipulating files in secondary memory using the C language. As an example, we developed an application for managing a library.
 
 #### Latest Documentation Update: `14/12/2023`
