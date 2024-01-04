@@ -1,81 +1,82 @@
 # Data Structures & Algorithms II
 
-Este repositório é destinado ao estudo dos alunos de **Algoritmos e Estruturas de Dados II**, oferecendo uma abordagem prática sobre a manipulação de arquivos em memória secundária utilizando a linguagem C. Como exemplo, desenvolvemos uma aplicação para administração de uma biblioteca.
+This repository is intended for students studying **Algorithms and Data Structures II**, offering a practical approach to manipulating files in secondary memory using the C language. As an example, we developed an application for managing a library.
 
-#### Última Atualização da documentação: `14/12/2023`
+#### Latest Documentation Update: `14/12/2023`
 
-## Sumário
+## summary
 
-1. [Requisitos](#requisitos)
-2. [Como Usar/Instalar](#uso)
-3. [Detalhes do Projeto - Parte Lógica](#source)
-4. [Contribuição](#contribuição)
+1. [Requirements](#Requirements)
+2. [How to Use/Install](#use)
+3. [Project Details - Logical Part](#source)
+4. [Contribution](#contribution)
 
-## Requisitos
+## Requirements
 
-Para implementar com sucesso este projeto, você precisa das seguintes tecnologias e ferramentas configuradas:
+To successfully implement this project, you need the following technologies and tools configured:
 
-- **Linguagem de Programação:** [C] - O projeto foi desenvolvido exclusivamente em C.
+- **Programming Language:** [C] - The project was developed exclusively in C.
 
-- **Banco de Dados:** [Banco de dados personalizado] - Utiliza um banco de dados personalizado armazenado em arquivos binários na pasta 'bin'.
+- **Database:** [Custom Database] - Uses a custom database stored in binary files in the 'bin' folder.
 
-- **Compilador:** [Minimalist GNU for Windows] - Desenvolvido usando o MinGW como compilador. Recomendamos [instalar](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) o MinGW ou GCC para garantir desempenho adequado e evitar bugs, pois as correções se baseiam em comandos específicos do compilador.
 
-- **Sistema Operacional:** [Windows] - Exclusivamente compatível com Windows devido à utilização da biblioteca gráfica *<windows.h>*.
+- **Compiler:** [Minimalist GNU for Windows] - Developed using MinGW as compiler. We recommend [installing](https://terminalroot.com.br/2022/12/como-instalar-gcc-gpp-mingw-no-windows.html) MinGW or GCC to ensure adequate performance and avoid bugs, as the fixes are based on specific compiler commands.
 
-## Usos
+- **Operating System:** [Windows] - Exclusively compatible with Windows due to the use of the *<windows.h>* graphics library.
 
-### Uso Comum
+## Uses
 
-Para começar a usar o Sistema de Gerenciamento de Biblioteca, siga estas etapas:
+### Common Usage
 
-1. Compile o código-fonte diretamente pelo bat (dentro do diretório do repositório):
+To get started using the Library Management System, follow these steps:
+
+1. Compile the source code directly via bat (inside the repository directory):
 
 ```shell windows 
 .\compile.bat
 ```
-2. Isso irá compilar todos os arquivos .c no diretório, após execute o programa principal usando o seguinte comando:
+2. This will compile all .c files in the directory, then run the main program using the following command:
 ````shell windows
 ./window.exe
 ````
-### Uso Próprio/Modificado
+### Own/Modified Use
 
-Caso você queira fazer modificações no projeto para que funcione somante via terminal, recomendo que siga essas etapas para evitar bugs:
+If you want to make modifications to the project so that it only works via the terminal, I recommend that you follow these steps to avoid bugs:
 
-1. Crie seu arquivo *main* dentro de `unit_tests/main.c` ;
+1. Create your *main* file inside `unit_tests/main.c`;
 
-2. Depois de realizar todas as modificações desejadas para seu programa, compile:
+2. After making all the desired modifications to your program, compile:
 ```shell windows 
 gcc -o main ./src/*.c ... /pasta_x/*.c
 
 ```
-3. Isso irá compilar todos os arquivos .c no diretórios, após execute o programa principal usando o seguinte comando:
+3. This will compile all .c files in the directories, then run the main program using the following command:
 ````shell windows
 ./main.exe
 ````
 
-4. (Voce também pode alterar o compile.bat para facilitar o processo repetitivo)
+4. (You can also change compile.bat to make the repetitive process easier)
 
-**Observação** Se houver bugs na compilação, você pode apagar todos os arquivos e pastas de manipulação de janelas, sendo eles:
+**Note** If there are bugs in the compilation, you can delete all window handling files and folders, namely:
 - `./windows_main.c`
 - `./src/window_functions`
 
 ## Source
 
-Nesta seção, abordaremos como os códigos funcionam
+In this section, we will cover how codes work
 
-Fique tranquilo, na pasta `./src`, você encontrará tudo documentado nos headers, boa leitura!
+Don't worry, in the `./src` folder, you will find everything documented in the headers, happy reading!
 
 
 <img src="assets/readme/f1.png" alt="Comentários">
 
-#### Observações Gerais:
+#### General observations:
 
-- Cada script é independente e contém suas próprias janelas e funcionalidades específicas.
-- O cuidado com a manipulação de arquivos e a validação de entrada do usuário são considerações importantes, e suas implementações estão em `/src/estruturas.c`
-- Os scripts podem ser compilados separadamente, e suas funcionalidades podem ser integradas conforme necessário.
+- Each script is independent and contains its own specific windows and functionality.
+- Careful handling of files and validation of user input are important considerations, and their implementations are in `/src/estruturas.c`
+- Scripts can be compiled separately, and their functionality can be integrated as needed.
 
 
-## Contribuição
+## Contribution
 
-Estamos abertos a contribuições e melhorias neste projeto. Se você deseja contribuir ou sugerir aprimoramentos, sinta-se à vontade para abrir problemas, enviar solicitações de pull e colaborar no desenvolvimento.
+We are open to contributions and improvements to this project. If you want to contribute or suggest improvements, feel free to open issues, submit pull requests, and collaborate on development.
