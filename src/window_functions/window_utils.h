@@ -4,7 +4,7 @@
 
 #include "../estruturas.h"
 #include "../buscas/buscas_binarias.h"
-#include "../metodos_ordenacao/insertionSort.h"
+#include "../metodos_ordenacao/quicksort.h"
 #include "../buscas/buscas_sequenciais.h"
 #include "../configs.h"
 #include "../metodos_ordenacao/classificacao.h"

@@ -17,7 +17,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             createButton(hwnd, "Resetar Banco de Dados", ID_RESET_DB, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 2);
             createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
             createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
-            createButton(hwnd, "Insertion Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
+            createButton(hwnd, "Quick Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
             createButton(hwnd, "Selecao natural", ID_INTERNAL_CLASSIFICATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 3);
             createButton(hwnd, "Intercalacao Otimo", ID_BASIC_INTERCALATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 4);
             create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
@@ -73,7 +73,7 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
                     break;
 
                 case ID_INSERTION_SORT:
-                    insertion_sort_both();
+                    quicksort_both();
                     break;
 
                 case ID_INTERNAL_CLASSIFICATION:
@@ -106,5 +106,8 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 int main() {
     printf("\033[H\033[J\nDebug: Iniciando o programa");
-    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
+
+
+    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, 
+                        WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
 }

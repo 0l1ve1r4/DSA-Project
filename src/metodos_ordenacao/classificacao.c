@@ -1,5 +1,14 @@
 #include "classificacao.h"
 
+/*
+
+
+O método de geração de partições ordenadas através da Seleção Natural é inspirado na evolução biológica. 
+Inicia-se com uma população de soluções, cada uma representando uma partição ordenada. 
+
+*/
+
+
 int classificacao_interna_Func(int M) {
     FILE *arq = fopen(EMPLOYEE_FILE_PATH, "rb+");
     rewind(arq);

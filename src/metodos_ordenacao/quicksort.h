@@ -3,9 +3,9 @@
 #include "../estruturas.h"
 #include "../configs.h"
 
-void insertionSort_funcionarios(FILE *arq, int tam);
-void insertionSort_livros(FILE *arq, int tam);
-void insertion_sort_both();
+void quicksort_employees(FILE *arq, int tam);
+void quicksort_books(FILE *arq, int tam);
+void quicksort_both();
 void printLivroCodes(FILE *arq, int tam);
 
 #endif // INSERTIONSORT_H_INCLUDED

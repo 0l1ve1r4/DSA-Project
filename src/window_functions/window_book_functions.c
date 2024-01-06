@@ -135,7 +135,7 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                     TLivro *temp = criar_livro(int_livro_cod, char_nome, char_num_paginas, char_autor, char_editora, "Disponivel", double_preco, registro_employee, NULL);
                     salvar_livro(temp, bookFile);
                     
-                    insertionSort_livros(bookFile, tamanho_arquivo_de_livros(bookFile));
+                    quicksort_books(bookFile, tamanho_arquivo_de_livros(bookFile));
                     
                     fclose(bookFile); fclose(employeeFile); fclose(LogFileBinary); free(temp); 
                     DestroyWindow(hwnd); 

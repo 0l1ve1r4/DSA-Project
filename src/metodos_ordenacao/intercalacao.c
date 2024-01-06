@@ -1,5 +1,16 @@
 #include "intercalacao.h"
 
+/*
+
+
+A intercalação ótima é um método de ordenação externa usado para classificar grandes conjuntos de dados
+ que não cabem totalmente na memória principal. Consiste em dividir, ordenar e intercalar as partições
+  de maneira a minimizar o número total de leituras e gravações no dispositivo de armazenamento externo.
+   A eficiência depende da escolha inteligente das partições a serem intercaladas.
+
+*/
+
+
 int compare_records(const void *a, const void *b, TipoRegistro tipo) {
     switch (tipo) {
         case FUNCIONARIO:

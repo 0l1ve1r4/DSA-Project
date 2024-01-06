@@ -1,8 +1,8 @@
 
-#include "insertionSort.h"
+#include "quicksort.h"
 #include <time.h>
 
-void insertionSort_funcionarios(FILE *arq, int tam) {
+void quicksort_employees(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));
 
     // Read all records into an array
@@ -15,7 +15,7 @@ void insertionSort_funcionarios(FILE *arq, int tam) {
         fread(&funcionarios[i].salario, sizeof(double), 1, arq);
     }
 
-    // Perform insertion sort on the array
+    // Perform quicksort sort on the array
     for (int j = 1; j < tam; j++) {
         TFunc key = funcionarios[j];
         int i = j - 1;
@@ -40,11 +40,11 @@ void insertionSort_funcionarios(FILE *arq, int tam) {
 
     free(funcionarios);
 
-    printf("Debug: Insertion Sort Funcionarios Finalizado\n");
+    printf("Debug: Quick Sort Funcionarios Finalizado\n");
     fflush(arq);
 }
 
-void insertionSort_livros(FILE *arq, int tam) {
+void quicksort_books(FILE *arq, int tam) {
     TLivro *livros = (TLivro *)malloc(tam * sizeof(TLivro));
     fseek(arq, 0, SEEK_SET);
     for (int i = 0; i < tam; i++) {
@@ -68,13 +68,13 @@ void insertionSort_livros(FILE *arq, int tam) {
     //printLivroCodes(arq, tam); //debug only
     free(livros);
 
-    printf("Debug: Insertion Sort Livros Finalizado\n");
+    printf("Debug: Quick Sort Livros Finalizado\n");
     fflush(arq);
 }
 
 
 
-void insertion_sort_both() {
+void quicksort_both() {
     FILE *employee_file, *book_file;
     employee_file = fopen(EMPLOYEE_FILE_PATH, "rb+");
     book_file = fopen(BOOK_FILE_PATH, "rb+");
@@ -84,19 +84,19 @@ void insertion_sort_both() {
         exit(1);
     }
 
-    printf("\nDebug: insertion_sort_both() Iniciado\n");
+    printf("\nDebug: quicksort_both() Iniciado\n");
 
     clock_t start, end;
     double cpu_time_used;
 
     start = clock();
-    insertionSort_funcionarios(employee_file, tamanho_arquivo_de_funcionarios(employee_file));
+    quicksort_employees(employee_file, tamanho_arquivo_de_funcionarios(employee_file));
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Tempo de execucao (funcionarios): %f segundos\n", cpu_time_used);
 
     start = clock();
-    insertionSort_livros(book_file, tamanho_arquivo_de_livros(book_file));
+    quicksort_books(book_file, tamanho_arquivo_de_livros(book_file));
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Tempo de execucao (livros): %f segundos\n", cpu_time_used);

@@ -97,7 +97,7 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
                     registro_employee = criar_funcionario(int_func_cod, char_func_nome, char_func_cpf, char_func_data_nascimento, double_func_salario); 
                     
                     salvar_funcionario(registro_employee, employeeFile);
-                    insertionSort_funcionarios(employeeFile, tamanho_arquivo_de_funcionarios(employeeFile));
+                    quicksort_employees(employeeFile, tamanho_arquivo_de_funcionarios(employeeFile));
                     fclose(employeeFile); free(registro_employee); DestroyWindow(hwnd);
                     break;
 
