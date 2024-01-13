@@ -1,226 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Relatório de Desempenho</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Algoritmos de Ordenação</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1 {
-            background-color: #0056b3;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 95%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            transition: all 0.3s;
-        }
-
-        th, td {
-            border: 1px solid #dee2e6;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #e9ecef;
-            position: sticky;
-            top: 0;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #dfe2e5;
-        }
-
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .container {
-                width: 98%;
-                padding: 15px;
-            }
-
-            table {
-                font-size: 0.9em;
-            }
-        }
-
-        .icon {
-            margin-right: 5px;
-        }
-
-        .footer {
-            text-align: center; 
-            padding: 20px; 
-            background-color: #f4f4f4;
-            color: #333;
-            left: 0; 
-            bottom: 0; 
-            width: 100%;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
-            font-size: 1em; 
-        }
-
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-        
-        .content {
-            flex: 1 0 auto;
-        }
-        
-        .footer {
-            flex-shrink: 0;
-        }
-        
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 <body>
-    <h1><i class="fas fa-chart-bar icon"></i>Relatório de Desempenho de Algoritmos</h1>
-    <div class="container">
-        <div id="relatorio">
+    <h1>Análise de Algoritmos de Ordenação</h1>
+    
+    <!-- Seção Quicksort -->
+    <section id="quicksort">
+        <h2>Quicksort</h2>
+        <div class="chart-controls">
+            <button onclick="updateChartType(quicksortGraph, 'bar')">Gráfico de Barras</button>
+            <button onclick="updateChartType(quicksortGraph, 'line')">Gráfico de Linhas</button>
+            <button onclick="toggleView('quicksort')">Alternar para Tabela</button>
         </div>
-        <canvas id="meuGrafico"></canvas>
+        <canvas id="quicksortGraph"></canvas>
+        <table id="quicksortTable" class="data-table" style="display: none;"></table>
+    </section>
+    <div class="analysis">
+        <h3>Análise do Quicksort</h3>
+        <p>O Quicksort demonstra excelente desempenho em conjuntos de dados menores. No entanto, o tempo de processamento aumenta significativamente para bases de dados maiores, especialmente para a base de livros, o que pode ser atribuído à complexidade de escolha do pivô e à natureza recursiva do algoritmo.</p>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function formatNumber(num) {
-                return Math.round(num * 1000000) / 1000000;
-            }
-        
-        
-            function gerarTabela(dados) {
-                let tabela = '<table><tr><th>Descrição</th><th>Funcionários (seg)</th><th>Livros (seg)</th><th>Classificação (seg)</th><th>Intercalação (seg)</th><th>Partições</th><th>Registros por Partição</th></tr>';
-                dados.forEach(item => {
-                    tabela += `<tr>
-                        <td>${item.descricao}</td>
-                        <td>${formatNumber(item.funcionarios)}</td>
-                        <td>${formatNumber(item.livros)}</td>
-                        <td>${formatNumber(item.classificacao)}</td>
-                        <td>${formatNumber(item.intercalacao)}</td>
-                        <td>${item.particoes}</td>
-                        <td>${item.registrosPorParticao}</td>
-                    </tr>`;
-                });
-                tabela += '</table>';
-                return tabela;
-            }
-        
-            function gerarComparacoes(dados) {
-                let comparacoes = '<h2>Comparação entre Dados Ordenados e Desordenados:</h2><table>';
-                comparacoes += '<tr><th></th><th>Ordenação (Funcionários)</th><th>Ordenação (Livros)</th><th>Intercalação</th></tr>';
-                
-                for (let i = 0; i < dados.length; i += 2) {
-                    let ordenado = dados[i];
-                    let desordenado = dados[i + 1];
-                    comparacoes += `<tr>
-                        <td><strong>${(i/2)+1}.</strong> ${ordenado.descricao} vs. ${desordenado.descricao}:</td>
-                        <td>${formatNumber(ordenado.funcionarios)} vs. ${formatNumber(desordenado.funcionarios)} segundos</td>
-                        <td>${formatNumber(ordenado.livros)} vs. ${formatNumber(desordenado.livros)} segundos</td>
-                        <td>${formatNumber(ordenado.intercalacao)} vs. ${formatNumber(desordenado.intercalacao)} segundos</td>
-                    </tr>`;
-                }
-        
-                comparacoes += '</table>';
-                return comparacoes;
-            }
-        
-            function gerarInsights(dados) {
-                let insights = '<h2>Conclusões:</h2><ul>';
-            
-                let desempenhoOrdenacao = dados.filter(d => d.descricao.includes('Ordenada'));
-                let desempenhoDesordenacao = dados.filter(d => d.descricao.includes('Desordenada'));
-                let melhoriaMediaOrdenacao = desempenhoOrdenacao.reduce((acc, d) => acc + d.classificacao, 0) / desempenhoOrdenacao.length;
-                let melhoriaMediaDesordenacao = desempenhoDesordenacao.reduce((acc, d) => acc + d.classificacao, 0) / desempenhoDesordenacao.length;
-            
-                insights += `<li>O desempenho médio da classificação em bases ordenadas é de ${formatNumber(melhoriaMediaOrdenacao)} segundos, enquanto em bases desordenadas é de ${formatNumber(melhoriaMediaDesordenacao)} segundos.</li>`;
-                        
-                insights += '</ul>';
-                return insights;
-            }
-        
-            const dados = [
-                { descricao: 'Base Ordenada 1000', funcionarios: 0.000000, livros: 0.000000, classificacao: 0.141000, intercalacao: 3.893000, particoes: 10, registrosPorParticao: 100 },
-                { descricao: 'Base Ordenada 10000', funcionarios: 0.027000, livros: 0.021000, classificacao: 1.540000, intercalacao: 3.642000, particoes: 100, registrosPorParticao: 100 },
-                { descricao: 'Base Ordenada 50000', funcionarios: 0.063000, livros: 0.078000, classificacao: 9.027000, intercalacao: 2.323000, particoes: 500, registrosPorParticao: 100 },
-                { descricao: 'Base Desordenada 1000', funcionarios: 0.000000, livros: 0.015000, classificacao: 0.174000, intercalacao: 0.205000, particoes: 10, registrosPorParticao: 100 },
-                { descricao: 'Base Desordenada 10000', funcionarios: 0.330000, livros: 0.455000, classificacao: 1.869000, intercalacao: 0.580000, particoes: 100, registrosPorParticao: 100 },
-                { descricao: 'Base Desordenada 50000', funcionarios: 10.303000, livros: 32.980000, classificacao: 9.224000, intercalacao: 10.017000, particoes: 500, registrosPorParticao: 100 }
-            ];
-        
-            document.getElementById('relatorio').innerHTML = `
-                <div>${gerarTabela(dados)}</div>
-                <div>${gerarComparacoes(dados)}</div>
-                <div>${gerarInsights(dados)}</div>
-            `;
 
-            const ctx = document.getElementById('meuGrafico').getContext('2d');
-            const meuGrafico = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Base Ordenada 1000', 'Base Ordenada 10000', 'Base Ordenada 50000', 'Base Desordenada 1000', 'Base Desordenada 10000', 'Base Desordenada 50000'],
-                    datasets: [
-                        {
-                            label: 'Tempo de Execução - Funcionários (seg)',
-                            data: [0.000000, 0.027000, 0.063000, 0.000000, 0.330000, 10.303000],
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Tempo de Execução - Livros (seg)',
-                            data: [0.000000, 0.021000, 0.078000, 0.015000, 0.455000, 32.980000],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-        });
-
-        </script>
-        <div class="footer">
-            <strong>By Mateus Diniz e Guilherme Santos</strong>
+    <!-- Seção Seleção Natural com Intercalação Ótima -->
+    <section id="naturalSelection">
+        <h2>Seleção Natural com Intercalação Ótima</h2>
+        <div class="chart-controls">
+            <button onclick="updateChartType(naturalSelectionGraph, 'bar')">Gráfico de Barras</button>
+            <button onclick="updateChartType(naturalSelectionGraph, 'line')">Gráfico de Linhas</button>
+            <button onclick="toggleView('naturalSelection')">Alternar para Tabela</button>
         </div>
+        <canvas id="naturalSelectionGraph"></canvas>
+        <table id="naturalSelectionTable" class="data-table" style="display: none;"></table>
+    </section>
+    
+    </section>
+    <div class="analysis">
+        <h3>Análise da Seleção Natural com Intercalação Ótima</h3>
+        <p>Este método exibe um aumento mais consistente e gradual no tempo de execução à medida que o tamanho da base de dados aumenta. A eficiência em grandes bases de dados é uma vantagem significativa, provavelmente devido à eficaz técnica de intercalação e ao uso otimizado de memória.</p>
+    </div>
 
-    </body>
+    <!-- Seção de Comparação -->
+    <section id="comparison">
+        <h2>Comparação</h2>
+        <div class="chart-controls">
+            <button onclick="updateChartType(comparisonGraph, 'bar')">Gráfico de Barras</button>
+            <button onclick="updateChartType(comparisonGraph, 'line')">Gráfico de Linhas</button>
+            <button onclick="toggleView('comparison')">Alternar para Tabela</button>
+        </div>
+        <canvas id="comparisonGraph"></canvas>
+        <table id="comparisonTable" class="data-table" style="display: none;"></table>
+    </section>
+    
+    <div class="analysis">
+        <h3>Razões Teóricas das Diferenças de Desempenho</h3>
+        <h4>Quicksort</h4>
+        <ul>
+            <li><strong>Escolha do Pivô:</strong> A eficiência do Quicksort depende da escolha do pivô. Uma escolha inadequada pode levar a um desempenho pior, especialmente em grandes conjuntos de dados.</li>
+            <li><strong>Dados de Entrada:</strong> O desempenho pode ser reduzido com dados quase ordenados ou com muitos valores repetidos.</li>
+            <li><strong>Recursão:</strong> A natureza recursiva do Quicksort pode ser um problema para conjuntos de dados muito grandes.</li>
+        </ul>
+
+        <h4>Seleção Natural com Intercalação Ótima</h4>
+        <ul>
+            <li><strong>Classificação Inicial:</strong> A divisão inicial em várias partições parcialmente ordenadas pode ser mais eficiente para grandes conjuntos de dados.</li>
+            <li><strong>Intercalação:</strong> A técnica de intercalação ótima é eficiente para combinar partições classificadas.</li>
+            <li><strong>Uso de Memória:</strong> Este método pode ser mais eficiente em termos de uso de memória comparado ao Quicksort.</li>
+        </ul>
+    </div>
+
+    <div class="analysis">
+        <h3>Conclusão</h3>
+        <p>A escolha entre Quicksort e Seleção Natural com Intercalação Ótima deve considerar o tamanho e as características da base de dados. Quicksort é mais eficiente para conjuntos de dados menores, enquanto a Seleção Natural com Intercalação Ótima é mais adequada para grandes volumes de dados.</p>
+    </div>
+
+    <footer>
+        By Mateus Diniz - Guilherme Santos | AEDS 2
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>

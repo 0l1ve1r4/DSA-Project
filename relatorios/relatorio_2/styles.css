@@ -1,73 +1,124 @@
-:root {
-    --background-color: #f4f4f4;
-    --main-color: #333;
-    --secondary-color: #555;
-    --text-color: #777;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 20px;
-    background-color: var(--background-color);
-    line-height: 1.6;
-    margin-bottom: 50px;
-}
-
-header {
-    background-color: var(--main-color);
-    color: white;
-    padding: 20px;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
-    margin: 0;
+    color: #333;
+    margin: 20px 0;
 }
 
-h2 {
-    color: var(--secondary-color);
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-    margin-top: 20px;
+section {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    width: 80%;
+    max-width: 960px;
 }
 
-p {
-    color: var(--text-color);
-    margin-bottom: 15px;
+canvas {
+    width: 100% !important;
+    height: 400px !important;
 }
 
-ul {
-    color: var(--text-color);
-    margin-bottom: 15px;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
+.analysis {
+    margin: 20px;
     padding: 15px;
-    text-align: left;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 960px;
 }
 
-th {
-    background-color: #f2f2f2;
+.analysis h3 {
+    color: #333;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+.analysis p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.analysis h4 {
+    color: #444;
+    margin-top: 15px;
+}
+
+.analysis ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+}
+
+.chart-controls {
+    margin-top: 10px;
+}
+
+.chart-controls button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chart-controls button:hover {
+    background-color: #0056b3;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 footer {
-    background-color: var(--main-color);
-    color: white;
-    padding: 10px;
     text-align: center;
-    width: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    border-top: 1px solid #ddd;
+    font-size: 0.8em;
     position: relative;
-    clear: both;
+    bottom: 0;
+    width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        align-items: stretch;
+    }
+
+    section {
+        width: 95%;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    canvas {
+        height: 300px !important;
+    }
 }
