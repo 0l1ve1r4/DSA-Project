@@ -201,19 +201,27 @@ function toggleView(chartId) {
 function fillTable(chartId) {
     let table = document.getElementById(chartId + 'Table');
     let data;
+    let funcionarioLabel;
+    let livroLabel;
     switch (chartId) {
         case 'quicksort':
             data = quicksortData;
+            funcionarioLabel = 'Funcionários';
+            livroLabel = 'Livros';
             break;
         case 'naturalSelection':
             data = naturalSelectionData;
+            funcionarioLabel = 'Seleção Natural';
+            livroLabel = 'Intercalação Ótima';
             break;
         case 'comparison':
             data = comparisonData;
+            funcionarioLabel = 'Quicksort';
+            livroLabel = 'Seleção Natural com Intercalação Ótima';
             break;
     }
 
-    let html = `<tr><th>Tamanho</th><th>${chartId === 'comparison' ? 'Quicksort' : 'Funcionários'}</th><th>${chartId === 'comparison' ? 'Intercalação com Seleção' : 'Livros'}</th></tr>`;
+    let html = `<tr><th>Tamanho</th><th>${funcionarioLabel}</th><th>${livroLabel}</th></tr>`;
     data.labels.forEach((label, index) => {
         html += `<tr>
                     <td>${label}</td>
