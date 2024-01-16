@@ -1,8 +1,4 @@
-#include "./src/window_functions/window_utils.h"
-
-//Compile: 
-// ./compile.bat
-// ./window.exe
+#include "./window_functions/window_utils.h"
 
 LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
