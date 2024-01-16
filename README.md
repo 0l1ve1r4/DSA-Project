@@ -5,7 +5,7 @@
 
 This repository is intended for students studying **Algorithms and Data Structures II**, offering a practical approach to manipulating files in secondary memory using the C language.
 
-<img src="assets/readme/MAIN_WINDOW.png" alt="Window">
+<img src="assets/readme/MAIN_WINDOW.png" alt="Window" align="center">
 
 #### Latest Documentation Update: `15/01/2023`
 

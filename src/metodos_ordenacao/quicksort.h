@@ -1,7 +1,7 @@
 #ifndef INSERTIONSORT_H_INCLUDED
 #define INSERTIONSORT_H_INCLUDED
+
 #include "../estruturas.h"
-#include "../configs.h"
 
 void quicksort_employees(FILE *arq, int tam);
 void quicksort_books(FILE *arq, int tam);

@@ -1,7 +1,7 @@
 #ifndef CLASSIFICACAO_H
 #define CLASSIFICACAO_H
 #include "../estruturas.h"
-#include "../configs.h"
+
 
 typedef struct{
 

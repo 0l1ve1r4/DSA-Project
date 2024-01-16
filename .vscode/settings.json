@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "intercalacao.h": "c"
+        "intercalacao.h": "c",
+        "string.h": "c",
+        "window_employee_functions.h": "c"
     }
 }

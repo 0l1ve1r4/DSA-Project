@@ -1,7 +1,6 @@
 #ifndef INTERCALACAO_H_INCLUDED
 #define INTERCALACAO_H_INCLUDED
 
-#include "../configs.h"
 #include "../estruturas.h"
 
 typedef struct{
