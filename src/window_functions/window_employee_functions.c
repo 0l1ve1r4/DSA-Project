@@ -1,4 +1,4 @@
-#include "window_employee_functions.h"
+#include "../estruturas.h"
 
 int int_func_cod;
 double double_func_salario;
@@ -12,7 +12,7 @@ TFunc *registro_employee;
 FILE *employeeFile;
 FILE *LogFileBinary;
 
-LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Print_Employee(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
 
@@ -63,7 +63,7 @@ LRESULT CALLBACK Window_Print_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Insert_Employee(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             
@@ -125,7 +125,7 @@ LRESULT CALLBACK Window_Insert_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_Search_Employee(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Search_Employee(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Procurar Funcionario", 1, 10, 10);

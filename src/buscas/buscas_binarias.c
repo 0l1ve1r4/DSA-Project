@@ -1,4 +1,4 @@
-#include "buscas_binarias.h"
+#include "../estruturas.h"
 
 int total_iterations;
 

@@ -2,6 +2,8 @@
     "files.associations": {
         "intercalacao.h": "c",
         "string.h": "c",
-        "window_employee_functions.h": "c"
+        "window_employee_functions.h": "c",
+        "time.h": "c",
+        "estruturas.h": "c"
     }
 }

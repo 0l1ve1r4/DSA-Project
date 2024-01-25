@@ -1,4 +1,4 @@
-#include "classificacao.h"
+#include "../estruturas.h"
 
 /*
 

@@ -1,4 +1,4 @@
-#include "intercalacao.h"
+#include "../estruturas.h"
 
 /*
 

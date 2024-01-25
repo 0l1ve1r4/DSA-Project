@@ -1,23 +1,32 @@
-#include "./window_functions/window_utils.h"
+#include "estruturas.h"
 
-LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW WindowProc_Main(WINDOW_PARAMS);
+
+int main() {
+    printf("\033[H\033[J\nDebug: Iniciando o programa");
+
+
+    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, 
+                        WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
+}
+
+NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
 
-            createButton(hwnd, "Adicionar Livro", ID_ADD_BOOK, DISTANCE_BUTTONS_X, 1);
-            createButton(hwnd, "Buscar Livro", ID_SEARCH_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 1);
-            createButton(hwnd, "Realizar Emprestimo", ID_LOAN_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 2);
-            createButton(hwnd, "Realizar Devolucao", ID_RETURN_BOOK, DISTANCE_BUTTONS_X, DISTANCE_BUTTONS_Y * 3);
-            createButton(hwnd, "Registrar Funcionario", ID_ADD_EMPLOYEE, DISTANCE_BUTTONS_X * 20, 1);
-            createButton(hwnd, "Buscar Funcionario", ID_SEARCH_EMPLOYEE, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 1);
-            createButton(hwnd, "Resetar Banco de Dados", ID_RESET_DB, DISTANCE_BUTTONS_X * 20, DISTANCE_BUTTONS_Y * 2);
-            createButton(hwnd, "Criar Base Ordenada", ID_CREATE_SORTED_DB, DISTANCE_BUTTONS_X * 40, 1);
-            createButton(hwnd, "Criar Base Desordenada", ID_CREATE_UNSORTED_DB, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 1);
-            createButton(hwnd, "Quick Sort", ID_INSERTION_SORT, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 2);
-            createButton(hwnd, "Selecao natural", ID_INTERNAL_CLASSIFICATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 3);
-            createButton(hwnd, "Intercalacao Otimo", ID_BASIC_INTERCALATION, DISTANCE_BUTTONS_X * 40, DISTANCE_BUTTONS_Y * 4);
-            create_Static_Label(hwnd, "Gui. Santos - Mat. Diniz | AEDS II", SIZE_MAIN_WINDOW_X / 2, SIZE_MAIN_WINDOW_Y - 60, SIZE_BUTTONS_Y * 10, 20, 0);
-
+            CREATE_BOOK_BUTTON(hwnd);
+            SEARCH_BOOK_BUTTON(hwnd);
+            LOAN_BOOK_BUTTON(hwnd);
+            RETURN_BOOK_BUTTON(hwnd);
+            ADD_EMPLOYEE_BUTTON(hwnd);
+            SEARCH_EMPLOYEE_BUTTON(hwnd);
+            RESET_DB_BUTTON(hwnd);
+            CREATE_SORTED_DB_BUTTON(hwnd);
+            CREATE_UNSORTED_DB_BUTTON(hwnd);
+            INSERTION_SORT_BUTTON(hwnd);
+            INTERNAL_CLASSIFICATION_BUTTON(hwnd);
+            BASIC_INTERCALATION_BUTTON(hwnd);
+            CREDITS_LABEL(hwnd);
             break;
         }
 
@@ -100,10 +109,3 @@ LRESULT CALLBACK WindowProc_Main(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     return 0;
 }
 
-int main() {
-    printf("\033[H\033[J\nDebug: Iniciando o programa");
-
-
-    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, 
-                        WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
-}

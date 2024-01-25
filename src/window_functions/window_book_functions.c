@@ -1,4 +1,4 @@
-#include "window_book_functions.h"
+#include "../estruturas.h"
 
 double double_preco;
 int int_livro_cod;
@@ -22,7 +22,7 @@ FILE *bookFile;
 FILE *employeeFile; 
 FILE *LogFileBinary;
 
-LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Print_Book(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
 
@@ -78,7 +78,7 @@ LRESULT CALLBACK Window_Print_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Insert_Book(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
 
@@ -165,7 +165,7 @@ LRESULT CALLBACK Window_Insert_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Search_Book(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Procurar Livro", 1, 10, 10);
@@ -221,7 +221,7 @@ LRESULT CALLBACK Window_Search_Book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 //############################################################################################################################################################################
 
 
-LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Windwow_Loan_book(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Emprestar Livro", 1, 10, 10);
@@ -304,7 +304,7 @@ LRESULT CALLBACK Windwow_Loan_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_return_book(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_return_book(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Devolver Livro", 1, 10, 10);

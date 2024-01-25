@@ -1,4 +1,5 @@
-#include "window_database_functions.h"
+#include "../estruturas.h"
+
 
 char char_tamanho_base[10];
 int int_tamanho_base;
@@ -7,7 +8,7 @@ FILE* book_file;
 FILE* log_file;
 FILE* employee_file;
 
-LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Unsorted_DataBase_Search(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             
@@ -71,7 +72,7 @@ LRESULT CALLBACK Window_Unsorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wP
 
 //############################################################################################################################################################################
 
-LRESULT CALLBACK Window_Sorted_DataBase_Search(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+NEW_WINDOW Window_Sorted_DataBase_Search(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             

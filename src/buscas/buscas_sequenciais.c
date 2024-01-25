@@ -1,6 +1,4 @@
-
-#include "buscas_sequenciais.h"
-#include <time.h>
+#include "../estruturas.h"
 
 int total_iterations_sequencial = 0;
 

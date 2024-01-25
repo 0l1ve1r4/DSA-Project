@@ -1,4 +1,4 @@
-#include "window_utils.h"
+#include "../estruturas.h"
 
 
 void removeExpandButton(HWND hwnd){
