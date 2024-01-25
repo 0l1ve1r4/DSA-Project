@@ -1,15 +1,5 @@
 #include "estruturas.h"
 
-NEW_WINDOW WindowProc_Main(WINDOW_PARAMS);
-
-int main() {
-    printf("\033[H\033[J\nDebug: Iniciando o programa");
-
-
-    create_and_run_window(WindowProc_Main, "Window_Main", MAIN_WINDOW_TITLE, 
-                        WS_OVERLAPPEDWINDOW, 0, 0, SIZE_MAIN_WINDOW_X, SIZE_MAIN_WINDOW_Y);
-}
-
 NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
@@ -108,4 +98,10 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
 
     return 0;
 }
+
+void TerminalProc_Main(){
+
+    printf("\nDebug: hello world\n");
+}
+
 

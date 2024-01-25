@@ -37,6 +37,10 @@
 // Definitions
 //----------------------------------------------------------------------------------
 
+#define TRUE 1    // simple boolean
+#define FALSE 0   // simple boolean
+#define GUI FALSE // Change this to TRUE to enable the GUI or FALSE to disable it.
+
 // Constants of the MAIN WINDOW 
 #define MAIN_WINDOW_TITLE "Library Management System" // Title of the main window
 #define DISTANCE_BUTTONS_Y 50 
@@ -115,6 +119,7 @@ typedef char NOME[32]; // struct TFunc e struct TLivro, struct TCliente
 typedef char AUTOR[32]; // struct TLivro
 typedef char EDITORA[32]; // struct TLivro
 
+
 //----------------------------------------------------------------------------------
 // Structures Definition
 //----------------------------------------------------------------------------------
@@ -182,6 +187,7 @@ typedef struct LogFile{
 ***********************************************************************************/
 
 void shuffle(int *vet, int size); // Função para embaralhar um vetor de inteiros
+void TerminalProc_Main(); // Função para rodar o programa sem a GUI
 
 /***********************************************************************************
  * Client Functions
@@ -309,5 +315,8 @@ NEW_WINDOW Window_Sorted_DataBase_Search(WINDOW_PARAMS);
 NEW_WINDOW Window_Print_Employee(WINDOW_PARAMS);
 NEW_WINDOW Window_Insert_Employee(WINDOW_PARAMS);
 NEW_WINDOW Window_Search_Employee(WINDOW_PARAMS);
+
+// Window main functions
+NEW_WINDOW WindowProc_Main(WINDOW_PARAMS);
 
 #endif // ESTRUTURAS_H
