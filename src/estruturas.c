@@ -197,3 +197,99 @@ void imprimirBase_livros(FILE *out) {
         imprimir_livro(livro);
     free(livro);
 }
+
+
+/* hash */
+
+// Função Hash
+int hash(int key) {
+    return key % TABLE_SIZE;
+}
+
+// Inserir elemento
+void insert_hash(HashTable *ht, int key, long file_pos) {
+    int index = hash(key);
+    
+    Node *newNode = (Node*) malloc(sizeof(Node));
+    newNode->key = key;
+    newNode->file_pos = file_pos;
+    newNode->next = ht->table[index];
+    ht->table[index] = newNode;
+
+    printf("Elemento inserido na posicao %d\n", index);
+}
+
+// Buscar elemento
+long search_hash(HashTable *ht, int key) {
+    int index = hash(key);
+    Node *node = ht->table[index];
+    while (node != NULL) {
+        if (node->key == key) {
+            return node->file_pos;
+        }
+        node = node->next;
+    }
+    return -1;
+}
+
+// Remover elemento
+void remove_hash(HashTable *ht, int key) {
+    int index = hash(key);
+    Node *node = ht->table[index];
+    Node *prev = NULL;
+    while (node != NULL) {
+        if (node->key == key) {
+            if (prev == NULL) {
+                ht->table[index] = node->next;
+            } else {
+                prev->next = node->next;
+            }
+            free(node);
+            return;
+        }
+        prev = node;
+        node = node->next;
+    }
+}
+
+
+// Salvar tabela hash em um arquivo
+void saveHashTable(HashTable *ht) {
+    FILE *file = fopen(HASH_TABLE_PATH, "wb");
+    if (file == NULL) {
+        printf("Não foi possível abrir o arquivo.\n");
+        return;
+    }
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        Node *node = ht->table[i];
+        while (node != NULL) {
+            fwrite(node, sizeof(Node), 1, file);
+            node = node->next;
+        }
+    }
+
+    fclose(file);
+}
+
+// Ler tabela hash de um arquivo
+HashTable* loadHashTable() {
+    FILE *file = fopen(HASH_TABLE_PATH, "rb");
+    if (file == NULL) {
+        printf("Não foi possível abrir o arquivo.\n");
+        return NULL;
+    }
+
+    HashTable *ht = (HashTable*) malloc(sizeof(HashTable));
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        ht->table[i] = NULL;
+    }
+
+    Node node;
+    while (fread(&node, sizeof(Node), 1, file)) {
+        insert_hash(ht, node.key, node.file_pos);
+    }
+
+    fclose(file);
+    return ht;
+}

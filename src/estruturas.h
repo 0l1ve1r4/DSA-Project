@@ -39,7 +39,7 @@
 
 #define TRUE 1    // simple boolean
 #define FALSE 0   // simple boolean
-#define GUI FALSE // Change this to TRUE to enable the GUI or FALSE to disable it.
+#define TABLE_SIZE 13 // Tamanho da tabela hash
 
 // Constants of the MAIN WINDOW 
 #define MAIN_WINDOW_TITLE "Library Management System" // Title of the main window
@@ -47,7 +47,8 @@
 #define DISTANCE_BUTTONS_X 10 
 #define SIZE_BUTTONS_Y 170 
 #define SIZE_MAIN_WINDOW_X 600 
-#define SIZE_MAIN_WINDOW_Y 410
+#define SIZE_MAIN_WINDOW_Y 520
+
 #define ID_ADD_BOOK 101 
 #define ADD_BOOK_TEXT "Add new book" 
 #define ID_SEARCH_BOOK 102 
@@ -56,13 +57,21 @@
 #define LOAN_BOOK_TEXT "Loan book" 
 #define ID_RENEW_LOAN 104 
 #define RENEW_LOAN_TEXT "Renew loan" 
-#define ID_RETURN_BOOK 105 
+#define ID_RETURN_BOOK 105
+#define ID_ADD_IN_HASH_TABLE 106
+#define ADD_IN_HASH_TABLE_TEXT "Add in hash table"
+#define ID_REMOVE_IN_HASH_TABLE 107
+#define REMOVE_IN_HASH_TABLE_TEXT "Remove in hash table"
+#define ID_SEARCH_IN_HASH_TABLE 108
+#define SEARCH_IN_HASH_TABLE_TEXT "Search in hash table" 
+
 #define RETURN_BOOK_TEXT "Return book" 
 #define ID_ADD_EMPLOYEE 201 
 #define ADD_EMPLOYEE_TEXT "Add new employee" 
 #define ID_SEARCH_EMPLOYEE 202 
 #define SEARCH_EMPLOYEE_TEXT "Search employee" 
 #define ID_GENERATE_REPORT 301 
+
 #define GENERATE_REPORT_TEXT "Generate report" 
 #define ID_CREATE_UNSORTED_DB 1 
 #define CREATE_UNSORTED_DB_TEXT "Create unsorted database" 
@@ -75,7 +84,7 @@
 #define ID_INTERNAL_CLASSIFICATION 5 
 #define INTERNAL_CLASSIFICATION_TEXT "Internal classification" 
 #define ID_BASIC_INTERCALATION 6 
-#define BASIC_INTERCALATION_TEXT "Basic intercalation" 
+#define BASIC_INTERCALATION_TEXT "Basic intercalation"
 
 // Constants of the SUB WINDOWS
 #define SIZE_SUB_WINDOW_X 400 
@@ -91,6 +100,10 @@
 #define SEARCH_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_BOOK_TEXT, ID_SEARCH_BOOK, 1, 2)
 #define LOAN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, LOAN_BOOK_TEXT, ID_LOAN_BOOK, 1, 3)
 #define RETURN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, RETURN_BOOK_TEXT, ID_RETURN_BOOK, 1, 4)
+#define ADD_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_IN_HASH_TABLE_TEXT, ID_ADD_IN_HASH_TABLE, 1, 5)
+#define REMOVE_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, REMOVE_IN_HASH_TABLE_TEXT, ID_REMOVE_IN_HASH_TABLE, 1, 6)
+#define SEARCH_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_IN_HASH_TABLE_TEXT, ID_SEARCH_IN_HASH_TABLE, 1, 7)
+
 #define ADD_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_EMPLOYEE_TEXT, ID_ADD_EMPLOYEE, 20, 1)
 #define SEARCH_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_EMPLOYEE_TEXT, ID_SEARCH_EMPLOYEE, 20, 2)
 #define RESET_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, RESET_DB_TEXT, ID_RESET_DB, 20, 3)
@@ -99,13 +112,15 @@
 #define INSERTION_SORT_BUTTON(hwnd) CREATE_BUTTON(hwnd, INSERTION_SORT_TEXT, ID_INSERTION_SORT, 40, 3)
 #define INTERNAL_CLASSIFICATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, INTERNAL_CLASSIFICATION_TEXT, ID_INTERNAL_CLASSIFICATION, 40, 4)
 #define BASIC_INTERCALATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, BASIC_INTERCALATION_TEXT, ID_BASIC_INTERCALATION, 40, 5)
-#define CREDITS_LABEL(hwnd) (void)create_Static_Label(hwnd, "Developed by Guilherme Santos and Matheus Diniz", 0, 350, 600, 50, 0)
+
+#define CREDITS_LABEL(hwnd) (void)create_Static_Label(hwnd, "Developed by Guilherme Santos and Matheus Diniz", 0, 450, 600, 50, 0)
 
 // Constantes dos paths dos arquivos ** NÃO ALTERAR, PODERÁ OCASIONAR ERROS ** 
 #define EMPLOYEE_FILE_PATH "src/bin/window_employee.dat" // Path do arquivo de funcionários
 #define BOOK_FILE_PATH "src/bin/window_books.dat" // Path do arquivo de livros
 #define LOG_FILE_PATH "src/bin/window_log.dat" // Path do arquivo de log
 #define PARTITIONS_PATH "src/bin/partitions" // Path das partições de funcionários e livros
+#define HASH_TABLE_PATH "src/bin/hashTable.dat" // Path da tabela hash
 #define PARTITIONS_PER_STRUCTS 100 // Número de partições que serão criadas para cada partições de funcionários e livros	
 
 int NUM_PARTITIONS; // Número de partições que foram criadas para o for da intercalação ótima
@@ -180,14 +195,50 @@ typedef struct LogFile{
     double tempo_ms;
 } TLog;
 
+// Nó para a lista encadeada
+typedef struct Node {
+    int key;
+    long file_pos;
+    struct Node *next;
+} Node;
+
+// Tabela Hash
+typedef struct HashTable {
+    Node *table[TABLE_SIZE];
+} HashTable;
+
 
 /***********************************************************************************
  * Generic Functions
+ * 
+ * Funções genéricas para manipulação de dados das estruturas.
  * 
 ***********************************************************************************/
 
 void shuffle(int *vet, int size); // Função para embaralhar um vetor de inteiros
 void TerminalProc_Main(); // Função para rodar o programa sem a GUI
+
+/***********************************************************************************
+ *                          Hash Functions
+ * 
+ * A função hash adotada é uma função hash externa. 
+ * A key é o módulo da chave pelo tamanho da tabela (key % TABLE_SIZE).
+ * 
+ * Ao tratamento de colisões, foi utilizada a técnica de encadeamento.
+ * Quando ocorre uma colisão, o novo registro é adicionado à lista encadeada. 
+ * As operações de busca, inserção e remoção percorrem a lista encadeada 
+ * na posição correspondente para encontrar o registro desejado.
+ * O(1) no caso médio. O(n) no pior caso. 
+ * 
+***********************************************************************************/
+
+HashTable* loadHashTable(); // Ler tabela hash de um arquivo
+
+int hash(int key); // Função Hash
+long search_hash(HashTable *ht, int key); // Buscar elemento
+void insert_hash(HashTable *ht, int key, long file_pos); // Inserir elemento
+void remove_hash(HashTable *ht, int key); // Remover elemento
+void saveHashTable(HashTable *ht); // Salvar tabela hash em um arquivo
 
 /***********************************************************************************
  * Client Functions
@@ -306,6 +357,7 @@ NEW_WINDOW Window_Insert_Book(WINDOW_PARAMS);
 NEW_WINDOW Window_Search_Book(WINDOW_PARAMS);
 NEW_WINDOW Windwow_Loan_book(WINDOW_PARAMS);
 NEW_WINDOW Window_return_book(WINDOW_PARAMS);
+NEW_WINDOW Window_delete_book(WINDOW_PARAMS);
 
 // Database functions
 NEW_WINDOW Window_Unsorted_DataBase_Search(WINDOW_PARAMS);
@@ -318,5 +370,9 @@ NEW_WINDOW Window_Search_Employee(WINDOW_PARAMS);
 
 // Window main functions
 NEW_WINDOW WindowProc_Main(WINDOW_PARAMS);
+
+// Window HASH functions
+NEW_WINDOW Window_Insert_Hash(WINDOW_PARAMS);
+NEW_WINDOW Window_Search_Hash(WINDOW_PARAMS);
 
 #endif // ESTRUTURAS_H

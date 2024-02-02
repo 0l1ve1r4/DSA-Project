@@ -8,6 +8,7 @@
 **********************************************************************************************/
 
 #include "estruturas.h"
+#define GUI TRUE // Change this to TRUE to enable the GUI or FALSE to disable it.
 
 int main() {
     printf("\033[H\033[J\nDebug: Iniciando o programa");

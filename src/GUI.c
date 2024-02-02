@@ -16,7 +16,13 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
             INSERTION_SORT_BUTTON(hwnd);
             INTERNAL_CLASSIFICATION_BUTTON(hwnd);
             BASIC_INTERCALATION_BUTTON(hwnd);
+            ADD_IN_HASH_TABLE_BUTTON(hwnd);
+            SEARCH_IN_HASH_TABLE_BUTTON(hwnd);
+            REMOVE_IN_HASH_TABLE_BUTTON(hwnd);
+            
             CREDITS_LABEL(hwnd);
+
+
             break;
         }
 
@@ -77,6 +83,19 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
 
                 case ID_BASIC_INTERCALATION:
                     intercalacoes_otimas();
+                    break;
+
+                case ID_ADD_IN_HASH_TABLE:
+                     create_and_run_window(Window_Insert_Hash, "Window_Insert_Hashs", "Inserir Livro na Hash Table",
+                     WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
+                     break;
+
+                case ID_SEARCH_IN_HASH_TABLE:
+                    create_and_run_window(Window_Search_Hash, "Window_Search_Hash", "Buscar Livro na Hash Table",
+                    WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
+                    break;
+
+                case ID_REMOVE_IN_HASH_TABLE:
                     break;
 
                 default:
