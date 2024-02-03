@@ -1,9 +1,6 @@
 #include "../estruturas.h"
 
-double double_preco;
 int int_livro_cod;
-int int_funcionario_id;
-int int_cliente_id_int;
 
 char char_cod[50];
 char char_nome[50];
@@ -13,16 +10,10 @@ char char_editora[50];
 char char_data_emprestimo[50];
 char char_preco[50];
 char char_funcionario_id[50];
-char char_cliente_id[50];
 
-TLivro *registro;
-TFunc *registro_employee;
+HashTable *myHashTable;
 
-FILE *bookFile;
-FILE *employeeFile; 
-FILE *LogFileBinary;
-
-NEW_WINDOW Window_delete_hash(WINDOW_PARAMS) {
+NEW_WINDOW Window_Delete_Hash(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
             createButton(hwnd, "Apagar Livro", 1, 10, 10);
@@ -35,58 +26,41 @@ NEW_WINDOW Window_delete_hash(WINDOW_PARAMS) {
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             switch (wmId) {
-                case 13:
-
-                    
-                    bookFile = fopen(HASH_TABLE_PATH, "ab+");
+                case 13: {
                     GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
                     int_livro_cod = atoi(char_cod);
+                    printf("Debug: %d\n", int_livro_cod);
 
-                    bookFile = fopen(BOOK_FILE_PATH, "rb+");
-                    LogFileBinary = fopen(LOG_FILE_PATH, "rb+");
+                    // Remove o livro da HashTable global
+                    remove_hash(myHashTable, int_livro_cod);
+                    printf("Livro removido da HashTable.\n");
 
-                    int tam_file_book = tamanho_arquivo_de_livros(bookFile);  
-                    TLivro *livro = buscarLivro_sequencialmente(bookFile, int_livro_cod, LogFileBinary);
-                    
+                    // Agora você pode adicionar lógica adicional, se necessário
 
-                     if (livro != NULL) {
-
-                        #pragma GCC diagnostic push
-                        #pragma GCC diagnostic ignored "-Woverflow"
-
-                        livro->cod = -1;
-                        fseek(bookFile, -sizeof(TLivro), SEEK_CUR);
-                        fwrite(livro, sizeof(TLivro), 1, bookFile);
-
-                        #pragma GCC diagnostic pop
-
-                        free(livro);
-                    } else {
-                        error_message("Livro nao encontrado", "Error");
-                    }
-
-                    fclose(bookFile);
-                    fclose(LogFileBinary);
                     DestroyWindow(hwnd);
                     break;
-            
-            case 14:
-                DestroyWindow(hwnd);
-                break;
+                }
 
-                    
+                case 14:
+                    DestroyWindow(hwnd);
+                    break;
             }
+
             break;
         }
+
         case WM_DESTROY: {
             PostQuitMessage(0);
             break;
         }
+
         default:
             return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
+
     return 0;
 }
+
 
 
 //############################################################################################################################################################################
@@ -112,52 +86,48 @@ NEW_WINDOW Window_Insert_Hash(WINDOW_PARAMS) {
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             switch (wmId) {
-                case 13: 
+                case 13: // Código para o botão "Adicionar"
                     GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
-                    GetDlgItemText(hwnd, 3, char_cod, sizeof(char_cod));
+                    GetDlgItemText(hwnd, 3, char_nome, sizeof(char_nome));
                     GetDlgItemText(hwnd, 4, char_num_paginas, sizeof(char_num_paginas));
                     GetDlgItemText(hwnd, 5, char_autor, sizeof(char_autor));
                     GetDlgItemText(hwnd, 6, char_editora, sizeof(char_editora));
                     GetDlgItemText(hwnd, 7, char_preco, sizeof(char_preco));
                     GetDlgItemText(hwnd, 8, char_funcionario_id, sizeof(char_funcionario_id));
-                    GetDlgItemText(hwnd, 9, char_cliente_id, sizeof(char_cliente_id));
-                    
-                    double_preco = strtod(char_preco, NULL);
-                    int_livro_cod = atoi(char_cod);
-                    int_funcionario_id = atoi(char_funcionario_id);
-                    
-                    employeeFile = fopen(EMPLOYEE_FILE_PATH, "rb");
-                    LogFileBinary = fopen(LOG_FILE_PATH, "w");
 
-                    if (int_funcionario_id != 23){
-                            int tamanho_base = tamanho_arquivo_de_funcionarios(employeeFile);
-                            registro_employee = buscarFuncionario_binariamente(int_funcionario_id, employeeFile, tamanho_base , LogFileBinary);
+                    // Converte os valores do formulário para os tipos apropriados
+                    int int_livro_cod = atoi(char_cod);
+                    double double_preco = strtod(char_preco, NULL);
+                    int int_funcionario_id = atoi(char_funcionario_id);
 
-                            if (registro_employee == NULL) {
-                            MessageBox(NULL, "Funcionario Nao Encontrado.", "Error", MB_ICONERROR | MB_OK);
-                            return 0;
-                                 }
+                        if (myHashTable == NULL) {
+                        // Se falhou, criar uma nova tabela hash
+                        myHashTable = (HashTable *)malloc(sizeof(HashTable));
+                        for (int i = 0; i < TABLE_SIZE; i++) {
+                            myHashTable->table[i] = NULL;
                         }
-
-
-
-                    HashTable *ht = (HashTable*) malloc(sizeof(HashTable));
-
-                    for (int i = 0; i < TABLE_SIZE; i++) {
-                        ht->table[i] = NULL;
                     }
 
-                    saveHashTable(ht);
+                    // Cria um livro com as informações do formulário
+                    TLivro livro;
+                    livro.cod = int_livro_cod;
+                    strcpy(livro.nome, char_nome);
+                    strcpy(livro.numero_paginas, char_num_paginas);
+                    strcpy(livro.autor, char_autor);
+                    strcpy(livro.editora, char_editora);
+                    livro.preco = double_preco;
 
-                    HashTable *loadedHt = loadHashTable();
+                    // Cria um funcionário (assumindo que a variável func1 seja definida)
+                    TFunc func1 = {int_funcionario_id, "Funcionario1", "11122233344", "01/01/1980", 3000.50};
+                    livro.funcionario = &func1;
 
-                    TFunc func1 = {23, "Adm", "", "", 0.0};
-                    TCliente cliente1 = {"", ""};
-                    TLivro livro1 = {int_livro_cod, char_nome, char_num_paginas, char_autor, char_editora, "05/02/23", double_preco, &func1, &cliente1};
-                    insert_hash(loadedHt, livro1.cod, &livro1);
-                    saveHashTable(loadedHt);
-                    
-                    DestroyWindow(hwnd); 
+                    // Adiciona o livro à tabela hash
+                    insert_hash(myHashTable, livro.cod, livro);
+
+                    // Exibe uma mensagem indicando que o livro foi adicionado
+                    MessageBox(hwnd, "Livro adicionado com sucesso!", "Sucesso", MB_OK | MB_ICONINFORMATION);
+                    saveHashTable(myHashTable);
+                    DestroyWindow(hwnd);
                     break;
                     
 
@@ -184,8 +154,6 @@ NEW_WINDOW Window_Insert_Hash(WINDOW_PARAMS) {
 
 //############################################################################################################################################################################
 
-
-
 NEW_WINDOW Window_Search_Hash(WINDOW_PARAMS) {
     switch (uMsg) {
         case WM_CREATE: {
@@ -199,20 +167,29 @@ NEW_WINDOW Window_Search_Hash(WINDOW_PARAMS) {
         case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             switch (wmId) {
-                case 13: 
-
+                case 13: {
                     GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
                     int_livro_cod = atoi(char_cod);
-                        printf("Debug: %d\n", int_livro_cod);
-                        HashTable *loadedHt = loadHashTable();
-                        TLivro *livroBuscado = (TLivro*) search_hash(loadedHt, int_livro_cod);
-                        if (livroBuscado != NULL) {
-                            printf("Livro encontrado: %s\n", livroBuscado->nome);
-                        } else {
-                            printf("Livro não encontrado.\n");
-                        }
-                
+
+                    TLivro livroBuscado = search_hash(myHashTable, int_livro_cod);
+                    if (livroBuscado.cod != -1) {
+                        printf("Livro encontrado.\n");
+                        printf("Codigo: %d\n", livroBuscado.cod);
+                        printf("Nome: %s\n", livroBuscado.nome);
+                        printf("Paginas: %s\n", livroBuscado.numero_paginas);
+                        printf("Autor: %s\n", livroBuscado.autor);
+                        printf("Editora: %s\n", livroBuscado.editora);
+                        printf("Preco: %.2f\n", livroBuscado.preco);
+
+                        
+                    } else {
+                        error_message("Livro nao encontrado.", "Erro");
+                    }
+                    break;
+                }
+
                 case 14:
+                    printf("Fechar janela.\n");
                     DestroyWindow(hwnd);
                     break;
             }
@@ -221,6 +198,7 @@ NEW_WINDOW Window_Search_Hash(WINDOW_PARAMS) {
         }
 
         case WM_DESTROY: {
+            printf("Fechar aplicativo.\n");
             PostQuitMessage(0);
             break;
         }

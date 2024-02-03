@@ -198,7 +198,7 @@ typedef struct LogFile{
 // Nó para a lista encadeada
 typedef struct Node {
     int key;
-    long file_pos;
+    TLivro livro;
     struct Node *next;
 } Node;
 
@@ -232,13 +232,17 @@ void TerminalProc_Main(); // Função para rodar o programa sem a GUI
  * 
 ***********************************************************************************/
 
-HashTable* loadHashTable(); // Ler tabela hash de um arquivo
+int hash(int key);
+void insert_hash(HashTable *ht, int key, TLivro livro);
+TLivro search_hash(HashTable *ht, int key);
+void remove_hash(HashTable *ht, int key);
+void saveHashTable(HashTable *ht);
+HashTable *loadHashTable();
+void printLivroInfo(TLivro livro);
 
-int hash(int key); // Função Hash
-long search_hash(HashTable *ht, int key); // Buscar elemento
-void insert_hash(HashTable *ht, int key, long file_pos); // Inserir elemento
-void remove_hash(HashTable *ht, int key); // Remover elemento
-void saveHashTable(HashTable *ht); // Salvar tabela hash em um arquivo
+#define MY_HASH_TABLE_SIZE 10
+HashTable *myHashTable;
+
 
 /***********************************************************************************
  * Client Functions
@@ -374,5 +378,6 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS);
 // Window HASH functions
 NEW_WINDOW Window_Insert_Hash(WINDOW_PARAMS);
 NEW_WINDOW Window_Search_Hash(WINDOW_PARAMS);
+NEW_WINDOW Window_Delete_Hash(WINDOW_PARAMS);
 
 #endif // ESTRUTURAS_H

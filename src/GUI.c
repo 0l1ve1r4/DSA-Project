@@ -96,6 +96,8 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
                     break;
 
                 case ID_REMOVE_IN_HASH_TABLE:
+                    create_and_run_window(Window_Delete_Hash, "Window_Remove_Hash", "Remover Livro na Hash Table",
+                    WS_OVERLAPPEDWINDOW, 100, 100, SIZE_SUB_WINDOW_X, SIZE_SUB_WINDOW_Y);
                     break;
 
                 default:
