@@ -218,7 +218,7 @@ void insert_hash(HashTable *ht, int key, TLivro livro) {
     newNode->next = ht->table[index];
     ht->table[index] = newNode;
 
-    printf("Livro inserido na posição %d\n", index);
+    printf("\n[+] Debug: Livro inserido na posicao %d\n", index);
 }
 
 // Buscar elemento

@@ -34,86 +34,12 @@
 #include <windows.h>
 
 //----------------------------------------------------------------------------------
-// Definitions
+// Basic Definitions
 //----------------------------------------------------------------------------------
 
 #define TRUE 1    // simple boolean
 #define FALSE 0   // simple boolean
-#define TABLE_SIZE 13 // Tamanho da tabela hash
-
-// Constants of the MAIN WINDOW 
-#define MAIN_WINDOW_TITLE "Library Management System" // Title of the main window
-#define DISTANCE_BUTTONS_Y 50 
-#define DISTANCE_BUTTONS_X 10 
-#define SIZE_BUTTONS_Y 170 
-#define SIZE_MAIN_WINDOW_X 600 
-#define SIZE_MAIN_WINDOW_Y 520
-
-#define ID_ADD_BOOK 101 
-#define ADD_BOOK_TEXT "Add new book" 
-#define ID_SEARCH_BOOK 102 
-#define SEARCH_BOOK_TEXT "Search Book"  
-#define ID_LOAN_BOOK 103 
-#define LOAN_BOOK_TEXT "Loan book" 
-#define ID_RENEW_LOAN 104 
-#define RENEW_LOAN_TEXT "Renew loan" 
-#define ID_RETURN_BOOK 105
-#define ID_ADD_IN_HASH_TABLE 106
-#define ADD_IN_HASH_TABLE_TEXT "Add in hash table"
-#define ID_REMOVE_IN_HASH_TABLE 107
-#define REMOVE_IN_HASH_TABLE_TEXT "Remove in hash table"
-#define ID_SEARCH_IN_HASH_TABLE 108
-#define SEARCH_IN_HASH_TABLE_TEXT "Search in hash table" 
-
-#define RETURN_BOOK_TEXT "Return book" 
-#define ID_ADD_EMPLOYEE 201 
-#define ADD_EMPLOYEE_TEXT "Add new employee" 
-#define ID_SEARCH_EMPLOYEE 202 
-#define SEARCH_EMPLOYEE_TEXT "Search employee" 
-#define ID_GENERATE_REPORT 301 
-
-#define GENERATE_REPORT_TEXT "Generate report" 
-#define ID_CREATE_UNSORTED_DB 1 
-#define CREATE_UNSORTED_DB_TEXT "Create unsorted database" 
-#define ID_CREATE_SORTED_DB 2 
-#define CREATE_SORTED_DB_TEXT "Create sorted database" 
-#define ID_RESET_DB 3 
-#define RESET_DB_TEXT "Reset database" 
-#define ID_INSERTION_SORT 4 
-#define INSERTION_SORT_TEXT "Insertion sort" 
-#define ID_INTERNAL_CLASSIFICATION 5 
-#define INTERNAL_CLASSIFICATION_TEXT "Internal classification" 
-#define ID_BASIC_INTERCALATION 6 
-#define BASIC_INTERCALATION_TEXT "Basic intercalation"
-
-// Constants of the SUB WINDOWS
-#define SIZE_SUB_WINDOW_X 400 
-#define SIZE_SUB_WINDOW_Y 300 
-#define TAMANHO_LABEL_INSERT_Y 400 
-
-// Functions constants and macros
-#define NEW_WINDOW LRESULT CALLBACK // Definição de função de janela
-#define WINDOW_PARAMS HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam // Parâmetros de função de janela
-#define CREATE_BUTTON(hwnd, buttonText, buttonID, posX, posY) createButton(hwnd, buttonText, buttonID, DISTANCE_BUTTONS_X * posX, DISTANCE_BUTTONS_Y * posY)
-
-#define CREATE_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_BOOK_TEXT, ID_ADD_BOOK, 1, 1)
-#define SEARCH_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_BOOK_TEXT, ID_SEARCH_BOOK, 1, 2)
-#define LOAN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, LOAN_BOOK_TEXT, ID_LOAN_BOOK, 1, 3)
-#define RETURN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, RETURN_BOOK_TEXT, ID_RETURN_BOOK, 1, 4)
-#define ADD_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_IN_HASH_TABLE_TEXT, ID_ADD_IN_HASH_TABLE, 1, 5)
-#define REMOVE_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, REMOVE_IN_HASH_TABLE_TEXT, ID_REMOVE_IN_HASH_TABLE, 1, 6)
-#define SEARCH_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_IN_HASH_TABLE_TEXT, ID_SEARCH_IN_HASH_TABLE, 1, 7)
-
-#define ADD_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_EMPLOYEE_TEXT, ID_ADD_EMPLOYEE, 20, 1)
-#define SEARCH_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_EMPLOYEE_TEXT, ID_SEARCH_EMPLOYEE, 20, 2)
-#define RESET_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, RESET_DB_TEXT, ID_RESET_DB, 20, 3)
-#define CREATE_SORTED_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, CREATE_SORTED_DB_TEXT, ID_CREATE_SORTED_DB, 40, 1)
-#define CREATE_UNSORTED_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, CREATE_UNSORTED_DB_TEXT, ID_CREATE_UNSORTED_DB, 40, 2)
-#define INSERTION_SORT_BUTTON(hwnd) CREATE_BUTTON(hwnd, INSERTION_SORT_TEXT, ID_INSERTION_SORT, 40, 3)
-#define INTERNAL_CLASSIFICATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, INTERNAL_CLASSIFICATION_TEXT, ID_INTERNAL_CLASSIFICATION, 40, 4)
-#define BASIC_INTERCALATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, BASIC_INTERCALATION_TEXT, ID_BASIC_INTERCALATION, 40, 5)
-
-#define CREDITS_LABEL(hwnd) (void)create_Static_Label(hwnd, "Developed by Guilherme Santos and Matheus Diniz", 0, 450, 600, 50, 0)
+#define TABLE_SIZE 13 // hash table divisor
 
 // Constantes dos paths dos arquivos ** NÃO ALTERAR, PODERÁ OCASIONAR ERROS ** 
 #define EMPLOYEE_FILE_PATH "src/bin/window_employee.dat" // Path do arquivo de funcionários
@@ -221,7 +147,7 @@ void TerminalProc_Main(); // Função para rodar o programa sem a GUI
 /***********************************************************************************
  *                          Hash Functions
  * 
- * A função hash adotada é uma função hash externa. 
+ * A função hash adotada é uma função hash INTERNA. 
  * A key é o módulo da chave pelo tamanho da tabela (key % TABLE_SIZE).
  * 
  * Ao tratamento de colisões, foi utilizada a técnica de encadeamento.
@@ -335,10 +261,102 @@ void salvar_log_file(FILE *out, int iteracoes, double tempo_ms);
 
 /***********************************************************************************
  * Window Functions
- * Shaco is an anagram for chaos.
+ * 
+ * Here are the functions that will be used in the GUI.
+ * The functions use windows.h to create and manage the windows.
+ * 
+ * The functions are divided into:
+ * - The first part is the constants and macros of the main window.
+ * - The second part is the constants and macros of the sub windows.
+ * - The third part is the macros of parameters 
+ * - The fourth part is the main window functions.
+ * - The fifth part is the sub window functions.
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  * Good luck!
 ***********************************************************************************/
+
+// Constants of the MAIN WINDOW 
+#define MAIN_WINDOW_TITLE "Library Management System" // Title of the main window
+#define DISTANCE_BUTTONS_Y 50 
+#define DISTANCE_BUTTONS_X 10 
+#define SIZE_BUTTONS_Y 170 
+#define SIZE_MAIN_WINDOW_X 600 
+#define SIZE_MAIN_WINDOW_Y 520
+
+#define ID_ADD_BOOK 101 
+#define ADD_BOOK_TEXT "Add new book" 
+#define ID_SEARCH_BOOK 102 
+#define SEARCH_BOOK_TEXT "Search Book"  
+#define ID_LOAN_BOOK 103 
+#define LOAN_BOOK_TEXT "Loan book" 
+#define ID_RENEW_LOAN 104 
+#define RENEW_LOAN_TEXT "Renew loan" 
+#define ID_RETURN_BOOK 105
+#define ID_ADD_IN_HASH_TABLE 106
+#define ADD_IN_HASH_TABLE_TEXT "Add in hash table"
+#define ID_REMOVE_IN_HASH_TABLE 107
+#define REMOVE_IN_HASH_TABLE_TEXT "Remove in hash table"
+#define ID_SEARCH_IN_HASH_TABLE 108
+#define SEARCH_IN_HASH_TABLE_TEXT "Search in hash table" 
+
+#define RETURN_BOOK_TEXT "Return book" 
+#define ID_ADD_EMPLOYEE 201 
+#define ADD_EMPLOYEE_TEXT "Add new employee" 
+#define ID_SEARCH_EMPLOYEE 202 
+#define SEARCH_EMPLOYEE_TEXT "Search employee" 
+#define ID_GENERATE_REPORT 301 
+
+#define GENERATE_REPORT_TEXT "Generate report" 
+#define ID_CREATE_UNSORTED_DB 1 
+#define CREATE_UNSORTED_DB_TEXT "Create unsorted database" 
+#define ID_CREATE_SORTED_DB 2 
+#define CREATE_SORTED_DB_TEXT "Create sorted database" 
+#define ID_RESET_DB 3 
+#define RESET_DB_TEXT "Reset database" 
+#define ID_INSERTION_SORT 4 
+#define INSERTION_SORT_TEXT "Insertion sort" 
+#define ID_INTERNAL_CLASSIFICATION 5 
+#define INTERNAL_CLASSIFICATION_TEXT "Internal classification" 
+#define ID_BASIC_INTERCALATION 6 
+#define BASIC_INTERCALATION_TEXT "Basic intercalation"
+
+// Constants of the SUB WINDOWS
+#define SIZE_SUB_WINDOW_X 400 
+#define SIZE_SUB_WINDOW_Y 300 
+#define TAMANHO_LABEL_INSERT_Y 400 
+
+// Functions constants and macros
+#define NEW_WINDOW LRESULT CALLBACK // Definição de função de janela
+#define WINDOW_PARAMS HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam // Parâmetros de função de janela
+#define CREATE_BUTTON(hwnd, buttonText, buttonID, posX, posY) createButton(hwnd, buttonText, buttonID, DISTANCE_BUTTONS_X * posX, DISTANCE_BUTTONS_Y * posY)
+
+#define CREATE_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_BOOK_TEXT, ID_ADD_BOOK, 1, 1)
+#define SEARCH_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_BOOK_TEXT, ID_SEARCH_BOOK, 1, 2)
+#define LOAN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, LOAN_BOOK_TEXT, ID_LOAN_BOOK, 1, 3)
+#define RETURN_BOOK_BUTTON(hwnd) CREATE_BUTTON(hwnd, RETURN_BOOK_TEXT, ID_RETURN_BOOK, 1, 4)
+#define ADD_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_IN_HASH_TABLE_TEXT, ID_ADD_IN_HASH_TABLE, 1, 5)
+#define REMOVE_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, REMOVE_IN_HASH_TABLE_TEXT, ID_REMOVE_IN_HASH_TABLE, 1, 6)
+#define SEARCH_IN_HASH_TABLE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_IN_HASH_TABLE_TEXT, ID_SEARCH_IN_HASH_TABLE, 1, 7)
+
+#define ADD_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, ADD_EMPLOYEE_TEXT, ID_ADD_EMPLOYEE, 20, 1)
+#define SEARCH_EMPLOYEE_BUTTON(hwnd) CREATE_BUTTON(hwnd, SEARCH_EMPLOYEE_TEXT, ID_SEARCH_EMPLOYEE, 20, 2)
+#define RESET_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, RESET_DB_TEXT, ID_RESET_DB, 20, 3)
+#define CREATE_SORTED_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, CREATE_SORTED_DB_TEXT, ID_CREATE_SORTED_DB, 40, 1)
+#define CREATE_UNSORTED_DB_BUTTON(hwnd) CREATE_BUTTON(hwnd, CREATE_UNSORTED_DB_TEXT, ID_CREATE_UNSORTED_DB, 40, 2)
+#define INSERTION_SORT_BUTTON(hwnd) CREATE_BUTTON(hwnd, INSERTION_SORT_TEXT, ID_INSERTION_SORT, 40, 3)
+#define INTERNAL_CLASSIFICATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, INTERNAL_CLASSIFICATION_TEXT, ID_INTERNAL_CLASSIFICATION, 40, 4)
+#define BASIC_INTERCALATION_BUTTON(hwnd) CREATE_BUTTON(hwnd, BASIC_INTERCALATION_TEXT, ID_BASIC_INTERCALATION, 40, 5)
+
+#define CREDITS_LABEL(hwnd) (void)create_Static_Label(hwnd, "Developed by Guilherme Santos and Matheus Diniz", 0, 450, 600, 50, 0)
 
 // Utilitários
 int confirm_message(char* message, char* title);
