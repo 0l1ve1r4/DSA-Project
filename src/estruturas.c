@@ -218,7 +218,7 @@ void insert_hash(HashTable *ht, int key, TLivro livro) {
     newNode->next = ht->table[index];
     ht->table[index] = newNode;
 
-    printf("\n[+] Debug: Livro inserido na posicao %d\n", index);
+    printf("\n[+] Debug: Livro inserido na tabela %d\n", index);
 }
 
 // Buscar elemento
@@ -227,6 +227,7 @@ TLivro search_hash(HashTable *ht, int key) {
     Node *node = ht->table[index];
     while (node != NULL) {
         if (node->key == key) {
+            printf("[+] Debug: Livro encontrado na tabela %d\n", index);
             return node->livro;
         }
         node = node->next;
@@ -304,15 +305,10 @@ HashTable *loadHashTable() {
     return ht;
 }
 
-// Função auxiliar para imprimir informações de um livro
-void printLivroInfo(TLivro livro) {
-    printf("Código: %d\n", livro.cod);
-    printf("Nome: %s\n", livro.nome);
-    printf("Número de Páginas: %d\n", livro.numero_paginas);
-    printf("Autor: %s\n", livro.autor);
-    printf("Editora: %s\n", livro.editora);
-    printf("Data de Empréstimo: %s\n", livro.data_emprestimo);
-    printf("Preço: %.2f\n", livro.preco);
-    printf("Funcionário: %s\n", livro.funcionario->nome);
-    printf("Cliente: %s\n", livro.cliente->nome);
+HashTable *createHashTable() {
+    HashTable *ht = (HashTable *)malloc(sizeof(HashTable));
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        ht->table[i] = NULL;
+    }
+    return ht;
 }

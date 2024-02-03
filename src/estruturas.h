@@ -165,6 +165,7 @@ void remove_hash(HashTable *ht, int key);
 void saveHashTable(HashTable *ht);
 HashTable *loadHashTable();
 void printLivroInfo(TLivro livro);
+HashTable *createHashTable();
 
 #define MY_HASH_TABLE_SIZE 10
 HashTable *myHashTable;
