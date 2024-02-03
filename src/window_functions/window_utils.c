@@ -14,7 +14,7 @@ void set_icon(HWND hwnd, char* path){
     if (hIcon != NULL)
         SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);           
     else
-         printf("Debug: Icone nao encontrado\n");
+         printf("[+] Debug: Icone nao encontrado\n");
 }
 
 void rmvBin() {

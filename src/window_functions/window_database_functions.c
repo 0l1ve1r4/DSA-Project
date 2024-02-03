@@ -26,7 +26,7 @@ NEW_WINDOW Window_Unsorted_DataBase_Search(WINDOW_PARAMS) {
                 case 13: 
                     
                     GetDlgItemText(hwnd, 2, char_tamanho_base, sizeof(char_tamanho_base));
-                    int_tamanho_base = atoi(char_tamanho_base); printf("\nTamanho da base: %d\n", int_tamanho_base);
+                    int_tamanho_base = atoi(char_tamanho_base); printf("\n[+] Debug: Tamanho da base: %d\n", int_tamanho_base);
                     
                     book_file = fopen("src/bin/window_books.dat", "ab+");
                     log_file = fopen("src/bin/window_log.dat", "ab+");

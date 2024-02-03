@@ -251,21 +251,21 @@ void remove_hash(HashTable *ht, int key) {
                 prev->next = node->next;
             }
             free(node);
-            printf("Livro removido com sucesso.\n");
+            printf("[+] Debug: Livro removido com sucesso.\n");
             return;
         }
         prev = node;
         node = node->next;
     }
 
-    printf("Livro com código %d não encontrado.\n", key);
+    printf("[+] Debug: Livro com código [%d] não encontrado.\n", key);
 }
 
 // Salvar tabela hash em um arquivo
 void saveHashTable(HashTable *ht) {
     FILE *file = fopen(HASH_TABLE_PATH, "wb");
     if (file == NULL) {
-        printf("Não foi possível abrir o arquivo.\n");
+        printf("[+] Debug: Não foi possível abrir o arquivo.\n");
         return;
     }
 
@@ -285,7 +285,7 @@ void saveHashTable(HashTable *ht) {
 HashTable *loadHashTable() {
     FILE *file = fopen(HASH_TABLE_PATH, "rb");
     if (file == NULL) {
-        printf("Não foi possível abrir o arquivo.\n");
+        printf("[+] Debug: Não foi possível abrir o arquivo.\n");
         return NULL;
     }
 

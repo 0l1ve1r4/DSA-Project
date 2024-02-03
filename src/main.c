@@ -11,10 +11,10 @@
 #define GUI TRUE // Change this to TRUE to enable the GUI or FALSE to disable it.
 
 int main() {
-    printf("\033[H\033[J\nDebug: Iniciando o programa");
+    printf("\033[H\033[J\n");
 
     if(GUI == TRUE) {
-        printf("\nDebug: Iniciando a GUI");
+        printf("\n[+] Debug: Iniciando a GUI");
         
         create_and_run_window(WindowProc_Main, 
         "Window_Main", MAIN_WINDOW_TITLE, 
@@ -22,13 +22,13 @@ int main() {
     }
 
     else if (GUI == FALSE) {
-        printf("\nDebug: Iniciando o programa sem GUI");
+        printf("\n[+] Debug: Iniciando o programa sem GUI");
         TerminalProc_Main();
 
     }
 
     else {
-        printf("\nDebug: GUI nao definida");
+        printf("\n[+] Debug: GUI nao definida");
         error_message("GUI nao definida", "Erro 404");
     }
 }
