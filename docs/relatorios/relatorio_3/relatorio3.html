@@ -2,72 +2,95 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório do Sistema de Hash com Encadeamento Externo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Relatório do Sistema de Hash com Encadeamento Externo</h1>
-    <section id="hashTableReport">
-        <h2>Objetivo e Funcionalidade</h2>
-        <p>Este código implementa uma tabela hash utilizando o método de encadeamento externo para o 
-            tratamento de colisões. A estrutura permite inserir, buscar e remover registros de livros, 
-            identificados por uma chave única. Além disso, oferece funcionalidades para salvar e carregar 
-            a tabela hash de/para um arquivo, facilitando a persistência de dados entre as execuções do 
-            programa</p>
+    <header>
+        <h1>Relatório do Sistema de Hash com Encadeamento Externo</h1>
+    </header>
+    
+    <main>
+        <section aria-labelledby="section1">
+            <h2 id="section1">Objetivo e Funcionalidade</h2>
+            <p>Este código implementa uma tabela hash utilizando o método de encadeamento externo para o tratamento de colisões. A estrutura permite inserir, buscar e remover registros de livros, identificados por uma chave única. Além disso, oferece funcionalidades para salvar e carregar a tabela hash de/para um arquivo, facilitando a persistência de dados entre as execuções do programa.</p>
+        </section>
 
-        <h2>Implementação Detalhada</h2>
-        <h3>Função Hash</h3>
-        <p>A função hash(int key) determina a posição de um elemento na tabela hash com base no 
-            módulo da chave pelo tamanho da tabela, proporcionando uma distribuição uniforme dos elementos.</p>
+        <section aria-labelledby="section2">
+            <h2 id="section2">Implementação Detalhada</h2>
+            <article aria-labelledby="hashFunction">
+                <h3 id="hashFunction">Função Hash</h3>
+                <p>A função hash(int key) determina a posição de um elemento na tabela hash com base no módulo da chave pelo tamanho da tabela, proporcionando uma distribuição uniforme dos elementos.</p>
+            </article>
+
+            <article aria-labelledby="insertion">
+                <h3 id="insertion">Inserção</h3>
+                <p><strong>insert_hash(HashTable *ht, int key, TLivro livro)</strong> insere um novo livro na tabela. Se ocorrer uma colisão, o livro é adicionado no início da lista encadeada correspondente ao índice calculado pela função hash.</p>
+                <img src="./image/image1.png">
+                <img src="./image/image2.png">
+            </article>
+
+            <article aria-labelledby="search">
+                <h3 id="search">Busca</h3>
+                <p><strong>search_hash(HashTable *ht, int key)</strong> busca um livro pela chave. Percorre a lista encadeada no índice relevante até encontrar o livro com a chave correspondente, retornando-o; caso contrário, retorna um livro com código -1, indicando que não foi encontrado.</p>
+                <img src="./image/image3.png">
+                <img src="./image/image4.png">
+            </article>
+
+            <article aria-labelledby="removal">
+                <h3 id="removal">Remoção</h3>
+                <p><strong>remove_hash(HashTable *ht, int key)</strong> remove um livro baseado em sua chave. Se o livro for encontrado, é removido da lista encadeada, mantendo a integridade da estrutura.</p>
+                <img src="./image/image5.png">
+                <img src="./image/image6.png">
+            </article>
+
+            <article aria-labelledby="persistence">
+                <h3 id="persistence">Persistência</h3>
+                <p>As funções <strong>saveHashTable(HashTable *ht)</strong> e <strong>loadHashTable()</strong> permitem salvar e carregar o estado atual da tabela hash em um arquivo, respectivamente.</p>
+            </article>
+        </section>
+
+        <section aria-labelledby="complexityAnalysis">
+            <h2 id="complexityAnalysis">Análise de Complexidade</h2>
+            <p>A complexidade de tempo para inserção, busca e remoção pode variar de O(1) para casos sem colisões até O(n) no pior caso, quando todos os elementos estão encadeados no mesmo índice. A complexidade de espaço é O(n), sendo n o número total de elementos armazenados na tabela hash.</p>
+        </section>
+
+        <section aria-labelledby="conclusion">
+            <h2 id="conclusion">Conclusão</h2>
+            <p>Este sistema de tabela hash com tratamento de colisões por encadeamento externo oferece uma base sólida para a manipulação eficiente de dados. Com as otimizações e uma atenção contínua à qualidade do código e testes, este sistema pode ser ainda mais robusto e versátil para diferentes aplicações.</p>
+        </section>
+
+        <section aria-labelledby="hashOperations">
+            <h2 id="hashOperations">Operações da Tabela Hash</h2>
+            <form id="insertForm">
+                <input type="text" id="insertKey" placeholder="Chave" required>
+                <input type="text" id="insertValue" placeholder="Valor" required>
+                <button type="submit">Inserir</button>
+            </form>
+            <form id="searchForm">
+                <input type="text" id="searchKey" placeholder="Chave para busca" required>
+                <button type="submit">Buscar</button>
+            </form>
+            <form id="removeForm">
+                <input type="text" id="removeKey" placeholder="Chave para remoção" required>
+                <button type="submit">Remover</button>
+            </form>
+            <div id="hashTableDisplay"></div>
+        </section>
         
-        <h3>Inserção</h3>
-        <p><strong>insert_hash(HashTable *ht, int key, TLivro livro)</strong> insere um novo livro na tabela. 
-            Se ocorrer uma colisão, o livro é adicionado no início da lista encadeada correspondente 
-            ao índice calculado pela função hash.</p>
+    </main>
 
-        <p><img src="./image/image1.png"></p>
-        <p>
-        <img src="./image/image2.png">
-        </p>    
-            
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
 
-        <h3>Busca</h3>
-        <p><strong>search_hash(HashTable *ht, int key)</strong> busca um livro pela chave. Percorre a lista encadeada 
-            no índice relevante até encontrar o livro com a chave correspondente, retornando-o; 
-            caso contrário, retorna um livro com código -1, indicando que não foi encontrado.</p>
-        
-            <p><img src="./image/image3.png"></p>
-            <p>
-            <img src="./image/image4.png">
-            </p>      
-        
-        <h3>Remoção</h3>
-        <p><strong>remove_hash(HashTable *ht, int key)</strong> remove um livro baseado em sua chave. 
-            Se o livro for encontrado, é removido da lista encadeada, mantendo a integridade da estrutura.</p>
-            
-            <p><img src="./image/image5.png"></p>
-            <p>
-            <img src="./image/image6.png">
-            </p>   
+      <footer>
+        By Mateus Diniz - Guilherme Santos | AEDS 2
+    </footer>
 
-        <h3>Persistência</h3>
-        <p>As funções <strong>saveHashTable(HashTable *ht)</strong> e <strong>loadHashTable()</strong> permitem salvar e carregar o estado atual 
-            da tabela hash em um arquivo, respectivamente.</p>
-
-        <h2>Análise de Complexidade</h2>
-        <p>A complexidade de tempo para inserção, busca e remoção pode variar de O(1) para casos 
-            sem colisões até O(n) no pior caso, quando todos os elementos estão encadeados no mesmo índice. 
-            A complexidade de espaço é O(n), sendo n o número total de elementos armazenados na 
-            tabela hash.</p>
-
-        <h2>Conclusão</h2>
-        <p>Este sistema de tabela hash com tratamento de colisões por encadeamento externo oferece 
-            uma base sólida para a manipulação eficiente de dados. Com as otimizações e uma atenção 
-            contínua à qualidade do código e testes, este sistema pode ser ainda mais robusto e 
-            versátil para diferentes aplicações.
-        </p>
-        
-    </section>
     <script src="script.js"></script>
 </body>
 </html>
