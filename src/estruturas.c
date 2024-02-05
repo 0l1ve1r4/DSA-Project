@@ -259,7 +259,7 @@ int remove_hash(HashTable *ht, int key) {
         node = node->next;
     }
 
-    printf("[+] Debug: Livro com código [%d] não encontrado.\n", key);
+    printf("[+] Debug: Livro com codigo [%d] nao encontrado.\n", key);
     return -1;
 
 }
@@ -268,7 +268,7 @@ int remove_hash(HashTable *ht, int key) {
 void saveHashTable(HashTable *ht) {
     FILE *file = fopen(HASH_TABLE_PATH, "wb");
     if (file == NULL) {
-        printf("[+] Debug: Não foi possível abrir o arquivo.\n");
+        printf("[+] Debug: Nao foi possível abrir o arquivo.\n");
         return;
     }
 
