@@ -14,7 +14,7 @@ int main() {
     printf("\033[H\033[J\n");
 
     if(GUI == TRUE) {
-        printf("\n[+] Debug: Iniciando a GUI");
+        printf("\n[+] Debug: Iniciando a GUI\n");
         
         create_and_run_window(WindowProc_Main, 
         "Window_Main", MAIN_WINDOW_TITLE, 
@@ -22,7 +22,7 @@ int main() {
     }
 
     else if (GUI == FALSE) {
-        printf("\n[+] Debug: Iniciando o programa sem GUI");
+        printf("\n[+] Debug: Iniciando o programa sem GUI\n");
         TerminalProc_Main();
 
     }

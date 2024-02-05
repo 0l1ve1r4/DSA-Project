@@ -218,7 +218,6 @@ void insert_hash(HashTable *ht, int key, TLivro livro) {
     newNode->next = ht->table[index];
     ht->table[index] = newNode;
 
-    printf("\n[+] Debug: Livro inserido na tabela %d\n", index);
 }
 
 // Buscar elemento
@@ -240,7 +239,7 @@ TLivro search_hash(HashTable *ht, int key) {
 }
 
 // Remover elemento
-void remove_hash(HashTable *ht, int key) {
+int remove_hash(HashTable *ht, int key) {
     int index = hash(key);
     Node *node = ht->table[index];
     Node *prev = NULL;
@@ -253,13 +252,16 @@ void remove_hash(HashTable *ht, int key) {
             }
             free(node);
             printf("[+] Debug: Livro removido com sucesso.\n");
-            return;
+            
+            return 0;
         }
         prev = node;
         node = node->next;
     }
 
     printf("[+] Debug: Livro com código [%d] não encontrado.\n", key);
+    return -1;
+
 }
 
 // Salvar tabela hash em um arquivo
