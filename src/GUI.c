@@ -22,6 +22,10 @@ NEW_WINDOW WindowProc_Main(WINDOW_PARAMS) {
             
             CREDITS_LABEL(hwnd);
 
+            fclose(fopen(LOG_FILE_PATH, "wb+"));
+            fclose(fopen(BOOK_FILE_PATH, "wb+"));
+
+
 
             break;
         }

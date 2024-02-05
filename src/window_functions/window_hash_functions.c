@@ -64,10 +64,13 @@ NEW_WINDOW Window_Delete_Hash(WINDOW_PARAMS) {
                     GetDlgItemText(hwnd, 2, char_cod, sizeof(char_cod));
                     printf("[+] Debug: Codigo a ser removido: [%d]\n", atoi(char_cod));
 
-                    remove_hash(myHashTable, atoi(char_cod));
+                    int verify = remove_hash(myHashTable, atoi(char_cod));
                     saveHashTable(myHashTable);
-                    free(myHashTable);
-                    DestroyWindow(hwnd);
+                    if (verify == 0) {
+                        MessageBox(hwnd, "Livro removido com sucesso!", "Sucesso", MB_OK | MB_ICONINFORMATION);
+                    } else {
+                        MessageBox(hwnd, "Livro nao encontrado!", "Erro", MB_OK | MB_ICONERROR);
+                    }
                     break;
                 }
 

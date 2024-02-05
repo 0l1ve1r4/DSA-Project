@@ -161,7 +161,7 @@ void TerminalProc_Main(); // Função para rodar o programa sem a GUI
 int hash(int key);
 void insert_hash(HashTable *ht, int key, TLivro livro);
 TLivro search_hash(HashTable *ht, int key);
-void remove_hash(HashTable *ht, int key);
+int remove_hash(HashTable *ht, int key);
 void saveHashTable(HashTable *ht);
 HashTable *loadHashTable();
 void printLivroInfo(TLivro livro);
